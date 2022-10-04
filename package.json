@@ -1,0 +1,32 @@
+{
+  "name": "hard-challengeapi",
+  "version": "1.0.0",
+  "description": "Primeiro Commit",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabio-Cesar/hard-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabio-Cesar/hard-challenge/issues"
+  },
+  "homepage": "https://github.com/Fabio-Cesar/hard-challenge#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.8.0"
+  }
+}
