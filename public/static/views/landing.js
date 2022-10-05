@@ -4,7 +4,7 @@ export class LandingView extends View {
 
     constructor() {
         super();
-        this.cssHref = "./css/landingPage.css";
+        this.cssHref = "./css/landing.css";
     };
 
     async getHTML() {

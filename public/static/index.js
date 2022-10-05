@@ -9,6 +9,7 @@ import { SigninView } from './views/signin.js';
 import { navigateTo } from './methods.js';
 
 const app = document.querySelector('#app');
+const log = document.querySelector('#log');
 
 const routes = {
     '404': NotFoundView,
@@ -70,10 +71,29 @@ window.addEventListener('DOMContentLoaded', () => {
             const options = { method: "POST" };
             const response = await fetch('api/logout', options);
             navigateTo('/login');
-        }
+        };
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
             navigateTo(e.target.href);
+        };
+        if (e.target.matches("[data-signinPost]")) {
+            e.preventDefault();
+            const emailValue = document.querySelector('#signin-input-email').value;
+            const passwordValue = document.querySelector('#signin-input-password').value;
+            const repeatPasswordValue = document.querySelector('#signin-input-new-password').value;
+            const userNameValue = document.querySelector('#signin-input-user').value;
+            const bodyValue = {
+                email: emailValue,
+                password: passwordValue,
+                name: userNameValue
+            }
+            const options = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(bodyValue)                
+            };
+            const response = await fetch('api/signin', options);
+            navigateTo('/login');
         };
     });
     router();
