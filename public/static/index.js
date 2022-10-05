@@ -28,9 +28,7 @@ export async function router() {
     let path = window.location.pathname;
     switch (path) {
         case '/home':
-            const options = {
-                method: "GET"
-            };
+            const options = { method: "GET" };
             const response = await fetch('api/home', options);
             if (response.status !== 200) {
                 console.log('Não autenticado!');
@@ -56,9 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             const options = {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyValue)                
             };
             const response = await fetch('api/login', options);
@@ -68,11 +64,17 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 navigateTo('/home');
             }
+        };
+        if (e.target.matches("[data-logoutPost]")) {
+            e.preventDefault();
+            const options = { method: "POST" };
+            const response = await fetch('api/logout', options);
+            navigateTo('/login');
         }
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
             navigateTo(e.target.href);
-        }
+        };
     });
     router();
 });
