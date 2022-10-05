@@ -5,8 +5,6 @@ import { navigateTo } from './methods.js';
 
 const app = document.querySelector('#app');
 
-console.log(window.location.pathname);
-
 const routes = {
     '404': notFoundView,
 
@@ -21,16 +19,12 @@ const routes = {
 
 export async function router() {
     let path = window.location.pathname;
-    // try authentication for paths that require it
     switch (path) {
         case '/home':
             const options = {
-                method: "POST",
-                headers: {
-                    "credentials": "include"
-                }
+                method: "GET"
             };
-            const response = await fetch('http://localhost:8080/home', options);
+            const response = await fetch('api/home', options);
             if (response.status !== 200) {
                 console.log('Não autenticado!');
                 path = '/';
@@ -45,11 +39,9 @@ export async function router() {
 
 window.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener("click", async (e) => {
-        // adquirir o token
         if (e.target.matches("[data-loginPost]")) {
             e.preventDefault();
             const emailValue = document.querySelector('#email-login-input').value;
-            console.log(emailValue);
             const passwordValue = document.querySelector('#password-login-input').value;
             const bodyValue = {
                 email: emailValue,
@@ -58,15 +50,13 @@ window.addEventListener('DOMContentLoaded', () => {
             const options = {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    "credentials": "include"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(bodyValue)                
             };
-            const response = await fetch('http://localhost:8080/login', options);
+            const response = await fetch('api/login', options);
             if (response.status !== 200) {
                 const data = await response.json();
-                console.log(data.message);
                 navigateTo('/');
             } else {
                 navigateTo('/home');
