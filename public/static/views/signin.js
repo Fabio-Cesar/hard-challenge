@@ -10,9 +10,7 @@ export class SigninView extends View {
     async getHTML() {
         return `<header class="flex">
         <div id="header-container" class="flex">
-            <a href="/" id="menu-home" data-link>
-                <h1>cardCreator</h1>
-            </a>
+                <h1 id="menu-home"><a href="/" data-link>cardCreator</a></h1>
             <nav>
                 <ul>
                     <li><a href="/login" id="menu-enter" data-link>Entrar</a></li>

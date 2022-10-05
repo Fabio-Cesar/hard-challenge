@@ -36,7 +36,7 @@ export class LandingView extends View {
                 </div>
                 <span>Troque com amigos e divirta-se</span>
             </div>
-            <img src="../images/packages-principal.png" alt="cards colecionáveis">
+            <img id="img-cards" src="../images/packages-principal.png" alt="cards colecionáveis">
         </section>
     </main>`
     };

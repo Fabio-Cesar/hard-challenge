@@ -21,8 +21,6 @@ body {
     background-image: url('../images/bg-principal.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
-    width: 100vw;
     color: #fff;
     font-size: 62.5%;
     font-family: Poppins;
@@ -41,18 +39,14 @@ header{
     justify-content: space-between;
 }
 
-#menu-home{
+#menu-home > a{
+    font-size: calc(14px + 1.4vw);
     text-decoration: none;
-}
-
-#menu-home > h1{
-    font-size: 2rem;
-    color: #fff;
 }
 
 ul{
     display: flex;
-    gap: 3rem;
+    gap: 4vw;
 }
 
 li{
@@ -61,49 +55,56 @@ li{
 
 #menu-about, #menu-enter, #menu-register{
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: calc( 6px + 1vw );
     color: #fff;
-}
-
-h3{
-    font-size: 2rem;
 }
 
 /* MAIN */
 
 main{
+    padding-top: 7vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 #container-register{
-    height: 40rem;
-    width: 35rem;
-    background-color: #FFFFFF26; 
-    border-radius: 10px;
+    padding: 4vh 0vw;
+    height: 76vh;
+    width: 40vw;
+    overflow-y: auto;
+    background-color: #FFFFFF26;
     color: #FFFFFF;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 30px 0;
+    gap: 3.2vh;
+    justify-content: flex-start;
+}
+
+#container-register::-webkit-scrollbar {
+    width: 1.3vw;
+    background-color: #bbbbbb80;
+}
+
+#container-register::-webkit-scrollbar-thumb {
+    background-color: #13101EA0;
 }
 
 #form-register{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    font-size: 1rem;
+    gap: 2.6vh;
+    font-size: calc( 6px + 0.8vw );
     width: 25vw;
 }
 
 input{
-    height: 4vh;
+    height: 4.8vh;
     background: none;
     border: none;
+    padding-bottom: 1px;
     border-bottom: 2px solid #FFFFFF;
     color: #FFFFFF;
-    font-size: 1rem;
+    font-size: calc( 6px + 0.7vw );
 }
 
 input:focus{
@@ -111,11 +112,11 @@ input:focus{
 }
 
 h2{
-    font-size: 1.6rem;
+    font-size: calc( 9px + 1.2vw );
 }
 
 p{
-    font-size: 1.2rem;
+    font-size: calc( 8px + 0.8vw );
     text-align: center;
 }
 
@@ -125,10 +126,12 @@ a{
 }
 
 #btn{
-    height: 5vh;
-    width: 8vw;
+    min-height: 35px;
+    min-width: 90px;
+    width: 15vw;
+    color: #FFFFFF;
     background-color: #9479A9;
+    border: none;
     border-radius: 10px;
-    font-size: 1rem;
-    border: 1px solid #FFFFFF;
+    font-size: calc( 6px + 0.8vw );
 }
