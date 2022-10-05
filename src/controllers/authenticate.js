@@ -20,8 +20,9 @@ export async function authenticateUser(req, res) {
 
 export async function logout(req, res) {
     res.clearCookie('token');
+    res.status(200).json({auth: false});
 }
 
 export async function verified(req, res) {
-    res.status(200).json({sucess: 'wheee'});
+    res.status(200).json({auth: true});
 };
