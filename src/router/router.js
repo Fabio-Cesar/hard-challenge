@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as authControllers from '../controllers/authenticate.js';
+import * as userControllers from '../controllers/user.js';
 import { fileURLToPath } from 'url';
 import verifyJWT from '../middlewares/verify.js';
 
@@ -13,7 +14,7 @@ app.get('*', function (req, res) {
 app.post('/login', authControllers.authenticateUser);
 app.post('/logout', authControllers.logout);
 app.post('/home', verifyJWT, authControllers.verified);
-// app.post('/signin', createUser);
+app.post('/signin', userControllers.createUser); // app.post('/signin', createUser);
 // app.post('/cards', verifyJWT, createCard);
 // app.post('/package', verifyJWT, createPackage);
 // app.post('/character', verifyJWT, createCharacter);
