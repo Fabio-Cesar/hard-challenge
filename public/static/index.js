@@ -1,20 +1,27 @@
 // Lógica para invocar o roteamento do SPA.
 
-import { homeView, landingView, loginView, notFoundView, signinView } from './views.js';
+import { AboutView } from './views/about.js';
+import { HomeView } from './views/home.js';
+import { LandingView } from './views/landing.js';
+import { LoginView } from './views/login.js';
+import { NotFoundView } from './views/notFound.js';
+import { SigninView } from './views/signin.js';
 import { navigateTo } from './methods.js';
 
 const app = document.querySelector('#app');
 
 const routes = {
-    '404': notFoundView,
+    '404': NotFoundView,
 
-    '/': landingView,
+    '/': LandingView,
 
-    '/login': loginView,
+    '/login': LoginView,
 
-    '/signin': signinView,
+    '/signin': SigninView,
 
-    '/home': homeView
+    '/home': HomeView,
+
+    '/about': AboutView
 };
 
 export async function router() {
@@ -33,8 +40,8 @@ export async function router() {
             break;
         default:
     }
-    const view = routes[path] || routes['404'];
-    app.innerHTML = await view().getHTML();
+    const view = new routes[path] || new routes['404'];
+    app.innerHTML = await view.getHTML();
 };
 
 window.addEventListener('DOMContentLoaded', () => {
