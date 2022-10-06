@@ -6,8 +6,4 @@ export class LandingView extends View {
         super();
         this.display = "#landing-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

@@ -6,8 +6,4 @@ export class SignupView extends View {
         super();
         this.display = "#signup-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

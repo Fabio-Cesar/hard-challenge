@@ -6,8 +6,4 @@ export class PendingTradeView extends View {
         super();
         this.display = "#pendingtrade-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

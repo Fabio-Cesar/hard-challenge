@@ -4,18 +4,20 @@ import jwt from 'jsonwebtoken';
 
 function verifyJWT(req, res, next){
     const { token } = req.cookies;
-    console.log(token);
     if (!token) {
-        return res.status(401).json({ auth: false, message: 'No token provided.' });
+        return res.status(401).json({ message: 'Para prosseguir, faça login novamente.' });
     };
     
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
       if (err) {
-        return res.status(401).json({ auth: false, message: 'Failed to authenticate token.' });
+        return res.status(401).json({ message: 'Para prosseguir, faça login novamente.' });
       };
 
-      req.userId = decoded.id;
+      req.userID = decoded.userID;
       req.userType = decoded.userType;
+      req.userName = decoded.userName;
+      req.userEmail = decoded.userEmail;
+      req.userCoins = decoded.userCoins;
       next();
     });
 };

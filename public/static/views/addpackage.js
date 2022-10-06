@@ -6,8 +6,4 @@ export class AddPackageView extends View {
         super();
         this.display = "#addpackage-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

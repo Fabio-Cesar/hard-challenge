@@ -6,8 +6,4 @@ export class HomeView extends View {
         super();
         this.display = '#home-page';
     };
-    
-    async getHTML() {
-        return;
-    };
 };

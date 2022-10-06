@@ -6,8 +6,4 @@ export class AboutView extends View {
         super();
         this.display = '#about-page';
     };
-
-    async getHTML() {
-        return;
-    };
 };
