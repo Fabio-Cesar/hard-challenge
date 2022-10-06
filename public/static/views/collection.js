@@ -6,8 +6,4 @@ export class CollectionView extends View {
         super();
         this.display = "#collection-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

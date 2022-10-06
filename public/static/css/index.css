@@ -170,9 +170,9 @@ main {
     width: 35vw;
 }
 
-/* MAIN REGISTER PAGE */
+/* MAIN SIGNUP PAGE & LOGIN PAGE */
 
-#container-register{
+#container-register, #container-login {
     padding: 4vh 0vw;
     height: 76vh;
     width: 40vw;
@@ -186,16 +186,16 @@ main {
     gap: 3.2vh;
 }
 
-#container-register::-webkit-scrollbar {
+#container-register::-webkit-scrollbar, #container-login::-webkit-scrollbar {
     width: 1.3vw;
     background-color: #bbbbbb80;
 }
 
-#container-register::-webkit-scrollbar-thumb {
+#container-register::-webkit-scrollbar-thumb, #container-login::-webkit-scrollbar {
     background-color: #13101EA0;
 }
 
-#form-register{
+#form-register, #form-login {
     display: flex;
     flex-direction: column;
     gap: 2.6vh;
@@ -231,7 +231,7 @@ a{
     color: #FFFFFF;
 }
 
-#signup-btn{
+#signup-btn, #login-btn, #back-btn {
     min-height: 35px;
     min-width: 90px;
     width: 15vw;
@@ -275,7 +275,7 @@ a{
     padding-bottom: 10px;
 }
 
-#save-btn{
+#save-btn, .btn-shop{
     height: 5vh;
     width: 8vw;
     background-color: #9479A9;
@@ -297,6 +297,104 @@ label{
 #img-preview{
     max-width: 130px;
     max-height: 130px;
+}
+
+/* MAIN COLLECTION PAGE */
+
+#container-shop {
+    padding: 4vh 0vw;
+    height: 76vh;
+    width: 60vw;
+    overflow-y: auto;
+    background-color: #FFFFFF26;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3.2vh;
+}
+
+#shop-packages{
+    display: flex;
+    gap: 5vw;
+}
+
+.packages{
+    width: 12vw;
+}
+
+.box-shop{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 12vw;
+    background-color: #FFFFFF26;
+    font-size: calc( 6px + 0.6vw );
+    text-align: center;
+}
+
+.package-chances {
+    font-size: calc( 5px + 0.5vw );
+}
+
+/* MODAL */
+.modal{
+    width: 50vw;
+    height: 70vh;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+    animation: animate;
+    animation-duration: 800ms;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@keyframes animate{
+    from{opacity:1}
+    from{opacity:0}
+}
+
+#icon-close-modal{
+    width: 36px;
+    float: right;
+    cursor: pointer;
+    padding: 10px;
+}
+
+#h3-modal{
+    font-size: 2rem;
+    color: #13101E;
+    text-align: center;
+    padding: 10px;
+}
+
+.card-acquired{
+    width: 12vw;
+}
+
+#new-cards{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10vh 0 20vh 0;
+}
+
+.description-new-card{
+    width: 12vw;
+    height: 10vh; 
+    border: 2px solid #13101E;
+}
+
+.name-new-card, .rarity-new-card{
+    color: #13101E;
+    font-size: 1rem;
+    text-align: center;
 }
 
 /* ESCONDER TUDO */
@@ -331,6 +429,8 @@ label{
 
 #about-page {
     display: none;
+    flex-direction: column;
+    gap: 2vh;
 }
 
 #home-page {

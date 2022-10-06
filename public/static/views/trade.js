@@ -6,8 +6,4 @@ export class TradeView extends View {
         super();
         this.display = "#trade-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

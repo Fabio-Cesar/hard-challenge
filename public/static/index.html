@@ -32,7 +32,7 @@
                         <li><a href="/home" id="nav-shop" data-link>Loja</a></li>
                         <li><a href="/collection" id="nav-collection" data-link>Minha Coleção</a></li>
                         <li><a href="/trade" id="nav-trade" data-link>Trocar</a></li>
-                        <li><a href="/pendingtrade" id="nav-pendingtrade" data-link>Trocas Pendentes</a></li>
+                        <li><a href="/pendingtrade" id="nav-pendingtrade" data-link>Aceitar Trocas</a></li>
                         <li><a href="/about" id="nav-about" data-link>Sobre</a></li>
                     </ul>
                 </nav>
@@ -84,7 +84,20 @@
             </div>
         </main>
         <main id="login-page">
-            <form><input type="text" name="email" id="email-login-input" /><input type="text" name="password" id="password-login-input" /><button type="button"><a href="/home" data-loginPost>Entrar</a></button></form>
+            <div id="container-login">
+                <h2>ACESSAR</h2>
+                <form id="form-login">
+                    <label for="login-input-email">E-mail</label>
+                    <input type="text" id="login-input-email">
+                    <label for="login-input-password">Senha</label>
+                    <input type="text" id="login-input-password">
+                </form>
+                <div>
+                    <p><a href="/signup" data-link>Não possui usuário?</a></p>
+                    <p><a href="/signup" data-link>Cadastre-se.</a></p>
+                </div>
+                <button id="login-btn" data-loginPost>Entrar</button>
+            </div>
         </main>
         <main id="signup-page">
             <div id="container-register">
@@ -94,8 +107,8 @@
                     <input type="text" id="signup-input-email">
                     <label for="signup-input-password">Senha</label>
                     <input type="text" id="signup-input-password">
-                    <label for="signup-input-new-password">Repita a Senha</label>
-                    <input type="text" id="signup-input-new-password">
+                    <label for="signup-input-redo-password">Repita a Senha</label>
+                    <input type="text" id="signup-input-redo-password">
                     <label for="signup-input-user">Usuário</label>
                     <input type="text" id="signup-input-user">
                 </form>
@@ -107,10 +120,42 @@
             </div>
         </main>
         <main id="about-page">
-            <p>About</p>
+            <button id="back-btn">Voltar</button>
+            <p>Como funciona?</p>
         </main>
         <main id="home-page">
-            <p>Loja</p>
+            <div id="container-shop">
+                <h2>Loja de Cards</h2>
+                <div id="shop-packages"></div>
+            </div>
+            <div class="modal">
+                <div class="close-modal">
+                    <img src="./images/close.svg" id="icon-close-modal"/>
+                    <h3 id="h3-modal">Cards Adquiridos</h3>
+                </div>
+                <div id="new-cards">
+                    <div>
+                        <img src="../images/minnie.png" alt="primeiro card adquirido" class="card-acquired">
+                        <div class="description-new-card">
+                            <p class="name-new-card"></p>
+                            <p class="rarity-new-card"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../images/minnie.png" alt="segundo card adquirido" class="card-acquired">
+                        <div class="description-new-card">
+                            <p class="name-new-card"></p>
+                            <p class="rarity-new-card"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../images/minnie.png" alt="terceiro card adquirido" class="card-acquired">
+                        <div class="description-new-card">
+                            <p class="name-new-card"></p>
+                            <p class="rarity-new-card"></p>
+                        </div>
+                    </div>
+                </div>
         </main>
         <main id="profile-page">
             <div id="container-profile">
@@ -140,7 +185,7 @@
             <p>Trocas</p>
         </main>
         <main id="pendingtrade-page">
-            <p>Trocas Pendentes</p>
+            <p>Aceitar Trocas</p>
         </main>
         <main id="addpackage-page">
             <p>Cadastrar Pacote</p>

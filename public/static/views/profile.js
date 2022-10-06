@@ -6,8 +6,4 @@ export class ProfileView extends View {
         super();
         this.display = "#profile-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

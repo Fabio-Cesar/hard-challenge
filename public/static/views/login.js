@@ -6,8 +6,4 @@ export class LoginView extends View {
         super();
         this.display = "#login-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

@@ -6,8 +6,4 @@ export class NotFoundView extends View {
         super();
         this.display = "#not-found-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };

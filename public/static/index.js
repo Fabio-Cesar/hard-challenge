@@ -49,19 +49,45 @@ export async function router() {
             document.querySelector('#unauthenticated-header').style.display = "flex";
             break;
         case '/home':
+            const packageContainer = document.querySelector('#shop-packages');
+            packageContainer.innerHTML = '';
+            const homeResponse = await fetch('api/packages');
+            if (homeResponse.status !== 200) {
+                log.innerText = 'Erro na requisição';
+            } else {
+                const packageRes = await homeResponse.json();
+                let commonchance;
+                let rarechance;
+                for (let i = 0; i < packageRes.packages.length; i++) {
+                    commonchance = 100 - packageRes.packages[i].chance_rare;
+                    rarechance = packageRes.packages[i].chance_rare - packageRes.packages[i].chance_ultrarare;
+                    packageContainer.innerHTML += `<div class="container-packages">
+                    <img src="./images/packages/${packageRes.packages[i].id}.jpg" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
+                    <div class="box-shop">
+                        <p><img src="/images/coin-svgrepo-com.svg" id="coins-img" />${packageRes.packages[i].price}</p>
+                        <p>Pacote ${packageRes.packages[i].brand}</p>
+                        <p>${packageRes.packages[i].type}</p>
+                        <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
+                        <p class="package-chances">CHANCE RARO ${rarechance}%</p>
+                        <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
+                        <button class="btn-shop" id="${packageRes.packages[i].id} data-value="${packageRes.packages[i].price}" data-buyPackagePost>Comprar</button>
+                    </div>
+                </div>`
+                };
+            }
         case '/profile':
         case '/collection':
         case '/trade':
         case '/pendingtrade':
-            console.log('chamei');
-            const response = await fetch('api/home');
+            const response = await fetch('api/user');
             if (response.status !== 200) {
                 console.log('Não autenticado!');
                 path = '/';
                 navigateTo(path);
-            };
-            document.querySelector('#authenticated-user-header').style.display = "flex";
-            document.querySelector('#profile-container').style.display = "flex";
+            } else {
+                document.querySelector('#authenticated-user-header').style.display = "flex";
+                document.querySelector('#profile-container').style.display = "flex";
+            }
             break;
         case '/addpackage':
         case '/addcharacter':
@@ -70,21 +96,24 @@ export async function router() {
                 console.log('Não autorizado!');
                 path = '/';
                 navigateTo(path);
+            } else {
+                document.querySelector('#authenticated-admin-header').style.display = "flex";
+                document.querySelector('#profile-container').style.display = "flex";
             };
-            document.querySelector('#authenticated-admin-header').style.display = "flex";
             break;
         default:
     }
     const view = new routes[path] || new routes['404'];
-    // app.innerHTML = await view.getHTML();
 };
 
 window.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener("click", async (e) => {
         if (e.target.matches("[data-loginPost]")) {
+            console.log('chamou');
             e.preventDefault();
-            const emailValue = document.querySelector('#email-login-input').value;
-            const passwordValue = document.querySelector('#password-login-input').value;
+            const emailValue = document.querySelector('#login-input-email').value;
+            const passwordValue = document.querySelector('#login-input-password').value;
+            console.log(emailValue, passwordValue);
             const bodyValue = {
                 email: emailValue,
                 password: passwordValue
@@ -97,6 +126,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('api/login', options);
             if (response.status !== 200) {
                 const data = await response.json();
+                // console.log(data);
                 navigateTo('/');
             } else {
                 navigateTo('/home');
@@ -136,3 +166,16 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('popstate', router);
+
+document.querySelector('#back-btn').addEventListener('click', () => {
+    window.history.back();
+});
+
+const modal = document.querySelector('.modal')
+
+const btnCloseModal = document.querySelector('#icon-close-modal');
+btnCloseModal.addEventListener('click', closeModal)
+
+function closeModal(){
+    modal.style.display = 'none';
+}

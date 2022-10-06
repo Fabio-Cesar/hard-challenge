@@ -6,8 +6,4 @@ export class AddCharacterView extends View {
         super();
         this.display = "#addcharacter-page";
     };
-
-    async getHTML() {
-        return;
-    };
 };
