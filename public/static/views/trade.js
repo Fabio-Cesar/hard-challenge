@@ -1,10 +1,10 @@
 import View from './view.js';
 
-export class LoginView extends View {
-
+export class TradeView extends View {
+    
     constructor() {
         super();
-        this.display = "#login-page";
+        this.display = "#trade-page";
     };
 
     async getHTML() {

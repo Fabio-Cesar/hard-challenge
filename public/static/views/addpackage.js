@@ -1,10 +1,10 @@
 import View from './view.js';
 
-export class LoginView extends View {
-
+export class AddPackageView extends View {
+    
     constructor() {
         super();
-        this.display = "#login-page";
+        this.display = "#addpackage-page";
     };
 
     async getHTML() {
