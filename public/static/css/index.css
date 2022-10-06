@@ -1,0 +1,366 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url(../fonts/Poppins-ExtraBold.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* BODY */
+body {
+    background-image: url('../images/bg-principal.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    color: #fff;
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* CABEÇALHOS */
+header {
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #13101E;
+}
+
+#header-container {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo > a {
+    text-decoration: none;
+    font-size: calc(14px + 1.4vw);
+    color: #ffffff;
+}
+
+#nav-login, #nav-signup, #nav-about, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-collection {
+    text-decoration: none;
+    font-size: calc( 6px + 0.9vw );
+    color: #ffffff;
+}
+
+ul {
+    display: flex;
+    gap: 4vw;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* PROFILE NAV */
+
+#profile-container{
+    padding: 0vh 10vw;
+    min-height: 80px;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    align-self: flex-end;
+}
+
+#profile-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+}
+
+#coins-img{
+    width: 18px;
+}
+
+#profile-img {
+    width: 50px;
+}
+
+#profile-user-name{
+    font-size: calc( 8px + 0.8vw );
+    text-align: end;
+}
+
+#profile-buttons{
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+}
+
+#profile-coins {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#edit-btn, #logout-btn {
+    height: 20px;
+    width: 40px;
+    background-color: #9479A9;
+    border-radius: 10px;
+    font-size: calc( 5px + 0.6vw );
+    color: #ffffff;
+    border: none;
+}
+
+#nav-editprofile {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#add-coin-btn {
+    height: 18px;
+    width: 18px;
+    background-color: #ff4098;
+    border-radius: 9px;
+    font-size: 0.8rem;
+    border: none;
+}
+
+/* MAIN LANDING PAGE */
+main {
+    padding-top: 6vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#section-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+}
+
+#texts-home {
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+    width: 50vw;
+}
+
+#main-text-home > p {
+    text-align: left;
+    font-size: calc(18px + 2.2vw);
+    line-height: calc(28px + 4vh);
+}
+
+#secondary-text-home > p {
+    text-align: left;
+    font-size: calc(8px + 1.1vw);
+}
+
+#texts-home > p {
+    text-align: left;
+    font-size: calc(9px + 1.2vw);
+}
+
+#img-cards {
+    width: 35vw;
+}
+
+/* MAIN REGISTER PAGE */
+
+#container-register{
+    padding: 4vh 0vw;
+    height: 76vh;
+    width: 40vw;
+    overflow-y: auto;
+    background-color: #FFFFFF26;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3.2vh;
+}
+
+#container-register::-webkit-scrollbar {
+    width: 1.3vw;
+    background-color: #bbbbbb80;
+}
+
+#container-register::-webkit-scrollbar-thumb {
+    background-color: #13101EA0;
+}
+
+#form-register{
+    display: flex;
+    flex-direction: column;
+    gap: 2.6vh;
+    font-size: calc( 6px + 0.8vw );
+    width: 25vw;
+}
+
+input{
+    height: 4.8vh;
+    background: none;
+    border: none;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: calc( 6px + 0.7vw );
+}
+
+input:focus{
+    outline: 0;
+}
+
+h2{
+    font-size: calc( 9px + 1.2vw );
+}
+
+p{
+    font-size: calc( 8px + 0.8vw );
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+#signup-btn{
+    min-height: 35px;
+    min-width: 90px;
+    width: 15vw;
+    color: #FFFFFF;
+    background-color: #9479A9;
+    border: none;
+    border-radius: 10px;
+    font-size: calc( 6px + 0.8vw );
+}
+
+/* MAIN PROFILE PAGE */
+
+#container-profile{
+    padding: 2vh 0;
+    height: 68vh;
+    width: 40vw;
+    overflow-y: auto;
+    background-color: #FFFFFF26; 
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#container-profile::-webkit-scrollbar {
+    width: 1.3vw;
+    background-color: #bbbbbb80;
+}
+
+#container-profile::-webkit-scrollbar-thumb {
+    background-color: #13101EA0;
+}
+
+#form-profile{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    font-size: calc( 6px + 0.7vw );
+    width: 25vw;
+    padding-bottom: 10px;
+}
+
+#save-btn{
+    height: 5vh;
+    width: 8vw;
+    background-color: #9479A9;
+    border-radius: 10px;
+    font-size: calc( 6px + 0.7vw );
+    color: #FFFFFF;
+    border: none;
+}
+
+.edit-svg{
+    width: 24px;
+}
+
+label{
+    display: flex;
+    justify-content: space-between;
+}
+
+#img-preview{
+    max-width: 130px;
+    max-height: 130px;
+}
+
+/* ESCONDER TUDO */
+
+#unauthenticated-header {
+    display: none;
+}
+
+#authenticated-user-header {
+    display: none;
+}
+
+#profile-container {
+    display: none;
+}
+
+#authenticated-admin-header {
+    display: none;
+}
+
+#landing-page {
+    display: none;
+}
+
+#login-page {
+    display: none;
+}
+
+#signup-page {
+    display: none;
+}
+
+#about-page {
+    display: none;
+}
+
+#home-page {
+    display: none;
+}
+
+#profile-page {
+    display: none;
+}
+
+#collection-page {
+    display: none;
+}
+
+#change-page {
+    display: none;
+}
+
+#my-changes-page {
+    display: none;
+}
+
+#addpackage-page {
+    display: none;
+}
+
+#addcharacter-page {
+    display: none;
+}
+
+#not-found-page {
+    display: none;
+}

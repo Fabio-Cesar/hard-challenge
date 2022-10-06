@@ -4,9 +4,10 @@ export class NotFoundView extends View {
 
     constructor() {
         super();
+        this.display = "#not-found-page";
     };
 
     async getHTML() {
-        return `<p>Not Found</p>`;
+        return;
     };
 };

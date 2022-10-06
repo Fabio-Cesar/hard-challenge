@@ -1,12 +1,10 @@
 export default class View {
-    constructor() {
-    };
 
-    set cssHref(href) {
-        document.querySelectorAll("link[rel='stylesheet']")[0].href = href;
+    set display(view) {
+        document.querySelector(view).style.display = "flex";
     };
 
     async getHTML() {
-        return ``;
+        return;
     };
-}
+};

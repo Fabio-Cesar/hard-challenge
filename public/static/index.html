@@ -4,11 +4,153 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="./css/index.css" />
         <title>CARD CREATOR</title>
     </head>
     <body>
-        <div id="app"></div>
+        <header id="unauthenticated-header">
+            <div id="header-container">
+                <h1 id="logo">
+                    <a href="/" data-link>cardCreator</a>
+                </h1>
+                <nav>
+                    <ul>
+                        <li><a href="/login" id="nav-login" data-link>Entrar</a></li>
+                        <li><a href="/signup" id="nav-signup" data-link>Cadastre-se</a></li>
+                        <li><a href="/about" id="nav-about" data-link>Sobre</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <header id="authenticated-user-header">
+            <div id="header-container">
+                <h1 id="logo">
+                    <a href="/home" data-link>cardCreator</a>
+                </h1>
+                <nav>
+                    <ul>
+                        <li><a href="/home" id="nav-shop" data-link>Loja</a></li>
+                        <li><a href="/collection" id="nav-collection" data-link>Minha Coleção</a></li>
+                        <li><a href="/trade" id="nav-trade" data-link>Trocar</a></li>
+                        <li><a href="/pendingtrade" id="nav-pendingtrade" data-link>Trocas Pendentes</a></li>
+                        <li><a href="/about" id="nav-about" data-link>Sobre</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <header id="authenticated-admin-header">
+            <div id="header-container">
+                <h1 id="logo">
+                    <a href="/adminhome" data-link>cardCreator</a>
+                </h1>
+                <nav>
+                    <ul>
+                        <li><a href="/addpackage" id="nav-addpackage" data-link>Cadastrar Pacote</a></li>
+                        <li><a href="/addcharacter" id="nav-addcharacter" data-link>Cadastrar Personagem</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section id="profile-container">
+            <div id="profile-info">
+                <p id="profile-user-name">Nome</p>
+                <div id="profile-buttons">
+                    <button id="edit-btn"><a href="/profile" id="nav-profile" data-link>Editar</a></button>
+                    <button id="logout-btn" data-logoutPost>Sair</button>
+                </div>
+                <div id="profile-coins">
+                    <img src="/images/coin-svgrepo-com.svg" id="coins-img" />
+                    <p id="profile-user-coins">50</p>
+                    <button id="add-coin-btn">+</button>
+                </div>
+            </div>
+            <img src="/images/default-profile.svg" id="profile-img" />
+        </section>
+        <main id="landing-page">
+            <div id="section-container">
+                <div id="texts-home">
+                    <div id="main-text-home">
+                        <p>Crie sua coleção</p>
+                        <p>de cards</p>
+                        <p>personalizada</p>
+                    </div>
+                    <div id="secondary-text-home">
+                        <p>Adquira já os cards da edição limitada</p>
+                        <p>e crie sua coleção personalizada</p>
+                    </div>
+                    <p>Troque com amigos e divirta-se</p>
+                </div>
+                <img id="img-cards" src="../images/packages-principal.png" alt="cards colecionáveis">
+            </div>
+        </main>
+        <main id="login-page">
+            <form><input type="text" name="email" id="email-login-input" /><input type="text" name="password" id="password-login-input" /><button type="button"><a href="/home" data-loginPost>Entrar</a></button></form>
+        </main>
+        <main id="signup-page">
+            <div id="container-register">
+                <h2>CADASTRAR</h2>
+                <form id="form-register">
+                    <label for="signup-input-email">E-mail</label>
+                    <input type="text" id="signup-input-email">
+                    <label for="signup-input-password">Senha</label>
+                    <input type="text" id="signup-input-password">
+                    <label for="signup-input-new-password">Repita a Senha</label>
+                    <input type="text" id="signup-input-new-password">
+                    <label for="signup-input-user">Usuário</label>
+                    <input type="text" id="signup-input-user">
+                </form>
+                <div>
+                    <p><a href="/login" data-link>Já possui usuário?</a></p>
+                    <p><a href="/login" data-link>Entre aqui.</a></p>
+                </div>
+                <button id="signup-btn" data-signupPost>Cadastrar</button>
+            </div>
+        </main>
+        <main id="about-page">
+            <p>About</p>
+        </main>
+        <main id="home-page">
+            <p>Loja</p>
+        </main>
+        <main id="profile-page">
+            <div id="container-profile">
+                <form id="form-profile">
+                    <img id="img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
+                    <input accept="image/*" type="file" id="edit-img">
+    
+                    <label for="name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="name-input" type="text">
+    
+                    <label for="email-input">E-mail <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="email-input" type="text">
+    
+                    <label for="senha-input">Nova Senha <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="senha-input" type="text">
+                </form>
+                <button id="save-btn" data-profilePut>Salvar</button>
+            </div>
+        </main>
+        <main id="collection-page">
+            <p>Minha Coleção</p>
+        </main>
+        <main id="trade-page">
+            <p>Trocas</p>
+        </main>
+        <main id="pendingtrade-page">
+            <p>Trocas Pendentes</p>
+        </main>
+        <main id="addpackage-page">
+            <p>Cadastrar Pacote</p>
+        </main>
+        <main id="addcharacter-page">
+            <p>Cadastrar Personagem</p>
+        </main>
+        <main id="not-found-page">
+            <p>Not Found</p>
+        </main>
         <div id="log"></div>
         <script type="module" src="./index.js"></script>
     </body>

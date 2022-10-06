@@ -4,9 +4,10 @@ export class HomeView extends View {
 
     constructor() {
         super();
+        this.display = '#home-page';
     };
     
     async getHTML() {
-        return `<p>Hello</p><form action="/logout" method="post"><button type="button" data-logoutPost>Sair</button></form>`;
+        return;
     };
 };
