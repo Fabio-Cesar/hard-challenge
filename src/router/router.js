@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import * as authControllers from '../controllers/authenticate.js';
 import * as userControllers from '../controllers/user.js';
+import * as cardsControllers from '../controllers/card.js';
 import verifyJWT from '../middlewares/verify.js';
 
 const app = Router();
 
 app.get('/home', verifyJWT, authControllers.verified);
+app.get('/cards', verifyJWT, cardsControllers.getCard);
 
 app.post('/login', authControllers.authenticateUser);
 app.post('/logout', authControllers.logout);
