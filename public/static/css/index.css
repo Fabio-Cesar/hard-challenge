@@ -174,7 +174,6 @@ main {
 
 #container-register, #container-login {
     padding: 4vh 0vw;
-    height: 76vh;
     width: 40vw;
     overflow-y: auto;
     background-color: #FFFFFF26;
@@ -246,7 +245,6 @@ a{
 
 #container-profile{
     padding: 2vh 0;
-    height: 68vh;
     width: 40vw;
     overflow-y: auto;
     background-color: #FFFFFF26; 
@@ -255,15 +253,6 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-}
-
-#container-profile::-webkit-scrollbar {
-    width: 1.3vw;
-    background-color: #bbbbbb80;
-}
-
-#container-profile::-webkit-scrollbar-thumb {
-    background-color: #13101EA0;
 }
 
 #form-profile{
@@ -303,7 +292,6 @@ label{
 
 #container-shop {
     padding: 4vh 0vw;
-    height: 76vh;
     width: 60vw;
     overflow-y: auto;
     background-color: #FFFFFF26;

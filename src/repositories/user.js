@@ -18,3 +18,12 @@ export async function createUser(_client, _userType, _name, _email, _password, _
     const res = await _client.query(query);
     return { 'error': null };
 };
+
+export async function update(_client, _queryColumns, _queryRef, _queryValues) {
+    const query = {
+        text: `UPDATE users SET (${_queryColumns}) = (${_queryRef}) WHERE id = $1`,
+        values: _queryValues
+    };
+    const res = await _client.query(query);
+    return { 'error': null };
+};

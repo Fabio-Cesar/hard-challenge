@@ -90,7 +90,7 @@
                     <label for="login-input-email">E-mail</label>
                     <input type="text" id="login-input-email">
                     <label for="login-input-password">Senha</label>
-                    <input type="text" id="login-input-password">
+                    <input type="password" id="login-input-password">
                 </form>
                 <div>
                     <p><a href="/signup" data-link>Não possui usuário?</a></p>
@@ -106,9 +106,7 @@
                     <label for="signup-input-email">E-mail</label>
                     <input type="text" id="signup-input-email">
                     <label for="signup-input-password">Senha</label>
-                    <input type="text" id="signup-input-password">
-                    <label for="signup-input-redo-password">Repita a Senha</label>
-                    <input type="text" id="signup-input-redo-password">
+                    <input type="password" id="signup-input-password">
                     <label for="signup-input-user">Usuário</label>
                     <input type="text" id="signup-input-user">
                 </form>
@@ -128,7 +126,7 @@
                 <h2>Loja de Cards</h2>
                 <div id="shop-packages"></div>
             </div>
-            <div class="modal">
+            <div id="shop-modal" class="modal">
                 <div class="close-modal">
                     <img src="./images/close.svg" id="icon-close-modal"/>
                     <h3 id="h3-modal">Cards Adquiridos</h3>
@@ -161,19 +159,19 @@
             <div id="container-profile">
                 <form id="form-profile">
                     <img id="img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
-                    <input accept="image/*" type="file" id="edit-img">
+                    <input accept="image/*" type="file" id="profile-edit-img" name="profile-image">
     
-                    <label for="name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
+                    <label for="profile-name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
                     </label>
-                    <input id="name-input" type="text">
+                    <input id="profile-name-input" type="text" name="name">
     
-                    <label for="email-input">E-mail <img src="/images/edit.svg" class="edit-svg" />
+                    <label for="profile-email-input">E-mail <img src="/images/edit.svg" class="edit-svg" />
                     </label>
-                    <input id="email-input" type="text">
+                    <input id="profile-email-input" type="text" name="email">
     
-                    <label for="senha-input">Nova Senha <img src="/images/edit.svg" class="edit-svg" />
+                    <label for="profile-password-input">Nova Senha <img src="/images/edit.svg" class="edit-svg" />
                     </label>
-                    <input id="senha-input" type="text">
+                    <input id="profile-password-input" type="password" name="password">
                 </form>
                 <button id="save-btn" data-profilePut>Salvar</button>
             </div>
@@ -196,7 +194,6 @@
         <main id="not-found-page">
             <p>Not Found</p>
         </main>
-        <div id="log"></div>
         <script type="module" src="./index.js"></script>
     </body>
 </html>
