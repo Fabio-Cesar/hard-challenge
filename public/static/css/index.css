@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Poppins';
-    src: url(../fonts/Poppins-ExtraBold.ttf);
+    src: url(../fonts/Poppins-Bold.ttf);
 }
 
 * {
@@ -15,7 +15,7 @@ body {
     background-repeat: repeat-y;
     background-size: cover;
     color: #fff;
-    font-family: Poppins;
+    font-family: 'Poppins';
     display: flex;
     flex-direction: column;
 }
@@ -28,6 +28,7 @@ button:hover {
 header {
     display: flex;
     height: 10vh;
+    min-height: 30px;
     justify-content: center;
     align-items: center;
     background-color: #13101E;
@@ -79,7 +80,7 @@ li {
     gap: 0.8vh;
 }
 
-#coins-img{
+.coins-img{
     width: 18px;
 }
 
@@ -175,7 +176,6 @@ main {
 #container-register, #container-login {
     padding: 4vh 0vw;
     width: 40vw;
-    overflow-y: auto;
     background-color: #FFFFFF26;
     color: #FFFFFF;
     display: flex;
@@ -183,15 +183,6 @@ main {
     justify-content: flex-start;
     align-items: center;
     gap: 3.2vh;
-}
-
-#container-register::-webkit-scrollbar, #container-login::-webkit-scrollbar {
-    width: 1.3vw;
-    background-color: #bbbbbb80;
-}
-
-#container-register::-webkit-scrollbar-thumb, #container-login::-webkit-scrollbar {
-    background-color: #13101EA0;
 }
 
 #form-register, #form-login {
@@ -235,7 +226,7 @@ a{
     min-width: 90px;
     width: 15vw;
     color: #FFFFFF;
-    background-color: #9479A9;
+    background-color: #ff4098;
     border: none;
     border-radius: 10px;
     font-size: calc( 6px + 0.8vw );
@@ -246,7 +237,6 @@ a{
 #container-profile{
     padding: 2vh 0;
     width: 40vw;
-    overflow-y: auto;
     background-color: #FFFFFF26; 
     color: #FFFFFF;
     display: flex;
@@ -264,11 +254,12 @@ a{
     padding-bottom: 10px;
 }
 
-#save-btn, .btn-shop{
+#save-btn, .btn-shop, .changeable-cardbtn{
     height: 5vh;
     width: 8vw;
-    background-color: #9479A9;
-    border-radius: 10px;
+    background-color: #ff4098;
+    border-radius: 1vh;
+    font-family: 'Poppins';
     font-size: calc( 6px + 0.7vw );
     color: #FFFFFF;
     border: none;
@@ -284,8 +275,8 @@ label{
 }
 
 #img-preview{
-    max-width: 130px;
-    max-height: 130px;
+    max-width: calc( 60px + 2vw);
+    max-height: calc( 60px + 3vh);
 }
 
 /* MAIN COLLECTION PAGE */
@@ -322,6 +313,8 @@ label{
     background-color: #FFFFFF26;
     font-size: calc( 6px + 0.6vw );
     text-align: center;
+    gap: 0.5vh;
+    padding-bottom: 1vh;
 }
 
 .package-chances {
@@ -330,14 +323,26 @@ label{
 
 /* MODAL */
 .modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: #00000080
+}
+
+.modal-box{
     width: 50vw;
     height: 70vh;
-    background-color: #FFFFFF;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    display: flex;
+    background-color: #FFFFFFCC;
     transform: translate(-50%,-50%);
-    display: none;
+    position: relative;
+    top: 50vh;
+    left: 50vw;
     animation: animate;
     animation-duration: 800ms;
     flex-direction: column;
@@ -349,41 +354,74 @@ label{
     from{opacity:0}
 }
 
-#icon-close-modal{
+#icon-close-shop-modal, #icon-close-pending-modal{
     width: 36px;
     float: right;
     cursor: pointer;
     padding: 10px;
 }
 
-#h3-modal{
+.h3-modal{
     font-size: 2rem;
     color: #13101E;
     text-align: center;
     padding: 10px;
 }
 
-.card-acquired{
+.card-acquired, .card-pending{
     width: 12vw;
 }
 
-#new-cards{
+#new-cards, #pendingtrade-cards{
     display: flex;
     justify-content: center;
     gap: 20px;
     padding: 10vh 0 20vh 0;
 }
 
-.description-new-card{
+.description-new-card, .description-pending-card{
     width: 12vw;
     height: 10vh; 
     border: 2px solid #13101E;
 }
 
-.name-new-card, .rarity-new-card{
+.name-new-card, .rarity-new-card, .name-pending-card, .rarity-pending-card {
     color: #13101E;
     font-size: 1rem;
     text-align: center;
+}
+
+/* TROCAR CARDS */
+
+#pendingtrade-page {
+    flex-direction: column;
+    gap: 5vh;
+}
+
+#changeable-cards-container {
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+    background-color: #FFFFFF26;
+    gap: 1.5vw;
+    flex-wrap: wrap;
+    padding: 1vh 1vw;
+}
+
+.changeablecard-img {
+    max-width: 9.5vw;
+}
+
+.changeablecard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00000046;
+    padding: 1vh 1vw;
+}
+
+.changeablecard > p {
+    font-size: calc( 6px + 0.7vw );
 }
 
 /* ESCONDER TUDO */
