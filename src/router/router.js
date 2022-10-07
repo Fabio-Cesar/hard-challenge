@@ -22,7 +22,7 @@ app.post('/login', authControllers.authenticateUser);
 app.post('/logout', authControllers.logout);
 app.post('/signup', userControllers.createUser);
 app.post('/user', verifyJWT, upload.single('profile-image'), userControllers.updateUser);
-// app.post('/packages/:packageID/rng/:rng', verifyJWT, packageControllers.buyPackage);
+app.post('/packages/:packageID/rng/:rng', verifyJWT, packageControllers.buyNewCard);
 // app.post('/packages', verifyJWT, packageControllers.createPackage);
 // app.post('/character', verifyJWT, characterControllers.createCharacter);
 // app.post('/change-requests/:offeredcardID/for/:requestcardID', verifyJWT, changeRequestControllers.createChangeRequest);
