@@ -53,13 +53,13 @@ export async function createNewCard(_client, _userID, _characterID) {
 export async function debitPriceFromUserCoins(_client, _userID, _cardPrice) {
     const query = {
         'text': `
-                UPDATE users SET coins = coins - $1 WHERE id = $2 RETURNING coins as userCoins;
+                UPDATE users SET coins = coins - $1 WHERE id = $2 AND coins >= $1 RETURNING coins as userCoins;
                 `,
         'values': [_cardPrice, _userID]
     };
     const res = await _client.query(query);
     if (res.rows.length == 0) {
-        throw new Error(`Não foi possível realizar o pagamento do card!.`);
+        throw new Error(`Não foi possível realizar o pagamento do card, saldo de coins insuficiente!.`);
     };
     return {'userCoins': res.rows, 'error': null};
 };
