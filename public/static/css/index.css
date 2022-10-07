@@ -310,6 +310,7 @@ label{
 
 .packages{
     width: 12vw;
+    box-shadow: 4px 4px 3px 3px #00000080;
 }
 
 .box-shop{
