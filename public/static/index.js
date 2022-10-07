@@ -106,7 +106,7 @@ export async function router() {
                     packageContainer.innerHTML += `<div class="container-packages">
                         <img src="./images/uploads/${packageRes.packages[i].id}.jpg" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
                         <div class="box-shop">
-                            <p><img src="/images/coin-svgrepo-com.svg" id="coins-img" />${packageRes.packages[i].price}</p>
+                            <p><img src="/images/coin-svgrepo-com.svg" class="coins-img" />${packageRes.packages[i].price}</p>
                             <p>Pacote ${packageRes.packages[i].brand}</p>
                             <p>${packageRes.packages[i].type}</p>
                             <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
@@ -131,8 +131,15 @@ export async function router() {
 
 window.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener("click", async (e) => {
-        if (e.target.matches(".btn-shop")) {
+        if (e.target.matches('.modal')) {
+            closeShopModal();
+            closePendingTradeModal();
+        }
+        if (e.target.matches("[data-buyPackagePost]")) {
             openShopModal();
+        }
+        if (e.target.matches("[data-getChangeReq]")) {
+            openPendingTradeModal();
         }
         if (e.target.matches("[data-loginPost]")) {
             e.preventDefault();
@@ -248,15 +255,26 @@ document.querySelector('#back-btn').addEventListener('click', () => {
     window.history.back();
 });
 
-const shopModal = document.querySelector('#shop-modal')
+const shopModal = document.querySelector('#shop-modal');
+const pendingTradeModal = document.querySelector('#pendingtrade-modal');
 
-const btnCloseModal = document.querySelector('#icon-close-modal');
-btnCloseModal.addEventListener('click', closeShopModal)
+const btnCloseShopModal = document.querySelector('#icon-close-shop-modal');
+btnCloseShopModal.addEventListener('click', closeShopModal);
+const btnClosePendingModal = document.querySelector('#icon-close-pending-modal');
+btnClosePendingModal.addEventListener('click', closePendingTradeModal);
 
 function closeShopModal(){
     shopModal.style.display = 'none';
 }
 
+function closePendingTradeModal(){
+    pendingTradeModal.style.display = 'none';
+}
+
 function openShopModal(){
     shopModal.style.display = 'flex';
+}
+
+function openPendingTradeModal(){
+    pendingTradeModal.style.display = 'flex';
 }
