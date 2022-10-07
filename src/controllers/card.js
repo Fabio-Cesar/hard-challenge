@@ -29,7 +29,3 @@ export async function getChangeableCardsByUserID(req, res) {
         res.status(result.status).json({ message: result.error })
     }
 }
-
-export async function postCards() {
-
-}
