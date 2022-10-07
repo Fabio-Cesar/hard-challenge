@@ -42,15 +42,18 @@ export async function router() {
         mains[i].style.display = "none";
     };
     document.querySelector('#profile-container').style.display = "none";
+
     let path = window.location.pathname;
+
     if (path == '/' || path == '/login' || path == '/signup' ) {
         document.querySelector('#unauthenticated-header').style.display = "flex";
     }
+
     if (path == '/home' || path == '/profile' || path == '/collection' || path == "/trade" || path == "/pendingtrade") {
         try {
             const response = await fetch('api/user');
             if (response.status !== 200) {
-                const error = await homeResponse.json();
+                const error = await response.json();
                 throw new Error(`${error.message}`);
             }
             const data = await response.json();
@@ -64,6 +67,26 @@ export async function router() {
             navigateTo(path);
         }
     }
+
+    if (path == '/addpackage' || path == '/addcharacter') {
+        try {
+            const res = await fetch('api/admin');
+            if (res.status !== 200) {
+                const error = await res.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await res.json();
+            document.querySelector('#authenticated-admin-header').style.display = "flex";
+            document.querySelector('#profile-container').style.display = "flex";
+            userName.innerText = `${data.userName}`;
+            profileImg.src = `./images/uploads/${data.userID}.png`
+        } catch (error) {
+            console.log(`${error.message}`);
+            path = '/';
+            navigateTo(path);
+        }
+    }
+
     switch (path) {
         case '/home':
             try {
@@ -102,21 +125,6 @@ export async function router() {
         case '/collection':
         case '/trade':
         case '/pendingtrade':
-            
-            break;
-        case '/addpackage':
-        case '/addcharacter':
-            const res = await fetch('api/admin');
-            if (res.status !== 200) {
-                console.log('Não autorizado!');
-                path = '/';
-                navigateTo(path);
-            } else {
-                document.querySelector('#authenticated-admin-header').style.display = "flex";
-                document.querySelector('#profile-container').style.display = "flex";
-            };
-            break;
-        default:
     }
     const view = new routes[path] || new routes['404'];
 };
@@ -129,30 +137,50 @@ window.addEventListener('DOMContentLoaded', () => {
         if (e.target.matches("[data-loginPost]")) {
             e.preventDefault();
 
-            const emailValue = document.querySelector('#login-input-email').value;
-            const passwordValue = document.querySelector('#login-input-password').value;
-            const bodyValue = {
-                email: emailValue,
-                password: passwordValue
-            }
-            const options = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(bodyValue)                
-            };
-            const response = await fetch('api/login', options);
-            if (response.status !== 200) {
+            try {
+                const emailValue = document.querySelector('#login-input-email').value;
+                const passwordValue = document.querySelector('#login-input-password').value;
+                const bodyValue = {
+                    email: emailValue,
+                    password: passwordValue
+                }
+                const options = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(bodyValue)                
+                };
+                const response = await fetch('api/login', options);
+                if (response.status !== 200) {
+                    const error = await response.json();
+                    throw new Error(`${error.message}`);
+                }
                 const data = await response.json();
+                console.log(data.admin);
+                console.log(data);
+                if (data.admin) {
+                    navigateTo('/addpackage');
+                } else {
+                    navigateTo('/home');
+                }
+            } catch (error) {
+                console.log(`${error.message}`);
                 navigateTo('/');
-            } else {
-                navigateTo('/home');
             }
         };
         if (e.target.matches("[data-logoutPost]")) {
             e.preventDefault();
-            const options = { method: "POST" };
-            const response = await fetch('api/logout', options);
-            navigateTo('/login');
+            try {
+                const options = { method: "POST" };
+                const response = await fetch('api/logout', options);
+                if (response.status !== 200) {
+                    const error = await response.json();
+                    throw new Error(`${error.message}`);
+                }
+                navigateTo('/login');
+            } catch (error) {
+                console.log(`${error.message}`);
+                navigateTo('/');   
+            }
         };
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
@@ -175,9 +203,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(bodyValue)                
                 };
                 const response = await fetch('api/signup', options);
+                if (response.status !== 200) {
+                    const error = await response.json();
+                    throw new Error(`${error.message}`);
+                }
                 navigateTo('/login');
             } catch (error) {
-                
+                console.log(`${error.message}`);
+                navigateTo('/');   
             }            
         };
         if (e.target.matches("[data-profilePut]")) {

@@ -6,7 +6,13 @@ async function authenticate(_email, _password) {
     try {
         // const begin = await db.begin();
         const findUser = await userQueries.select(client, _email, _password);
+        if (findUser.userType === 'admin') {
+            findUser.admin = true;
+            console.log(findUser);
+            return findUser;
+        }
         // const commit = await db.commit();
+        findUser.admin = false;
         return findUser;
     } catch (error) {
         console.error(error);
