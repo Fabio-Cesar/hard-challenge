@@ -37,6 +37,15 @@ const profileImg = document.querySelector('#profile-img');
 const adminName = document.querySelector('#profile-admin-name');
 const adminProfileImg = document.querySelector('#profile-admin-img');
 
+const userImgPreview = document.querySelector('#user-img-preview');
+const userImg = document.querySelector('#profile-edit-img');
+const adminImgPreview = document.querySelector('#admin-img-preview');
+const adminImg = document.querySelector('#admin-profile-edit-img');
+const packageImgPreview = document.querySelector('#package-img-preview');
+const packageImg = document.querySelector('#addpackage-image');
+const characterImgPreview = document.querySelector('#character-img-preview');
+const characterImg = document.querySelector('#addcharacter-image');
+
 export async function router() {
     const headers = document.querySelectorAll('header');
     for ( let i = 0; i < headers.length; i++ ) {
@@ -181,6 +190,10 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener("click", async (e) => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
+            userImgPreview.src = './images/default-profile.svg';
+            adminImgPreview.src = './images/default-profile.svg';
+            characterImgPreview.src = './images/default-profile.svg';
+            packageImgPreview.src = './images/default-profile.svg';
             navigateTo(e.target.href);
         };
         if (e.target.matches('.modal')) {
@@ -315,7 +328,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 const data = await response.json();
                 const formImageData = new FormData();
-                formImageData.append("package-image", document.querySelector('#addpackage-image').files[0]);
+                formImageData.append("package-image", packageImg.files[0]);
                 const optionstwo = {
                     method: "POST",
                     body: formImageData
@@ -325,6 +338,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     const errortwo = await responsetwo.json();
                     throw new Error(`${errortwo.message}`);
                 }
+                packageImgPreview.src = './images/default-profile.svg';
             } catch (error) {
                 console.log(`${error.message}`)
             }
@@ -352,7 +366,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 const data = await response.json();
                 const formImageData = new FormData();
-                formImageData.append("character-image", document.querySelector('#addcharacter-image').files[0]);
+                formImageData.append("character-image", characterImg.files[0]);
                 const optionstwo = {
                     method: "POST",
                     body: formImageData
@@ -362,13 +376,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     const errortwo = await responsetwo.json();
                     throw new Error(`${errortwo.message}`);
                 }
+                characterImgPreview.src = './images/default-profile.svg';
             } catch (error) {
                 console.log(`${error.message}`)
             }
         }
         if (e.target.matches("[data-adminProfilePut]")) {
             try {
-                const adminNewImg = document.querySelector('#admin-profile-edit-img').files[0];
+                const adminNewImg = adminImg.files[0];
                 const adminNewName = document.querySelector('#admin-profile-name-input').value;
                 const adminNewEmail = document.querySelector('#admin-profile-email-input').value;
                 const adminNewPassword = document.querySelector('#admin-profile-password-input').value;
@@ -389,13 +404,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 adminName.innerText = `${data.name}`;
                 adminProfileImg.src = `./images/uploads/${data.userID}.png`
+                adminImgPreview.src = './images/default-profile.svg';
             } catch (error) {
                 console.log(error.message);
             };
         }
         if (e.target.matches("[data-profilePut]")) {
             try {
-                const newImg = document.querySelector('#profile-edit-img').files[0];
+                const newImg = userImg.files[0];
                 const newName = document.querySelector('#profile-name-input').value;
                 const newEmail = document.querySelector('#profile-email-input').value;
                 const newPassword = document.querySelector('#profile-password-input').value;
@@ -416,6 +432,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 userName.innerText = `${data.name}`;
                 profileImg.src = `./images/uploads/${data.userID}.png`
+                userImgPreview.src = './images/default-profile.svg';
             } catch (error) {
                 console.log(error.message);
             };
@@ -437,6 +454,27 @@ const btnCloseShopModal = document.querySelector('#icon-close-shop-modal');
 btnCloseShopModal.addEventListener('click', closeShopModal);
 const btnClosePendingModal = document.querySelector('#icon-close-pending-modal');
 btnClosePendingModal.addEventListener('click', closePendingTradeModal);
+
+userImg.addEventListener('change', (e) => {
+    const url = window.URL.createObjectURL(e.target.files[0]);
+    userImgPreview.src = url;
+    userImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
+})
+adminImg.addEventListener('change', (e) => {
+    const url = window.URL.createObjectURL(e.target.files[0]);
+    adminImgPreview.src = url;
+    adminImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
+})
+characterImg.addEventListener('change', (e) => {
+    const url = window.URL.createObjectURL(e.target.files[0]);
+    characterImgPreview.src = url;
+    characterImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
+})
+packageImg.addEventListener('change', (e) => {
+    const url = window.URL.createObjectURL(e.target.files[0]);
+    packageImgPreview.src = url;
+    packageImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
+})
 
 function closeShopModal(){
     shopModal.style.display = 'none';

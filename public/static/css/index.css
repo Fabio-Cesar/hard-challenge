@@ -234,6 +234,22 @@ a{
 
 /* MAIN PROFILE PAGE */
 
+.input-file-label {
+    padding: 0vh 0.5vw;
+    align-self: center;
+    height: 5vh;
+    min-height: 30px;
+    background-color: #ff4098;
+    border-radius: 10px;
+    display: flex;
+    gap: 1.5vw;
+    align-items: center;
+}
+
+#admin-profile-edit-img, #profile-edit-img, #addpackage-image, #addcharacter-image {
+    display: none;
+}
+
 #container-profile, #container-addbrand, #container-addpackage, #container-addcharacter{
     padding: 2vh 0;
     width: 40vw;
@@ -274,7 +290,8 @@ label{
     justify-content: space-between;
 }
 
-#img-preview{
+#user-img-preview, #admin-img-preview, #character-img-preview, #package-img-preview{
+    align-self: center;
     max-width: calc( 60px + 2vw);
     max-height: calc( 60px + 3vh);
 }
