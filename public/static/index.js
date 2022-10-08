@@ -38,6 +38,8 @@ const profileImg = document.querySelector('#profile-img');
 const adminName = document.querySelector('#profile-admin-name');
 const adminProfileImg = document.querySelector('#profile-admin-img');
 
+const userCoins = document.querySelector('#profile-user-coins');
+
 const userImgPreview = document.querySelector('#user-img-preview');
 const userImg = document.querySelector('#profile-edit-img');
 const adminImgPreview = document.querySelector('#admin-img-preview');
@@ -79,6 +81,7 @@ export async function router() {
             document.querySelector('#profile-container').style.display = "flex";
             userName.innerText = `${data.userName}`;
             profileImg.src = `./images/uploads/${data.userID}.png`
+            userCoins.innerText = `${data.userCoins}`;
         } catch (error) {
             console.log(`${error.message}`);
             path = '/';
@@ -155,9 +158,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 const acqCardImg = document.querySelector('.card-acquired');
                 const acqCardName = document.querySelector('.name-new-card');
                 const acqCardRarity = document.querySelector('.rarity-new-card');
-                acqCardImg.src = `../images/uploads/${acquiredCard.card_id}.png`;
+                acqCardImg.src = `../images/uploads/character/${acquiredCard.character_id}.png`;
                 acqCardName.textContent = `${acquiredCard.character_name}`;
                 acqCardRarity.textContent = `${acquiredCard.rarity}`;
+                userCoins.innerText = `${acquiredCard.user_coins}`;
             } catch (error) {
                 console.log(`${error.message}`);
                 navigateTo('/home');
