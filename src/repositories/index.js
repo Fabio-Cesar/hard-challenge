@@ -17,7 +17,7 @@ export async function begin(client) {
 
 export async function commit(client) {
     const commit = await client.query('COMMIT');
-    return;
+    return { 'error' : null };
 };
 
 export async function rollback(client) {

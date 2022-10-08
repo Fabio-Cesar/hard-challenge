@@ -24,7 +24,12 @@ export async function logout(req, res) {
 };
 
 export async function verified(req, res) {
-    res.status(200).json({ userID: req.userID, userEmail: req.userEmail, userName: req.userName, userCoins: req.userCoins});
+    const type = req.userType;
+    if (type === 'user') {
+        res.status(200).json({ userID: req.userID, userEmail: req.userEmail, userName: req.userName, userCoins: req.userCoins});
+    } else {
+        res.status(403).json({ message: 'Usuário não autorizado!' });
+    };
 };
 
 export async function authorized(req, res) {

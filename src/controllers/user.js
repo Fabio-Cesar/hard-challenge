@@ -1,19 +1,22 @@
 import * as dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
 dotenv.config();
+import jwt from 'jsonwebtoken';
 import * as userServices from '../services/user.js';
 
 export async function createUser(req, res) {
     const { name, email, password } = req.body;
     const result = await userServices.createUser(name, email, password);
     if (result.error === null) {
-        res.status(200).json({ message: 'Usuário criado com sucesso!' });
+        res.status(201).json({ message: 'Usuário criado com sucesso!' });
     } else {
         res.status(result.status).json({ message: result.error });
     };
 };
 
 export async function updateUser(req, res) {
+    if (req.invalidFile) {
+        return res.status(400).json({ message: 'Apenas imagens png e imagens jpg são permitidas!' })
+    }
     const { userID, userType, userCoins } = req;
     const { name, email, password } = req.body;
     const result = await userServices.updateUser(userID, name, email, password);

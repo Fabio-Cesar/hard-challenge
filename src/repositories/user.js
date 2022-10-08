@@ -1,4 +1,16 @@
-export async function select(_client, _email, _password) {
+export async function select(_client, _email) {
+    const query = {
+        'text': 'SELECT id, password, email, user_type, name, coins FROM users WHERE email = $1 AND deleted_at IS NULL',
+        'values': [_email]
+    };
+    const res = await _client.query(query);
+    if (res.rows.length == 0) {
+        throw new Error(`Nenhum usuário encontrado com esse email e senha.`);
+    }
+    return {'userID': res.rows[0].id, 'password': res.rows[0].password, 'userType': res.rows[0].user_type, 'userEmail': res.rows[0].email, 'userName': res.rows[0].name, 'userCoins': res.rows[0].coins, 'error': null};
+};
+
+export async function selectAdmin(_client, _email, _password) {
     const query = {
         'text': 'SELECT id, email, user_type, name, coins FROM users WHERE email = $1 AND password = $2 AND deleted_at IS NULL',
         'values': [_email, _password]
