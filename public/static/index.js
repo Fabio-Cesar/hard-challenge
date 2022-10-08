@@ -267,6 +267,9 @@ window.addEventListener('DOMContentLoaded', () => {
             try {
                 const brandName = document.querySelector('#addbrand-input-name').value;
                 const brandSeries = document.querySelector('#addbrand-input-series').value;
+                if (!brandName || !brandSeries) {
+                    throw new Error('Preencha todos os campos!');
+                }
                 const bodyValue = {
                     name: brandName,
                     series: brandSeries
@@ -287,12 +290,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches("[data-packagePost")) {
             try {
+                const packageSeries = document.querySelector('#addpackage-input-series').value;
+                const packageRarity = document.querySelector('#addpackage-rarity').value;
+                const packagePrice = document.querySelector('#addpackage-price').value;
+                const packageRareChance = parseInt(document.querySelector('#addpackage-rarechance').value) + parseInt(document.querySelector('#addpackage-ultrararechance').value);
+                const packageUltraRareChance = parseInt(document.querySelector('#addpackage-ultrararechance').value);
+                if (!packageSeries || !packageRarity || !packagePrice || !packageRareChance || !packageUltraRareChance) {
+                    throw new Error('Preencha todos os campos!');
+                }
                 const formData = new FormData();
-                formData.append("brand", document.querySelector('#addpackage-input-series').value);
-                formData.append("type", document.querySelector('#addpackage-rarity').value);
-                formData.append("price", document.querySelector('#addpackage-price').value);
-                formData.append("chancerare", ( document.querySelector('#addpackage-rarechance').value + document.querySelector('#addpackage-ultrararechance').value));
-                formData.append("chanceultrarare", document.querySelector('#addpackage-ultrararechance').value);
+                formData.append("brand", packageSeries);
+                formData.append("type", packageRarity);
+                formData.append("price", packagePrice);
+                formData.append("chancerare", packageRareChance);
+                formData.append("chanceultrarare", packageUltraRareChance);
                 const options = {
                     method: "POST",
                     body: formData                
@@ -320,10 +331,16 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches("[data-characterPost")) {
             try {
+                const characterSeries = document.querySelector('#addcharacter-input-series').value;
+                const characterRarity = document.querySelector('#addcharacter-rarity').value;
+                const characterName = document.querySelector('#addcharacter-input-name').value;
+                if (!characterSeries || !characterRarity || !characterName) {
+                    throw new Error('Preencha todos os campos!');
+                }
                 const formData = new FormData();
-                formData.append("brand", document.querySelector('#addcharacter-input-series').value);
-                formData.append("rarity", document.querySelector('#addcharacter-rarity').value);
-                formData.append("name", document.querySelector('#addcharacter-input-name').value);
+                formData.append("brand", characterSeries);
+                formData.append("rarity", characterRarity);
+                formData.append("name", characterName);
                 const options = {
                     method: "POST",
                     body: formData                
@@ -351,11 +368,15 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches("[data-adminProfilePut]")) {
             try {
+                const adminNewImg = document.querySelector('#admin-profile-edit-img').files[0];
+                const adminNewName = document.querySelector('#admin-profile-name-input').value;
+                const adminNewEmail = document.querySelector('#admin-profile-email-input').value;
+                const adminNewPassword = document.querySelector('#admin-profile-password-input').value;
                 const formData = new FormData();
-                formData.append("profile-image", document.querySelector('#admin-profile-edit-img').files[0]);
-                formData.append("name", document.querySelector('#admin-profile-name-input').value);
-                formData.append("email", document.querySelector('#admin-profile-email-input').value);
-                formData.append("password", document.querySelector('#admin-profile-password-input').value);
+                if(adminNewImg) formData.append("profile-image", adminNewImg);
+                if(adminNewName) formData.append("name", adminNewName);
+                if(adminNewEmail) formData.append("email", adminNewEmail);
+                if(adminNewPassword) formData.append("password", adminNewPassword);
                 const options = {
                     method: "PUT",
                     body: formData
@@ -363,7 +384,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('api/user', options);
                 if (response.status !== 200) {
                     const error = await response.json();
-                    throw new Error(`${response.message}`);
+                    throw new Error(`${error.message}`);
                 }
                 const data = await response.json();
                 adminName.innerText = `${data.name}`;
@@ -374,11 +395,15 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches("[data-profilePut]")) {
             try {
+                const newImg = document.querySelector('#profile-edit-img').files[0];
+                const newName = document.querySelector('#profile-name-input').value;
+                const newEmail = document.querySelector('#profile-email-input').value;
+                const newPassword = document.querySelector('#profile-password-input').value;
                 const formData = new FormData();
-                formData.append("profile-image", document.querySelector('#profile-edit-img').files[0]);
-                formData.append("name", document.querySelector('#profile-name-input').value);
-                formData.append("email", document.querySelector('#profile-email-input').value);
-                formData.append("password", document.querySelector('#profile-password-input').value);
+                if(newImg) formData.append("profile-image", newImg);
+                if(newName) formData.append("name", newName);
+                if(newEmail) formData.append("email", newEmail);
+                if(newPassword) formData.append("password", newPassword);
                 const options = {
                     method: "PUT",
                     body: formData
@@ -386,7 +411,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('api/user', options);
                 if (response.status !== 200) {
                     const error = await response.json();
-                    throw new Error(`${response.message}`);
+                    throw new Error(`${error.message}`);
                 }
                 const data = await response.json();
                 userName.innerText = `${data.name}`;
