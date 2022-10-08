@@ -1,6 +1,6 @@
 export async function selectPackages(_client) {
     const query = {
-        'text': 'SELECT package.id as id, brand.name as brand, package.type as type, package.price as price, package.chance_rare as chance_rare, package.chance_ultrarare as chance_ultrarare FROM package INNER JOIN brand ON package.brand = brand.id WHERE finished_at IS NULL'
+        'text': 'SELECT package.id as id, brand.name as brand, package.type as type, package.price as price, package.chance_rare as chance_rare, package.chance_ultrarare as chance_ultrarare FROM package INNER JOIN brand ON package.brand = brand.id'
     };
     const res = await _client.query(query);
     return {'packages': res.rows, 'error': null};
@@ -33,56 +33,48 @@ export async function insertPackage(_client, _brand, _type, _price, _chancerare,
 
 export async function findBrand(_client, _packageID) {
     const query = {
-        'text': `
-                UPDATE package SET copies_sold = copies_sold + 1, amount = amount - 1, updated_at = NOW() WHERE id = $1 AND finished_at IS NULL RETURNING brand as brandID, price as cardPrice, chance_rare as rare,chance_ultrarare as ultraRare;
-                `,
+        'text': 'UPDATE package SET copies_sold = copies_sold + 1, updated_at = NOW() WHERE id = $1 RETURNING brand AS brand_id,(SELECT name FROM brand WHERE package.brand = brand.id) AS brand_name, price AS card_price, chance_rare AS rare,chance_ultrarare AS ultra_rare;',
         'values': [_packageID]
     };
     const res = await _client.query(query);
     if (res.rows.length == 0) {
-        throw new Error(`Os cards deste pacote esgotaram!.`);
+        throw new Error(`Houve um erro nesta solicitação!`);
     };
-    return {'findBrand': res.rows, 'error': null};
+    return {'res': res.rows, 'error': null};
 };
 
 export async function raffleCharacter(_client, _brandID, _rarity) {
     const query = {
-        'text': `
-                SELECT character.id as characterID, character.name as characterName FROM character WHERE brand = $1 AND rarity = $2 ORDER BY RANDOM() LIMIT 1;
-                `,
+        'text': 'SELECT character.id as character_id, character.name as character_name FROM character WHERE brand = $1 AND rarity = $2 ORDER BY RANDOM() LIMIT 1;',
         'values': [_brandID, _rarity]
     };
     const res = await _client.query(query);
     if (res.rows.length == 0) {
-        throw new Error(`Não há personagens desta marca com esta raridade!.`);
+        throw new Error(`Não há personagens desta marca com esta raridade!`);
     };
-    return {'raffleCharacter': res.rows, 'error': null};
+    return {'res': res.rows, 'error': null};
 };
 
 export async function createNewCard(_client, _userID, _characterID) {
     const query = {
-        'text': `
-                INSERT INTO card (user_id,character_id) VALUES ($1,$2) RETURNING id as cardID;
-                `,
+        'text': 'INSERT INTO card (user_id,character_id) VALUES ($1,$2) RETURNING id as card_id;',
         'values': [_userID, _characterID]
     };
     const res = await _client.query(query);
     if (res.rows.length == 0) {
-        throw new Error(`Não foi possível criar este card!.`);
+        throw new Error(`Não foi possível criar este card!`);
     };
-    return {'cardID': res.rows, 'error': null};
+    return {'res': res.rows, 'error': null};
 };
 
 export async function debitPriceFromUserCoins(_client, _userID, _cardPrice) {
     const query = {
-        'text': `
-                UPDATE users SET coins = coins - $1 WHERE id = $2 AND coins >= $1 RETURNING coins as userCoins;
-                `,
+        'text': 'UPDATE users SET coins = coins - $1, updated_at = NOW() WHERE id = $2 AND coins >= $1 RETURNING coins as user_coins;',
         'values': [_cardPrice, _userID]
     };
     const res = await _client.query(query);
     if (res.rows.length == 0) {
-        throw new Error(`Não foi possível realizar o pagamento do card, saldo de coins insuficiente!.`);
+        throw new Error(`Não foi possível realizar o pagamento do card, saldo de coins insuficiente!`);
     };
-    return {'userCoins': res.rows, 'error': null};
+    return {'res': res.rows, 'error': null};
 };

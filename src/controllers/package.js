@@ -27,12 +27,13 @@ export async function createNewPackageImage(req, res) {
 }
 
 export async function buyNewCard(req, res) {
-    const userID = req.userId;       //ver como isso vem do front
-    const packageID = req.packageId; //ver como isso vem do front
-    const result = await packageServices.buyNewCardService(userID, packageID);
-    if(result.error === null) {
-        res.status(200).json({ card: result })
+    const userID = req.userID;
+    const packageID = req.params.packageID;
+    const aquiredCard = await packageServices.buyNewCardService(userID, packageID);
+
+    if(aquiredCard.error === null) {
+        res.status(200).json({ card: aquiredCard });
     } else {
-        res.status(result.status).json({ message: result.error })
-    }
-}
+        res.status(result.status).json({ message: aquiredCard.error });
+    };
+};
