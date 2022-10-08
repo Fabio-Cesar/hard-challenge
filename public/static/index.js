@@ -179,6 +179,10 @@ export async function router() {
 
 window.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener("click", async (e) => {
+        if (e.target.matches("[data-link]")) {
+            e.preventDefault();
+            navigateTo(e.target.href);
+        };
         if (e.target.matches('.modal')) {
             closeShopModal();
             closePendingTradeModal();
@@ -234,10 +238,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 navigateTo('/');   
             }
         };
-        if (e.target.matches("[data-link]")) {
-            e.preventDefault();
-            navigateTo(e.target.href);
-        };
         if (e.target.matches("[data-signupPost]")) {
             try {
                 const emailValue = document.querySelector('#signup-input-email').value;
@@ -251,7 +251,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const options = {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: bodyValue                
+                    body: JSON.stringify(bodyValue)                
                 };
                 const response = await fetch('api/signup', options);
                 if (response.status !== 201) {
@@ -274,7 +274,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const options = {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: bodyValue                
+                    body: JSON.stringify(bodyValue)                
                 };
                 const response = await fetch('api/brands', options);
                 if (response.status !== 201) {
