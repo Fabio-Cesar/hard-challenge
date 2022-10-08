@@ -363,7 +363,8 @@ label{
     animation: animate;
     animation-duration: 800ms;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes animate{
@@ -371,9 +372,11 @@ label{
     from{opacity:0}
 }
 
-#icon-close-shop-modal, #icon-close-pending-modal{
+#icon-close-shop-modal, #icon-close-pending-modal, #icon-close-error-log{
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 36px;
-    float: right;
     cursor: pointer;
     padding: 10px;
 }
@@ -383,6 +386,10 @@ label{
     color: #13101E;
     text-align: center;
     padding: 10px;
+}
+
+#error-log-message{
+    color: #13101E;
 }
 
 .card-acquired, .card-pending{
