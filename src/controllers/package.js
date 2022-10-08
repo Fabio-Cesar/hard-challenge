@@ -1,4 +1,5 @@
 import * as packageServices from '../services/package.js';
+import jwt from 'jsonwebtoken';
 
 export async function getPackages(req, res) {
     const result = await packageServices.getPackages();
@@ -27,13 +28,16 @@ export async function createNewPackageImage(req, res) {
 }
 
 export async function buyNewCard(req, res) {
-    const userID = req.userID;
+    const { userID, userType, userEmail, userName } = req;
     const packageID = req.params.packageID;
     const aquiredCard = await packageServices.buyNewCardService(userID, packageID);
 
     if(aquiredCard.error === null) {
+        res.clearCookie('token');
+        const token = jwt.sign({ userID, userType, userEmail, userName, userCoins : aquiredCard.user_coins }, process.env.SECRET, { expiresIn: 3600 });
+        res.cookie('token', token, { httpOnly: true });
         res.status(200).json({ card: aquiredCard });
     } else {
-        res.status(result.status).json({ message: aquiredCard.error });
+        res.status(aquiredCard.status).json({ message: aquiredCard.error });
     };
 };
