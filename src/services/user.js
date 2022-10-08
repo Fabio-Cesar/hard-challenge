@@ -20,13 +20,13 @@ export async function createUser(_name, _email, _password) {
             throw error;
         }
         const addUser = await userQueries.createUser(client, 'user', _name, _email, _password, 50)
+        db.release(client);
         return addUser;
     } catch (error) {
         console.error(error);
-        return {'status': error.status || 500, 'error': error.message};
-    } finally {
         db.release(client);
-    };
+        return {'status': error.status || 500, 'error': error.message};
+    }
 };
 
 export async function updateUser(_id, _name, _email, _password) {

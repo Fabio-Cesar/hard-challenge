@@ -112,7 +112,7 @@ export async function router() {
                             <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
                             <p class="package-chances">CHANCE RARO ${rarechance}%</p>
                             <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
-                            <button class="btn-shop" id="${packageRes.packages[i].id} data-value="${packageRes.packages[i].price}" data-buyPackagePost>Comprar</button>
+                            <button class="btn-shop" id="${packageRes.packages[i].id}" data-value="${packageRes.packages[i].price}" data-buyPackagePost>Comprar</button>
                        </div>
                     </div>`
                 };
@@ -136,7 +136,34 @@ window.addEventListener('DOMContentLoaded', () => {
             closePendingTradeModal();
         }
         if (e.target.matches("[data-buyPackagePost]")) {
-            openShopModal();
+            try {
+                const packageID = e.target.id;
+                //const packagePrice = e.target.dataset.value;
+                const options = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },              
+                };
+                const response = await fetch(`api/packages/${packageID}`, options)
+                if (response.status !== 200) {
+                    const error = await response.json();
+                    throw new Error(`${error.message}`);
+                };
+                const cardObject = await response.json();
+                console.log(cardObject);
+                const acquiredCard = cardObject.card;
+                if(acquiredCard.error === null) {
+                    openShopModal();
+                };
+                const acqCardImg = document.querySelector('.card-acquired');
+                const acqCardName = document.querySelector('.name-new-card');
+                const acqCardRarity = document.querySelector('.rarity-new-card');
+                acqCardImg.src = `../images/uploads/${acquiredCard.card_id}.png`;
+                acqCardName.textContent = `${acquiredCard.character_name}`;
+                acqCardRarity.textContent = `${acquiredCard.rarity}`;
+            } catch (error) {
+                console.log(`${error.message}`);
+                navigateTo('/home');
+            }
         }
         if (e.target.matches("[data-getChangeReq]")) {
             openPendingTradeModal();

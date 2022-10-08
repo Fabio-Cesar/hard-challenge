@@ -17,41 +17,43 @@ export async function getPackages() {
 export async function buyNewCardService(_userID, _packageID) {
     const client = await db.connect();
     try {
-        await db.begin();
+        await db.begin(client);
         
         const findBrand = await packageQueries.findBrand(client, _packageID);
-        const { brandID, cardPrice, rare, ultraRare } = findBrand;
+        const brandData = findBrand.res[0];
+        const { brand_id, brand_name, card_price, rare, ultra_rare } = brandData;
 
         function getRandomIntNumber(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min) + min)
         }
-        const rarityNumber = getRandomIntNumber(0,100);
+        const randomRarity = getRandomIntNumber(0,100);
         let rarity = '';
-        if (rarityNumber <= ultraRare)  rarity = 'ultrarare';
-        else if (rarityNumber <= rare)  rarity = 'rare';
-        else                            rarity = 'common';
+        if (randomRarity <= ultra_rare) rarity = 'Ultra Raro';
+        else if (randomRarity <= rare)  rarity = 'Raro';
+        else                            rarity = 'Comum';
         
-        console.log(`sorteio: ${rarityNumber}`,rarity)
+        const raffleCharacter = await packageQueries.raffleCharacter(client, brand_id, rarity);
+        const CharacterRaffled = raffleCharacter.res[0];
+        const { character_id, character_name } = CharacterRaffled;
 
-        const raffleCharacter = await packageQueries.raffleCharacter(client, brandID, rarity);
-        const { characterID, characterName } = raffleCharacter;
+        const createNewCard = await packageQueries.createNewCard(client, _userID, character_id);
+        const { card_id } = createNewCard.res[0];
 
-        const createNewCard = await packageQueries.createNewCard(client, _userID, characterID);
-        const { cardID } = createNewCard;
+        const debitPriceFromUserCoins = await packageQueries.debitPriceFromUserCoins(client, _userID, card_price);
+        const { user_coins } = debitPriceFromUserCoins.res[0];
 
-        const debitPriceFromUserCoins = await packageQueries.debitPriceFromUserCoins(client, _userID, cardPrice);
-        const { userCoins } = debitPriceFromUserCoins;
+        await db.commit(client);
+        db.release(client);
 
-        await db.commit();
-        
-        return { cardID, characterID, characterName, userCoins };
+        return { card_id, brand_id, brand_name, character_id, character_name, user_coins, rarity, 'error': null };
     } catch (error) {
         console.error(error);
-        await db.rollback();
-        return {'status': 500, 'error': error.message};
-    } finally {
+
+        await db.rollback(client);
         db.release(client);
+
+        return {'status': error.status || 500, 'error': error.message};
     };
 };
