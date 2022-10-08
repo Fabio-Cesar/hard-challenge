@@ -18,7 +18,6 @@ function imageFilter(req, file, cb) {
         req.invalidFile = true;
         cb(null, false, req.invalidFile);
     }
-    cb(null, true);
 };
 
 const upload = multer({ storage, fileFilter : imageFilter });

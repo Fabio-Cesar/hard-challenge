@@ -37,7 +37,7 @@ export async function updateUser(_id, _name, _email, _password) {
     try {
         const queryColumnsArray = ['updated_at'];
         const queryValues = [_id, 'now()'];
-        if (_name !== undefined || _name !== '') {
+        if (_name !== undefined) {
             queryValues.push(_name); queryColumnsArray.push('name');
         }
         if (_email !== undefined) {

@@ -32,10 +32,19 @@ export async function createUser(_client, _userType, _name, _email, _password, _
 };
 
 export async function update(_client, _queryColumns, _queryRef, _queryValues) {
-    const query = {
-        text: `UPDATE users SET (${_queryColumns}) = (${_queryRef}) WHERE id = $1`,
-        values: _queryValues
+    if(_queryValues.length === 2) {
+        const query = {
+            text: `UPDATE users SET updated_at = $2 WHERE id = $1 RETURNING name, email`,
+            values: _queryValues
+        }
+        const res = await _client.query(query);
+        return { 'newName': res.rows[0].name, 'newEmail': res.rows[0].email, 'error': null };
+    } else {
+        const query = {
+            text: `UPDATE users SET (${_queryColumns}) = (${_queryRef}) WHERE id = $1 RETURNING name, email`,
+            values: _queryValues
+        }
+        const res = await _client.query(query);
+        return { 'newName': res.rows[0].name, 'newEmail': res.rows[0].email, 'error': null };
     };
-    const res = await _client.query(query);
-    return { 'error': null };
 };
