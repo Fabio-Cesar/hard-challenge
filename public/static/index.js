@@ -31,9 +31,10 @@ const routes = {
     '/admin-profile': AdminProfileView
 };
 
+const errorLogMessage = document.querySelector('#error-log-message');
+
 const userName = document.querySelector('#profile-user-name');
 const profileImg = document.querySelector('#profile-img');
-
 const adminName = document.querySelector('#profile-admin-name');
 const adminProfileImg = document.querySelector('#profile-admin-img');
 
@@ -45,6 +46,8 @@ const packageImgPreview = document.querySelector('#package-img-preview');
 const packageImg = document.querySelector('#addpackage-image');
 const characterImgPreview = document.querySelector('#character-img-preview');
 const characterImg = document.querySelector('#addcharacter-image');
+
+const backBtn404 = document.querySelector('#back-btn');
 
 export async function router() {
     const headers = document.querySelectorAll('header');
@@ -107,83 +110,12 @@ export async function router() {
     }
 
     switch (path) {
-        case '/home':
-            try {
-                const packageContainer = document.querySelector('#shop-packages');
-                packageContainer.innerHTML = '';
-                const homeResponse = await fetch('api/packages');
-                if (homeResponse.status !== 200) {
-                    const error = await homeResponse.json();
-                    throw new Error(`${error.message}`);
-                }
-                const packageRes = await homeResponse.json();
-                let commonchance;
-                let rarechance;
-                for (let i = 0; i < packageRes.packages.length; i++) {
-                    commonchance = 100 - packageRes.packages[i].chance_rare;
-                    rarechance = packageRes.packages[i].chance_rare - packageRes.packages[i].chance_ultrarare;
-                    packageContainer.innerHTML += `<div class="container-packages">
-                        <img src="./images/uploads/package/${packageRes.packages[i].id}.jpg" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
-                        <div class="box-shop">
-                            <p><img src="/images/coin-svgrepo-com.svg" class="coins-img" />${packageRes.packages[i].price}</p>
-                            <p>Pacote ${packageRes.packages[i].brand}</p>
-                            <p>${packageRes.packages[i].type}</p>
-                            <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
-                            <p class="package-chances">CHANCE RARO ${rarechance}%</p>
-                            <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
-                            <button class="btn-shop" id="${packageRes.packages[i].id}" data-value="${packageRes.packages[i].price}" data-buyPackagePost>Comprar</button>
-                       </div>
-                    </div>`
-                };
-            } catch (error) {
-                path = '/';
-                navigateTo(path);
-            };
-            break;
-        case '/profile':
         case '/collection':
         case '/trade':
         case '/pendingtrade':
-        case '/addpackage':
-            try {
-                const addPackageSelectBrand = document.querySelector('#addpackage-input-series');
-                addPackageSelectBrand.innerHTML = '';
-                const res = await fetch('api/brands');
-                if (res.status !== 200) {
-                    const error = await res.json();
-                    throw new Error(`${error.message}`);
-                }
-                const data = await res.json();
-                for ( let i = 0; i < data.brands.length; i++) {
-                    addPackageSelectBrand.innerHTML += `<option value="${data.brands[i].id}">${data.brands[i].name}${data.brands[i].series}</option>`
-                }
-            } catch (error) {
-                console.log(`${error.message}`);
-                path = '/addbrand';
-                navigateTo(path);
-            }
-            break;
-        case '/addcharacter':
-            try {
-                const addCharacterSelectBrand = document.querySelector('#addcharacter-input-series');
-                addCharacterSelectBrand.innerHTML = '';
-                const res = await fetch('api/brands');
-                if (res.status !== 200) {
-                    const error = await res.json();
-                    throw new Error(`${error.message}`);
-                }
-                const data = await res.json();
-                for ( let i = 0; i < data.brands.length; i++) {
-                    addCharacterSelectBrand.innerHTML += `<option value="${data.brands[i].id}">${data.brands[i].name}${data.brands[i].series}</option>`
-                }
-            } catch (error) {
-                console.log(`${error.message}`);
-                path = '/addbrand';
-                navigateTo(path);
-            }
-            break;
     }
     const view = new routes[path];
+    const data = await view.getData();
 };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -199,6 +131,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (e.target.matches('.modal')) {
             closeShopModal();
             closePendingTradeModal();
+            closeErrorModal();
         }
         if (e.target.matches("[data-buyPackagePost]")) {
             try {
@@ -260,8 +193,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     navigateTo('/home');
                 }
             } catch (error) {
-                console.log(`${error.message}`);
-                navigateTo('/');
+                openErrorModal(`${error.message}`);
             }
         };
         if (e.target.matches("[data-logoutPost]")) {
@@ -274,8 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 navigateTo('/login');
             } catch (error) {
-                console.log(`${error.message}`);
-                navigateTo('/');   
+                openErrorModal(`${error.message}`);
             }
         };
         if (e.target.matches("[data-signupPost]")) {
@@ -300,7 +231,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 navigateTo('/login');
             } catch (error) {
-                console.log(`${error.message}`)
+                openErrorModal(`${error.message}`);
             }            
         };
         if (e.target.matches("[data-brandPost")) {
@@ -325,7 +256,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     throw new Error(`${error.message}`);
                 }
             } catch (error) {
-                console.log(`${error.message}`)
+                openErrorModal(`${error.message}`);
             }
         }
         if (e.target.matches("[data-packagePost")) {
@@ -367,7 +298,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 packageImgPreview.src = './images/default-profile.svg';
             } catch (error) {
-                console.log(`${error.message}`)
+                openErrorModal(`${error.message}`);
             }
         }
         if (e.target.matches("[data-characterPost")) {
@@ -405,7 +336,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 characterImgPreview.src = './images/default-profile.svg';
             } catch (error) {
-                console.log(`${error.message}`)
+                openErrorModal(`${error.message}`);
             }
         }
         if (e.target.matches("[data-adminProfilePut]")) {
@@ -433,7 +364,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 adminProfileImg.src = `./images/uploads/${data.userID}.png`
                 adminImgPreview.src = './images/default-profile.svg';
             } catch (error) {
-                console.log(error.message);
+                openErrorModal(`${error.message}`);
             };
         }
         if (e.target.matches("[data-profilePut]")) {
@@ -461,7 +392,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 profileImg.src = `./images/uploads/${data.userID}.png`
                 userImgPreview.src = './images/default-profile.svg';
             } catch (error) {
-                console.log(error.message);
+                openErrorModal(`${error.message}`);
             };
         }
     });
@@ -470,17 +401,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('popstate', router);
 
-document.querySelector('#back-btn').addEventListener('click', () => {
+backBtn404.addEventListener('click', () => {
     window.history.back();
 });
-
-const shopModal = document.querySelector('#shop-modal');
-const pendingTradeModal = document.querySelector('#pendingtrade-modal');
-
-const btnCloseShopModal = document.querySelector('#icon-close-shop-modal');
-btnCloseShopModal.addEventListener('click', closeShopModal);
-const btnClosePendingModal = document.querySelector('#icon-close-pending-modal');
-btnClosePendingModal.addEventListener('click', closePendingTradeModal);
 
 userImg.addEventListener('change', (e) => {
     const url = window.URL.createObjectURL(e.target.files[0]);
@@ -503,18 +426,40 @@ packageImg.addEventListener('change', (e) => {
     packageImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
 })
 
-function closeShopModal(){
-    shopModal.style.display = 'none';
+const errorModal = document.querySelector('#error-log');
+const btnCloseerrorModal = document.querySelector('#icon-close-error-log')
+const shopModal = document.querySelector('#shop-modal');
+const btnCloseShopModal = document.querySelector('#icon-close-shop-modal');
+const pendingTradeModal = document.querySelector('#pendingtrade-modal');
+const btnClosePendingModal = document.querySelector('#icon-close-pending-modal');
+
+btnCloseerrorModal.addEventListener('click', closeErrorModal);
+
+function openErrorModal(message) {
+    errorLogMessage.innerText = message;
+    errorModal.style.display = 'flex';
 }
 
-function closePendingTradeModal(){
-    pendingTradeModal.style.display = 'none';
+function closeErrorModal() {
+    errorModal.style.display = 'none';
 }
+
+btnCloseShopModal.addEventListener('click', closeShopModal);
 
 function openShopModal(){
     shopModal.style.display = 'flex';
 }
 
+function closeShopModal(){
+    shopModal.style.display = 'none';
+}
+
+btnClosePendingModal.addEventListener('click', closePendingTradeModal);
+
 function openPendingTradeModal(){
     pendingTradeModal.style.display = 'flex';
+}
+
+function closePendingTradeModal(){
+    pendingTradeModal.style.display = 'none';
 }
