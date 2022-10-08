@@ -150,9 +150,10 @@
         </main>
         <main id="profile-page">
             <div id="container-profile">
-                <form id="form-profile">
-                    <!-- <img id="img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" /> -->
-                    <input accept="image/*" type="file" id="profile-edit-img" name="profile-image">
+                <form class="form-profile">
+                    <img id="user-img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
+                    <label for="profile-edit-img" class="input-file-label">Foto de Perfil <img src="/images/edit.svg" class="edit-svg" /></label>
+                    <input accept="image/*" type="file" id="profile-edit-img" name="profile-image" placeholder="Foto de Perfil">
     
                     <label for="profile-name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
                     </label>
@@ -166,13 +167,14 @@
                     </label>
                     <input id="profile-password-input" type="password" name="password">
                 </form>
-                <button id="save-btn" data-profilePut>Salvar</button>
+                <button class="save-btn" data-profilePut>Salvar</button>
             </div>
         </main>
         <main id="admin-profile-page">
             <div id="container-profile">
                 <form class="form-profile">
-                    <!-- <img id="img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" /> -->
+                    <img id="admin-img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
+                    <label for="admin-profile-edit-img" class="input-file-label">Foto de Perfil <img src="/images/edit.svg" class="edit-svg" /></label>
                     <input accept="image/*" type="file" id="admin-profile-edit-img" name="profile-image">
     
                     <label for="admin-profile-name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
@@ -242,11 +244,11 @@
             <div id="container-addpackage">
                 <h2>NOVO PACOTE</h2>
                 <form class="form-profile">
+                    <img id="package-img-preview" src="./images/default-profile.svg" alt="Imagem do Pacote" />
+                    <label for="addpackage-image" class="input-file-label">Imagem do Pacote <img src="/images/edit.svg" class="edit-svg" /></label>
                     <input accept="image/*" type="file" id="addpackage-image">
                     <label for="addpackage-input-series">Identificador Da Coleção</label>
-                    <select id="addpackage-input-series">
-                        <!-- <option>retorno do get /api/brands</option> -->
-                    </select>
+                    <select id="addpackage-input-series"></select>
                     <label for="addpackage-rarity">Raridade</label>
                     <select id="addpackage-rarity">
                         <option value="Comum">Comum</option>
@@ -267,13 +269,13 @@
             <div id="container-addcharacter">
                 <h2>NOVO PERSONAGEM</h2>
                 <form class="form-profile">
+                    <img id="character-img-preview" src="./images/default-profile.svg" alt="Imagem do Personagem" />
+                    <label for="addcharacter-image" class="input-file-label">Imagem do Personagem <img src="/images/edit.svg" class="edit-svg" /></label>
                     <input accept="image/*" type="file" id="addcharacter-image">
                     <label for="addcharacter-input-name">Nome</label>
                     <input type="text" id="addcharacter-input-name">
                     <label for="addcharacter-input-series">Identificador Da Coleção</label>
-                    <select id="addcharacter-input-series">
-                        <!-- <option>retorno do get /api/brands</option> -->
-                    </select>
+                    <select id="addcharacter-input-series"></select>
                     <label for="addcharacter-rarity">Raridade</label>
                     <select id="addcharacter-rarity">
                         <option value="Comum">Comum</option>
