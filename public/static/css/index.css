@@ -47,7 +47,7 @@ header {
     color: #ffffff;
 }
 
-#nav-login, #nav-signup, #nav-about, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-collection {
+#nav-login, #nav-signup, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-addbrand, #nav-collection {
     text-decoration: none;
     font-size: calc( 6px + 0.9vw );
     color: #ffffff;
@@ -64,7 +64,7 @@ li {
 
 /* PROFILE NAV */
 
-#profile-container{
+#profile-container, #profile-admin-container {
     padding: 0vh 10vw;
     min-height: 80px;
     height: 15vh;
@@ -74,7 +74,7 @@ li {
     align-self: flex-end;
 }
 
-#profile-info{
+.profile-info {
     display: flex;
     flex-direction: column;
     gap: 0.8vh;
@@ -84,28 +84,28 @@ li {
     width: 18px;
 }
 
-#profile-img {
+#profile-img, #profile-admin-img {
     width: 50px;
 }
 
-#profile-user-name{
+#profile-user-name, #profile-admin-user-name{
     font-size: calc( 8px + 0.8vw );
     text-align: end;
 }
 
-#profile-buttons{
+.profile-buttons{
     display: flex;
     gap: 6px;
     justify-content: flex-end;
 }
 
-#profile-coins {
+.profile-coins {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-#edit-btn, #logout-btn {
+.edit-btn, .logout-btn {
     height: 20px;
     width: 40px;
     background-color: #9479A9;
@@ -234,7 +234,23 @@ a{
 
 /* MAIN PROFILE PAGE */
 
-#container-profile{
+.input-file-label {
+    padding: 0vh 0.5vw;
+    align-self: center;
+    height: 5vh;
+    min-height: 30px;
+    background-color: #ff4098;
+    border-radius: 10px;
+    display: flex;
+    gap: 1.5vw;
+    align-items: center;
+}
+
+#admin-profile-edit-img, #profile-edit-img, #addpackage-image, #addcharacter-image {
+    display: none;
+}
+
+#container-profile, #container-addbrand, #container-addpackage, #container-addcharacter{
     padding: 2vh 0;
     width: 40vw;
     background-color: #FFFFFF26; 
@@ -245,7 +261,7 @@ a{
     justify-content: space-around;
 }
 
-#form-profile{
+.form-profile{
     display: flex;
     flex-direction: column;
     gap: 1vh;
@@ -254,13 +270,13 @@ a{
     padding-bottom: 10px;
 }
 
-#save-btn, .btn-shop, .changeable-cardbtn{
+.save-btn, .btn-shop, .changeable-cardbtn, #addpackage-btn, #addcharacter-btn, #addbrand-btn{
     height: 5vh;
     width: 8vw;
     background-color: #ff4098;
     border-radius: 1vh;
     font-family: 'Poppins';
-    font-size: calc( 6px + 0.7vw );
+    font-size: calc( 5px + 0.6vw );
     color: #FFFFFF;
     border: none;
 }
@@ -274,7 +290,8 @@ label{
     justify-content: space-between;
 }
 
-#img-preview{
+#user-img-preview, #admin-img-preview, #character-img-preview, #package-img-preview{
+    align-self: center;
     max-width: calc( 60px + 2vw);
     max-height: calc( 60px + 3vh);
 }
@@ -454,17 +471,15 @@ label{
     display: none;
 }
 
-#about-page {
-    display: none;
-    flex-direction: column;
-    gap: 2vh;
-}
-
 #home-page {
     display: none;
 }
 
 #profile-page {
+    display: none;
+}
+
+#profile-admin-container {
     display: none;
 }
 
@@ -488,6 +503,12 @@ label{
     display: none;
 }
 
+#addbrand-page {
+    display: none;
+}
+
 #not-found-page {
     display: none;
+    flex-direction: column;
+    gap: 2vh;
 }

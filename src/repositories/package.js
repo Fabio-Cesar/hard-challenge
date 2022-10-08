@@ -6,6 +6,29 @@ export async function selectPackages(_client) {
     return {'packages': res.rows, 'error': null};
 };
 
+// Funções usuário admin criar novo Pacote
+
+export async function filterPackages(_client, _brand, _type) {
+    const query = {
+        'text': 'SELECT id from package WHERE brand = $1 AND type = $2',
+        'values': [_brand, _type]
+    }
+    const res = await _client.query(query);
+    if (res.rows.length > 0) {
+        throw new Error(`Não foi possível criar esse pacote pois ele já existe!`);
+    }
+    return {'error': null };
+}
+
+export async function insertPackage(_client, _brand, _type, _price, _chancerare, _chanceultrarare) {
+    const query = {
+        'text': 'INSERT INTO package (brand, type, price, copies_sold, chance_rare, chance_ultrarare) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+        'values': [_brand, _type, _price, 0, _chancerare, _chanceultrarare]
+    }
+    const res = await _client.query(query);
+    return {'packageID': res.rows[0].id, 'error': null };
+}
+
 // Funções de transação de compra de card: findBrand, raffleCharacter, createNewCard, debitPriceFromUserCoins
 
 export async function findBrand(_client, _packageID) {
