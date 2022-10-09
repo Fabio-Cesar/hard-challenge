@@ -32,7 +32,7 @@ app.post('/character', verifyJWT, uploadthree.none(), characterControllers.creat
 app.post('/characterimage/:characterID', verifyJWT, uploadthree.single('character-image'), characterControllers.createNewCharacterImage);
 app.post('/brands', verifyJWT, brandControllers.createNewBrand);
 // app.post('/change-requests/:offeredcardID/for/:requestcardID', verifyJWT, changeRequestControllers.createChangeRequest);
-// app.post('/trade', verifyJWT, changeRequestControllers.tradeCards);
+app.post('/trade', verifyJWT, changeRequestControllers.tradeCards);
 
 app.put('/user', verifyJWT, upload.single('profile-image'), userControllers.updateUser);
 // app.put('/cards/:cardID', verifyJWT, cardsControllers.toggleCardChangeable);

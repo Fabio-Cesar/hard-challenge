@@ -8,7 +8,6 @@ export async function createNewCharacter(_brand, _name, _rarity) {
         const checkCharacterExists = await characterQueries.filterCharacter(client, _brand, _name, _rarity);
         const createCharacter = await characterQueries.insertCharacter(client, _brand, _name, _rarity);
         const commit = await db.commit(client);
-        console.log(createCharacter);
         db.release(client);
         return createCharacter;
     } catch (error) {
