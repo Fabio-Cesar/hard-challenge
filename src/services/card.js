@@ -39,3 +39,16 @@ export async function getUserChangeableCards(_userID) {
         db.release(client);
     };
 }
+
+export async function toggleCardChangeable(_cardID, _isAvailable) {
+    const client = await db.connect();
+    try {
+        const findCards = await cardQueries.toggleCardChangeable(client, _cardID, _isAvailable);
+        return findCards;
+    } catch (error) {
+        console.error(error);
+        return {'status': error.status || 500, 'error': error.message};
+    } finally {
+        db.release(client);
+    };
+}

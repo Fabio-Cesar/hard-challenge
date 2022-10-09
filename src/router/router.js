@@ -28,7 +28,7 @@ app.post('/packages/:packageID/rng/:rng', verifyJWT, packageControllers.buyNewCa
 // app.post('/change-requests/:offeredcardID/for/:requestcardID', verifyJWT, changeRequestControllers.createChangeRequest);
 // app.post('/trade', verifyJWT, changeRequestControllers.tradeCards);
 
-// app.put('/cards/:cardID', verifyJWT, cardsControllers.toggleCardChangeable);
+app.put('/cards/:cardID/:isAvailable', verifyJWT, cardsControllers.toggleCardChangeable);
 
 // app.delete('/user', verifyJWT, userControllers.removeUser);
 
