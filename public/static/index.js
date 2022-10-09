@@ -106,11 +106,74 @@ export async function router() {
             navigateTo('/home');
         }
     }
-
+    
     else {
         path = '404';
         const view = new routes[path];
         const viewData = await view.getData();
+    };
+
+    switch (path) {
+        case '/collection':
+            try {
+                fetch('api/cards')
+                .then((res) => res.json())
+                .then((data) => addCards(data.cards))
+                
+                const myCollection = document.querySelector('#my-collection');
+                myCollection.innerHTML = '';
+                // CRIANDO OS CARDS DINAMICAMENTE
+                function addCards(cards){
+                    console.log(cards);
+                    for(let i = 0; i<cards.length; i++){
+                        const containerImg = document.createElement('div');
+                        const img = document.createElement('img');
+                        const name = document.createElement('p');
+                        const rarely = document.createElement('p');
+                        const divToggle = document.createElement('div');
+                        const inputToggle = document.createElement('input')
+                        const checked = document.createElement('label')
+
+                        containerImg.className = 'container-card-collection';
+                        img.src = `../images/characters/${cards[i].charactername}.png`;
+                        img.className = 'img-my-collection';
+                        name.className = 'name-card-collection';
+                        name.innerHTML = cards[i].charactername;
+                        rarely.className = 'rarely-card-collection';
+                        rarely.innerHTML = cards[i].characterrarity;
+                        divToggle.className = 'container-taggle';
+                        inputToggle.type = 'checkbox';
+                        inputToggle.className = 'input-toggle';
+                        inputToggle.id = cards[i].cardid;
+                        inputToggle.dataset.change = cards[i].change_available;
+                        inputToggle.onclick = isChecked;
+                        checked.innerHTML = 'Disponível para troca ?';
+
+                        if(inputToggle.dataset.change === true){
+                            inputToggle.style.checked = true;
+                        };
+
+                        myCollection.appendChild(containerImg);
+                        containerImg.appendChild(img);
+                        containerImg.appendChild(name);
+                        containerImg.appendChild(rarely);
+                        containerImg.appendChild(divToggle);
+                        divToggle.appendChild(inputToggle);
+                        divToggle.appendChild(checked);
+                    };
+                };
+
+                function isChecked(event){
+                    const options = {
+                        method: "PUT"   
+                    };
+                    fetch(`api/cards/${event.target.id}/${event.target.checked}`, options)
+                    .then((res) => console.log(res))
+                };
+            } catch (error) {
+                console.log(error);
+            }
+            break;
     }
 };
 

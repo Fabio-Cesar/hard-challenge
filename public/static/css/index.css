@@ -540,3 +540,62 @@ label{
     flex-direction: column;
     gap: 2vh;
 }
+
+/* CSS DA PÁGINA MINHA COLEÇÃO */
+
+#collection-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100vw;
+    padding-bottom: 20px;
+}
+
+#my-collection{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 60vw;
+}
+
+.img-my-collection{
+    height: 32vh;
+    width: 12vw;
+}
+
+#first-section-collection{
+    display: flex;
+    justify-content: space-between;
+    width: 60vw;
+    padding: 20px 20px 0 20px;
+}
+
+#first-section-collection > h2{
+    font-size: 2rem;
+}
+
+.container-card-collection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 14vw;
+    height: 45vh;
+    padding: 10px 0;
+    background-color: #FFFFFF26;
+}
+
+.rarely-card-collection, .name-card-collection{
+    font-size: 1rem;
+}
+
+.container-taggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6rem;
+}
