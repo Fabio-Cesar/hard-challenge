@@ -17,7 +17,6 @@
                     <ul>
                         <li><a href="/login" id="nav-login" data-link>Entrar</a></li>
                         <li><a href="/signup" id="nav-signup" data-link>Cadastre-se</a></li>
-                        <li><a href="/about" id="nav-about" data-link>Sobre</a></li>
                     </ul>
                 </nav>
             </div>
@@ -33,7 +32,6 @@
                         <li><a href="/collection" id="nav-collection" data-link>Minha Coleção</a></li>
                         <li><a href="/trade" id="nav-trade" data-link>Trocar</a></li>
                         <li><a href="/pendingtrade" id="nav-pendingtrade" data-link>Aceitar Trocas</a></li>
-                        <li><a href="/about" id="nav-about" data-link>Sobre</a></li>
                     </ul>
                 </nav>
             </div>
@@ -47,6 +45,7 @@
                     <ul>
                         <li><a href="/addpackage" id="nav-addpackage" data-link>Cadastrar Pacote</a></li>
                         <li><a href="/addcharacter" id="nav-addcharacter" data-link>Cadastrar Personagem</a></li>
+                        <li><a href="/addbrand" id="nav-addbrand" data-link>Cadastrar Coleção</a></li>
                     </ul>
                 </nav>
             </div>
@@ -54,17 +53,27 @@
         <section id="profile-container">
             <div id="profile-info">
                 <p id="profile-user-name">Nome</p>
-                <div id="profile-buttons">
-                    <button id="edit-btn"><a href="/profile" id="nav-profile" data-link>Editar</a></button>
-                    <button id="logout-btn" data-logoutPost>Sair</button>
+                <div class="profile-buttons">
+                    <button class="edit-btn"><a href="/profile" class="nav-profile" data-link>Editar</a></button>
+                    <button class="logout-btn" data-logoutPost>Sair</button>
                 </div>
-                <div id="profile-coins">
+                <div class="profile-coins">
                     <img src="/images/coin-svgrepo-com.svg" class="coins-img" />
-                    <p id="profile-user-coins">50</p>
+                    <p id="profile-user-coins"></p>
                     <button id="add-coin-btn">+</button>
                 </div>
             </div>
             <img src="/images/default-profile.svg" id="profile-img" />
+        </section>
+        <section id="profile-admin-container">
+            <div class="profile-info">
+                <p id="profile-admin-name">Nome</p>
+                <div class="profile-buttons">
+                    <button class="edit-btn"><a href="/adminprofile" class="nav-profile" data-link>Editar</a></button>
+                    <button class="logout-btn" data-logoutPost>Sair</button>
+                </div>
+            </div>
+            <img src="/images/default-profile.svg" id="profile-admin-img" />
         </section>
         <main id="landing-page">
             <div id="section-container">
@@ -117,10 +126,6 @@
                 <button id="signup-btn" data-signupPost>Cadastrar</button>
             </div>
         </main>
-        <main id="about-page">
-            <button id="back-btn">Voltar</button>
-            <p>Como funciona?</p>
-        </main>
         <main id="home-page">
             <div id="container-shop">
                 <h2>Loja de Cards</h2>
@@ -134,7 +139,7 @@
                     </div>
                     <div id="new-cards">
                         <div>
-                            <img src="../images/minnie.png" alt="card adquirido" class="card-acquired">
+                            <img src="./images/default-profile.svg" alt="card adquirido" class="card-acquired">
                             <div class="description-new-card">
                                 <p class="name-new-card"></p>
                                 <p class="rarity-new-card"></p>
@@ -142,12 +147,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
         <main id="profile-page">
             <div id="container-profile">
-                <form id="form-profile">
-                    <img id="img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
-                    <input accept="image/*" type="file" id="profile-edit-img" name="profile-image">
+                <form class="form-profile">
+                    <img id="user-img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
+                    <label for="profile-edit-img" class="input-file-label">Foto de Perfil <img src="/images/edit.svg" class="edit-svg" /></label>
+                    <input accept="image/*" type="file" id="profile-edit-img" name="profile-image" placeholder="Foto de Perfil">
     
                     <label for="profile-name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
                     </label>
@@ -161,7 +168,29 @@
                     </label>
                     <input id="profile-password-input" type="password" name="password">
                 </form>
-                <button id="save-btn" data-profilePut>Salvar</button>
+                <button class="save-btn" data-profilePut>Salvar</button>
+            </div>
+        </main>
+        <main id="admin-profile-page">
+            <div id="container-profile">
+                <form class="form-profile">
+                    <img id="admin-img-preview" src="./images/default-profile.svg" alt="Imagem de perfil" />
+                    <label for="admin-profile-edit-img" class="input-file-label">Foto de Perfil <img src="/images/edit.svg" class="edit-svg" /></label>
+                    <input accept="image/*" type="file" id="admin-profile-edit-img" name="profile-image">
+    
+                    <label for="admin-profile-name-input">Nome <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="admin-profile-name-input" type="text" name="name">
+    
+                    <label for="admin-profile-email-input">E-mail <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="admin-profile-email-input" type="text" name="email">
+    
+                    <label for="admin-profile-password-input">Nova Senha <img src="/images/edit.svg" class="edit-svg" />
+                    </label>
+                    <input id="admin-profile-password-input" type="password" name="password">
+                </form>
+                <button class="save-btn" data-adminProfilePut>Salvar</button>
             </div>
         </main>
         <main id="collection-page">
@@ -178,55 +207,97 @@
         </main>
         <main id="pendingtrade-page">
             <p>Aceitar Trocas</p>
-            <div id="changeable-cards-container">
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeable-cardName">Carta</p>
-                    <p class="changeable-cardBrand">Disney</p>
-                    <p class="changeable-cardRarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeable-cardName">Carta</p>
-                    <p class="changeable-cardBrand">Disney</p>
-                    <p class="changeable-cardRarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeablecard-name">Carta</p>
-                    <p class="changeablecard-brand">Disney</p>
-                    <p class="changeablecard-rarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-            </div>
+            <div id="changeable-cards-container"></div>
             <div id="pendingtrade-modal" class="modal">
                 <div class="modal-box">
                     <div class="close-modal">
                         <img src="./images/close.svg" id="icon-close-pending-modal"/>
                         <h3 class="h3-modal">Escolha uma das cartas para confirmar a troca</h3>
                     </div>
-                    <div id="pendingtrade-cards">
-                        <div>
-                            <img src="../images/minnie.png" alt="card ofertada" class="card-pending">
-                            <div class="description-pending-card">
-                                <p class="name-pending-card"></p>
-                                <p class="rarity-pending-card"></p>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="pendingtrade-cards"></div>
                 </div>
+            </div>
         </main>
         <main id="addpackage-page">
-            <p>Cadastrar Pacote</p>
+            <div id="container-addpackage">
+                <h2>NOVO PACOTE</h2>
+                <form class="form-profile">
+                    <img id="package-img-preview" src="./images/default-profile.svg" alt="Imagem do Pacote" />
+                    <label for="addpackage-image" class="input-file-label">Imagem do Pacote <img src="/images/edit.svg" class="edit-svg" /></label>
+                    <input accept="image/*" type="file" id="addpackage-image">
+                    <label for="addpackage-input-series">Identificador Da Coleção</label>
+                    <select id="addpackage-input-series"></select>
+                    <label for="addpackage-rarity">Raridade</label>
+                    <select id="addpackage-rarity">
+                        <option value="Comum">Comum</option>
+                        <option value="Raro">Raro</option>
+                        <option value="Ultrararo">Ultrararo</option>
+                    </select>
+                    <label for="addpackage-price">Custo em Moedas</label>
+                    <input id="addpackage-price" type="number" min="0" step="1" />
+                    <label for="addpackage-rarechance">Chance de Cartas Raras</label>
+                    <input id="addpackage-rarechance" type="number" min="0" step="1" />
+                    <label for="addpackage-ultrararechance">Chance de Cartas Ultrararas</label>
+                    <input id="addpackage-ultrararechance" type="number" min="0" step="1" />
+                </form>
+                <button id="addpackage-btn" data-packagePost>Cadastrar</button>
+            </div>
         </main>
         <main id="addcharacter-page">
-            <p>Cadastrar Personagem</p>
+            <div id="container-addcharacter">
+                <h2>NOVO PERSONAGEM</h2>
+                <form class="form-profile">
+                    <img id="character-img-preview" src="./images/default-profile.svg" alt="Imagem do Personagem" />
+                    <label for="addcharacter-image" class="input-file-label">Imagem do Personagem <img src="/images/edit.svg" class="edit-svg" /></label>
+                    <input accept="image/*" type="file" id="addcharacter-image">
+                    <label for="addcharacter-input-name">Nome</label>
+                    <input type="text" id="addcharacter-input-name">
+                    <label for="addcharacter-input-series">Identificador Da Coleção</label>
+                    <select id="addcharacter-input-series"></select>
+                    <label for="addcharacter-rarity">Raridade</label>
+                    <select id="addcharacter-rarity">
+                        <option value="Comum">Comum</option>
+                        <option value="Raro">Raro</option>
+                        <option value="Ultrararo">Ultrararo</option>
+                    </select>
+                </form>
+                <button id="addcharacter-btn" data-characterPost>Cadastrar</button>
+            </div>
+        </main>
+        <main id="addbrand-page">
+            <div id="container-addbrand">
+                <h2>NOVA COLEÇÃO</h2>
+                <form class="form-profile">
+                    <label for="addbrand-input-name">Nome</label>
+                    <input type="text" id="addbrand-input-name">
+                    <label for="addbrand-input-series">Identificador De Série</label>
+                    <input type="text" id="addbrand-input-series">
+                </form>
+                <button id="addbrand-btn" data-brandPost>Cadastrar</button>
+            </div>
         </main>
         <main id="not-found-page">
-            <p>Not Found</p>
+            <button id="back-btn">Voltar</button>
+            <p>Página não encontrada</p>
         </main>
+        <div id="error-log" class="modal">
+            <div class="modal-box">
+                <div class="close-modal">
+                    <img src="./images/close.svg" id="icon-close-error-log"/>
+                    <h3 class="h3-modal">ERRO</h3>
+                </div>
+                <div id="error-log-message"></div>
+            </div>
+        </div>
+        <div id="success-log" class="modal">
+            <div class="modal-box">
+                <div class="close-modal">
+                    <img src="./images/close.svg" id="icon-close-success-log"/>
+                    <h3 class="h3-modal">SUCESSO</h3>
+                </div>
+                <div id="success-log-message"></div>
+            </div>
+        </div>
         <script type="module" src="./index.js"></script>
     </body>
 </html>

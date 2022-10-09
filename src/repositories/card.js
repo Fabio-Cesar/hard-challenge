@@ -18,7 +18,7 @@ export async function selectChangeableCards(_client, _userID) {
 
 export async function selectUserChangeableCards(_client, _userID) {
     const query = {
-        'text': 'SELECT card.id as cardID, card.character_id as characterID, character.name as characterName, character.rarity as characterRarity FROM card INNER JOIN character ON card.character_id = character.id WHERE card.change_available IS TRUE AND card.user_id = $1 AND card.deleted_at IS NULL',
+        'text': 'SELECT card.id as card_id, card.character_id, character.name, character.rarity, brand.name as brand_name, brand.series as brand_series FROM card INNER JOIN character ON card.character_id = character.id INNER JOIN brand ON character.brand = brand.id WHERE card.change_available IS TRUE AND card.user_id = $1 AND card.deleted_at IS NULL',
         'values': [_userID]
     };
     const res = await _client.query(query);
