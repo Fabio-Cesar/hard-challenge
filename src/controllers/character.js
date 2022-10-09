@@ -2,7 +2,6 @@ import * as characterServices from '../services/character.js';
 
 export async function createNewCharacter(req, res) {
     const { brand, name, rarity } = req.body;
-    console.log(brand, name, rarity);
     const result = await characterServices.createNewCharacter(brand, name, rarity)
     if (result.error === null) {
         res.status(201).json({ characterID: result.characterID})

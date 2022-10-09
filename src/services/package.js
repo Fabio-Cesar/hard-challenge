@@ -47,7 +47,7 @@ export async function buyNewCardService(_userID, _packageID) {
         }
         const randomRarity = getRandomIntNumber(0,100);
         let rarity = '';
-        if (randomRarity <= ultra_rare) rarity = 'Ultra Raro';
+        if (randomRarity <= ultra_rare) rarity = 'Ultrararo';
         else if (randomRarity <= rare)  rarity = 'Raro';
         else                            rarity = 'Comum';
         

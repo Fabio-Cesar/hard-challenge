@@ -1,4 +1,5 @@
 import View from './view.js';
+import { navigateTo, openErrorModal } from '../methods.js';
 
 export class HomeView extends View {
 
@@ -31,13 +32,13 @@ export class HomeView extends View {
                         <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
                         <p class="package-chances">CHANCE RARO ${rarechance}%</p>
                         <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
-                        <button class="btn-shop" id="${packageRes.packages[i].id}" data-value="${packageRes.packages[i].price}" data-buyPackagePost>Comprar</button>
+                        <button class="btn-shop" id="${packageRes.packages[i].id}" data-buyPackagePost>Comprar</button>
                    </div>
                 </div>`
             };
         } catch (error) {
-            path = '/';
-            navigateTo(path);
+            openErrorModal(error.message);
+            navigateTo('/');
         };
     }
 };
