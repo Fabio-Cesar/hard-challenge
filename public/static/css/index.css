@@ -302,7 +302,6 @@ label{
 #container-shop {
     padding: 4vh 0vw;
     width: 60vw;
-    overflow-y: auto;
     background-color: #FFFFFF26;
     color: #FFFFFF;
     display: flex;
@@ -469,6 +468,64 @@ label{
     color: #13101E;
 }
 
+/* CSS DA PÁGINA MINHA COLEÇÃO */
+
+#collection-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#my-collection{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 60vw;
+}
+
+.img-my-collection{
+    width: 12vw;
+}
+
+#first-section-collection{
+    display: flex;
+    justify-content: space-between;
+    width: 60vw;
+    padding: 20px 20px 0 20px;
+}
+
+#first-section-collection > h2{
+    font-size: 2rem;
+}
+
+.container-card-collection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 14vw;
+    height: fit-content;
+    padding: 10px 0;
+    background-color: #FFFFFF26;
+}
+
+.container-card-collection > p {
+    font-size: calc( 7px + 0.7vw );
+}
+
+.container-taggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6rem;
+}
+
 /* ESCONDER TUDO */
 
 #unauthenticated-header {
@@ -539,62 +596,4 @@ label{
     display: none;
     flex-direction: column;
     gap: 2vh;
-}
-
-/* CSS DA PÁGINA MINHA COLEÇÃO */
-
-#collection-page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2vh;
-    width: 100%;
-    padding-bottom: 20px;
-}
-
-#my-collection{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 60vw;
-}
-
-.img-my-collection{
-    width: 12vw;
-}
-
-#first-section-collection{
-    display: flex;
-    justify-content: space-between;
-    width: 60vw;
-    padding: 20px 20px 0 20px;
-}
-
-#first-section-collection > h2{
-    font-size: 2rem;
-}
-
-.container-card-collection{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 14vw;
-    height: fit-content;
-    padding: 10px 0;
-    background-color: #FFFFFF26;
-}
-
-.container-card-collection > p {
-    font-size: calc( 7px + 0.7vw );
-}
-
-.container-taggle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.6rem;
 }
