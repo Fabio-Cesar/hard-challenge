@@ -112,12 +112,6 @@ export async function router() {
         const view = new routes[path];
         const viewData = await view.getData();
     };
-
-    switch (path) {
-        case '/collection':
-            
-            break;
-    }
 };
 
 window.addEventListener('DOMContentLoaded', () => {
