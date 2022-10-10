@@ -314,6 +314,7 @@ label{
 #shop-packages{
     display: flex;
     gap: 5vw;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
