@@ -1,5 +1,3 @@
-// Lógica para invocar o roteamento do SPA.
-
 import { AdminProfileView } from "./views/adminprofile.js";
 import { AddBrandView } from './views/addbrand.js';
 import { AddCharacterView } from './views/addcharacter.js';
@@ -13,7 +11,7 @@ import { PendingTradeView } from './views/pendingtrade.js';
 import { ProfileView } from './views/profile.js';
 import { SignupView } from './views/signup.js';
 import { TradeView } from './views/trade.js';
-import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange } from './methods.js';
+import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange, createRequest } from './methods.js';
 
 const routes = {
     '404': NotFoundView,
@@ -45,8 +43,6 @@ export const adminName = document.querySelector('#profile-admin-name');
 export const adminProfileImg = document.querySelector('#profile-admin-img');
 
 const backBtn404 = document.querySelector('#back-btn');
-
-let requestcardID;
 
 export async function router() {
     const headers = document.querySelectorAll('header');
@@ -124,55 +120,6 @@ window.addEventListener('DOMContentLoaded', () => {
         if (e.target.matches('.modal')) {            
             closeModals();
         }
-        if (e.target.matches('[data-cardTradeRequest]')) {
-            try {
-                requestcardID = e.target.id; //criado no escopo global
-                const options = {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },              
-                };
-                const response = await fetch(`api/cards`, options)
-                if (response.status !== 200) {
-                    const error = await response.json();
-                    throw new Error(`${error.message}`);
-                };
-                const userCardsForTrade = await response.json();
-                openUserCardsToTradeModal()
-                const userCardsModalToTrade = document.querySelector('#user-cards-modal');
-                userCardsModalToTrade.innerHTML = "";
-                for (let i = 0; i < userCardsForTrade.cards.length; i++) {
-                    userCardsModalToTrade.innerHTML += `<div class="container-packages">
-                        <img src="./images/uploads/cards/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
-                        <div class="box-shop">
-                            <p>${userCardsForTrade.cards[i].charactername}</p>
-                            <p>${userCardsForTrade.cards[i].characterrarity}</p>
-                            <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
-                       </div>
-                    </div>`
-                };
-            } catch (error) {
-                openErrorModal(`${error.message}`);
-            }
-            
-        }
-        if (e.target.matches("[data-cardTradeOffer]")) {
-            try {
-                const offeredcardID = e.target.id;
-                const options = {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },              
-                };
-                const response = await fetch(`api/change-requests/${offeredcardID}/for/${requestcardID}`, options)
-                if (response.status !== 201) {
-                    const error = await response.json();
-                    throw new Error(`${error.message}`);
-                };
-                const res = await response.json();
-                console.log(res); 
-            } catch (error) {
-                openErrorModal(`${error.message}`);
-            }
-        }
         if (e.target.matches("[data-loginPost]")) {
             login();
         };
@@ -187,6 +134,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches(".toggle-change")) {
             toggleChange(e);
+        }
+        if (e.target.matches('[data-cardTradeRequest]')) {
+            listChangeableCards(e)
+        }
+        if (e.target.matches("[data-cardTradeOffer]")) {
+            createRequest(e)
         }
         if (e.target.matches("[data-getChangeReq]")) {
             getChangeRequests(e);
@@ -218,16 +171,3 @@ window.addEventListener('popstate', router);
 backBtn404.addEventListener('click', () => {
     window.history.back();
 });
-
-const tradeModal = document.querySelector('#trade-modal');
-const btnCloseTradeModal = document.querySelector('#icon-close-trade-modal');
-
-btnCloseTradeModal.addEventListener('click', closeUserCardsToTradeModal);
-
-function openUserCardsToTradeModal(){
-    tradeModal.style.display = 'flex';
-}
-
-function closeUserCardsToTradeModal(){
-    tradeModal.style.display = 'none';
-}

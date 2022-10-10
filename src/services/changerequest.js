@@ -23,6 +23,7 @@ export async function createChangeRequestService(_offeredcardID, _requestcardID)
         return changeRequest;
     } catch (error) {
         console.error(error);
+    }
 }
 
 export async function finishTrade(_reqcardID, _offcardID) {

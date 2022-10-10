@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 async function authenticate(_email, _password) {
     const client = await db.connect();
     try {
-        if (_email === "fabio@fabio.com") {
+        if (_email === "admin@admin.com") {
             const findAdmin = await userQueries.selectAdmin(client, _email, _password);
             findAdmin.admin = true;
             db.release(client);
