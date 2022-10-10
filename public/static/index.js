@@ -11,7 +11,7 @@ import { PendingTradeView } from './views/pendingtrade.js';
 import { ProfileView } from './views/profile.js';
 import { SignupView } from './views/signup.js';
 import { TradeView } from './views/trade.js';
-import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange, createRequest } from './methods.js';
+import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange, createRequest, listChangeableCards } from './methods.js';
 
 const routes = {
     '404': NotFoundView,

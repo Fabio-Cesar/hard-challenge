@@ -17,10 +17,9 @@ export class TradeView extends View {
                 throw new Error(`${error.message}`);
             }
             const tradeCardsRes = await tradeResponse.json();
-            console.log(tradeCardsRes)
             for (let i = 0; i < tradeCardsRes.cards.length; i++) {
                 tradeCardContainer.innerHTML += `<div class="container-packages">
-                    <img src="./images/uploads/cards/${tradeCardsRes.cards[i].character_id}.png" alt="${tradeCardsRes.cards[i].character_name}" class="packages">
+                    <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}.png" alt="${tradeCardsRes.cards[i].character_name}" class="packages">
                     <div class="box-shop">
                         <p>${tradeCardsRes.cards[i].character_name}</p>
                         <p>${tradeCardsRes.cards[i].character_rarity}</p>
