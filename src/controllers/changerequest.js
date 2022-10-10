@@ -10,6 +10,16 @@ export async function getChangeRequestByCardID(req, res) {
     }
 }
 
+export async function createChangeRequest(req, res) {
+    const { offeredcardID, requestcardID } = req.params;
+    const result = await changeRequestServices.createChangeRequestService(offeredcardID, requestcardID);
+    if(result.error === null) {
+        res.status(201).json({ 'res': result })
+    } else {
+        res.status(result.status).json({ message: result.error })
+    }
+}
+
 export async function tradeCards(req, res) {
     const { reqcardID, offcardID } = req.body;
     const result = await changeRequestServices.finishTrade(reqcardID, offcardID);

@@ -15,6 +15,16 @@ export async function getChangeRequests(_cardID) {
     };
 }
 
+export async function createChangeRequestService(_offeredcardID, _requestcardID) {
+    const client = await db.connect();
+    try {
+        const changeRequest = await changeRequestQueries.createChangeRequest(client, _offeredcardID, _requestcardID)
+        db.release(client);
+        return changeRequest;
+    } catch (error) {
+        console.error(error);
+}
+
 export async function finishTrade(_reqcardID, _offcardID) {
     const client = await db.connect();
     try {

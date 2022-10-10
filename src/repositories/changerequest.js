@@ -7,6 +7,15 @@ export async function selectCards(_client, _cardID) {
     return {'cards': res.rows, 'error': null};
 };
 
+export async function createChangeRequest(_client, _offeredcardID, _requestcardID) {
+    const query = {
+        'text': 'INSERT INTO change_request (requestcard_id,offeredcard_id) VALUES ($1,$2)',
+        'values': [_requestcardID, _offeredcardID]
+    }
+    await _client.query(query);
+    return {'res': 'Pedido de troca realizado!', 'error': null};
+}
+
 export async function selectChangeRequest(_client, _reqcardID, _offcardID) {
     const query = {
         'text': 'SELECT cancelled_at FROM change_request WHERE requestcard_id = $1 AND offeredcard_id = $2',
