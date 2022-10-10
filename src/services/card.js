@@ -53,7 +53,7 @@ export async function toggleCardChangeable(_cardID, _isAvailable) {
         }
         const findCards = await cardQueries.toggleCardChangeable(client, _cardID, change);
 
-        const cancelPendingTrades = await cancelAnyOpenTrades(_cardID);
+        const cancelPendingTrades = await cancelAnyOpenTrades(client, _cardID);
         await db.commit(client);
         db.release(client);
         return findCards;

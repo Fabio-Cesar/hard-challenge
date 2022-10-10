@@ -23,6 +23,8 @@ export async function createChangeRequestService(_offeredcardID, _requestcardID)
         return changeRequest;
     } catch (error) {
         console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
     }
 }
 

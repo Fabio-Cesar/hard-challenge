@@ -95,8 +95,8 @@ export async function listChangeableCards(e) {
         userCardsModalToTrade.innerHTML = "";
         for (let i = 0; i < userCardsForTrade.cards.length; i++) {
             userCardsModalToTrade.innerHTML += `<div class="container-packages">
-                <img src="./images/uploads/cards/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
-                <div class="box-shop">
+                <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
+                <div class="trade-shop">
                     <p>${userCardsForTrade.cards[i].charactername}</p>
                     <p>${userCardsForTrade.cards[i].characterrarity}</p>
                     <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
@@ -121,7 +121,8 @@ export async function createRequest(e) {
             throw new Error(`${error.message}`);
         };
         const res = await response.json();
-        console.log(res); 
+        openSuccessModal(`${res.res.res}`);
+        navigateTo('/trade');
     } catch (error) {
         openErrorModal(`${error.message}`);
     }

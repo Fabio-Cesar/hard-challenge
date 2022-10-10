@@ -374,7 +374,7 @@ label{
     from{opacity:0}
 }
 
-#icon-close-shop-modal, #icon-close-pending-modal, #icon-close-error-log, #icon-close-success-log{
+#icon-close-shop-modal, #icon-close-pending-modal, #icon-close-error-log, #icon-close-success-log, #icon-close-trade-modal{
     position: absolute;
     top: 0;
     right: 0;
@@ -398,21 +398,21 @@ label{
     width: 12vw;
 }
 
-#new-cards, #pendingtrade-cards{
+#new-cards, #pendingtrade-cards, #user-cards-modal{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 10vh 0 20vh 0;
+    padding: 5vh 0 5vh 0;
     overflow-y: auto;
 }
 
-#pendingtrade-cards::-webkit-scrollbar {
+#user-cards-modal::-webkit-scrollbar, #pendingtrade-cards::-webkit-scrollbar {
     width: 1.3vw;
     background-color: #bbbbbb80;
 }
 
-#pendingtrade-cards::-webkit-scrollbar-thumb {
+#user-cards-modal::-webkit-scrollbar-thumb, #pendingtrade-cards::-webkit-scrollbar-thumb {
     background-color: #13101EA0;
 }
 
@@ -452,7 +452,7 @@ label{
     max-width: 9.5vw;
 }
 
-.changeablecard {
+.changeablecard, .trade-shop {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -464,7 +464,7 @@ label{
     font-size: calc( 6px + 0.7vw );
 }
 
-.description-pending-card > p {
+.description-pending-card > p, .trade-shop > p {
     font-size: calc( 6px + 0.7vw );
     color: #13101E;
 }
