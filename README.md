@@ -1,1 +1,1 @@
-Primeiro Commit
+Repositório para desenvolver o desafio Ciclo 1 Hard Skills
