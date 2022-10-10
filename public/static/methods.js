@@ -198,6 +198,33 @@ export async function signup() {
     }
 }
 
+export async function toggleChange(e) {
+    try {
+        e.preventDefault()
+        const cardID = e.target.id;
+        const changeAvailable = e.target.dataset.change;
+        const bodyValue = {
+            'card' : cardID,
+            'change': changeAvailable
+        }
+        const options = {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodyValue)
+        }
+        const result = await fetch('api/cards', options)
+        if (result.status !== 200) {
+            const error = await result.json();
+            throw new Error(`${error.message}`);
+        }
+        const data = await result.json();
+        e.target.checked = data.change_available;
+        e.target.dataset.change = data.change_available;
+    } catch (error) {
+        console.log(error, error.message);
+    }
+}
+
 export async function createBrand() {
     try {
         const brandName = document.querySelector('#addbrand-input-name').value;

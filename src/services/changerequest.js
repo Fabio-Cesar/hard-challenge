@@ -19,6 +19,7 @@ export async function finishTrade(_reqcardID, _offcardID) {
     const client = await db.connect();
     try {
         await db.begin(client);
+        const checkForChangeReq = await changeRequestQueries.selectChangeRequest(client, _reqcardID, _offcardID);
         const deleteReqCard = await changeRequestQueries.deleteCardFromOriginalUser(client, _reqcardID);
         const deleteOffCard = await changeRequestQueries.deleteCardFromOriginalUser(client, _offcardID);
         const createNewCardForReq = await createNewCard(client, deleteReqCard.user_id, deleteOffCard.character_id);

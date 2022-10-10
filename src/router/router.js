@@ -34,8 +34,7 @@ app.post('/brands', verifyJWT, brandControllers.createNewBrand);
 // app.post('/change-requests/:offeredcardID/for/:requestcardID', verifyJWT, changeRequestControllers.createChangeRequest);
 app.post('/trade', verifyJWT, changeRequestControllers.tradeCards);
 
-app.put('/cards/:cardID/:isAvailable', verifyJWT, cardsControllers.toggleCardChangeable);
+app.put('/cards', verifyJWT, cardsControllers.toggleCardChangeable);
 app.put('/user', verifyJWT, upload.single('profile-image'), userControllers.updateUser);
-// app.put('/cards/:cardID', verifyJWT, cardsControllers.toggleCardChangeable);
 
 export default app;
