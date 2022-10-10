@@ -3,7 +3,7 @@ import * as userQueries from '../repositories/user.js';
 import bcrypt from 'bcrypt';
 const saltRounds = 10;
 
-export async function createUser(_name, _email, _password) {
+export async function createUser(_name, _email, _password, _type) {
     const client = await db.connect();
     try {
         if ( _name === undefined || _name === '') {
@@ -22,7 +22,7 @@ export async function createUser(_name, _email, _password) {
             throw error;
         }
         const hash = await bcrypt.hash(_password, saltRounds);
-        const addUser = await userQueries.createUser(client, 'user', _name, _email, hash, 50)
+        const addUser = await userQueries.createUser(client, _type, _name, _email, hash, 100)
         db.release(client);
         return addUser;
     } catch (error) {

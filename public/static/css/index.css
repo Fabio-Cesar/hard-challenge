@@ -311,13 +311,12 @@ label{
     gap: 3.2vh;
 }
 
-#shop-packages{
+#shop-packages, #trade-cards{
     display: flex;
     gap: 5vw;
     justify-content: center;
     flex-wrap: wrap;
 }
-
 .packages{
     width: 12vw;
     box-shadow: 4px 4px 3px 3px #00000080;

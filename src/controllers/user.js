@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken';
 import * as userServices from '../services/user.js';
 
 export async function createUser(req, res) {
-    const { name, email, password } = req.body;
-    const result = await userServices.createUser(name, email, password);
+    const { name, email, password, type } = req.body;
+    const result = await userServices.createUser(name, email, password, type);
     if (result.error === null) {
         res.status(201).json({ message: 'Usuário criado com sucesso!' });
     } else {

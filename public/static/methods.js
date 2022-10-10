@@ -234,7 +234,8 @@ export async function signup() {
         const bodyValue = {
             email: emailValue,
             password: passwordValue,
-            name: userNameValue
+            name: userNameValue,
+            type: 'user'
         }
         const options = {
             method: "POST",
