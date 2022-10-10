@@ -9,3 +9,13 @@ export async function getChangeRequestByCardID(req, res) {
         res.status(result.status).json({ message: result.error })
     }
 }
+
+export async function createChangeRequest(req, res) {
+    const { offeredcardID, requestcardID } = req.params;
+    const result = await changeRequestServices.createChangeRequestService(offeredcardID, requestcardID);
+    if(result.error === null) {
+        res.status(200).json({ 'res': result })
+    } else {
+        res.status(result.status).json({ message: result.error })
+    }
+}

@@ -13,3 +13,16 @@ export async function getChangeRequests(_cardID) {
         return {'status': error.status || 500, 'error': error.message};
     };
 }
+
+export async function createChangeRequestService(_offeredcardID, _requestcardID) {
+    const client = await db.connect();
+    try {
+        const changeRequest = await changeRequestQueries.createChangeRequestQuery(client, _offeredcardID, _requestcardID)
+        db.release(client);
+        return changeRequest;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    }
+}
