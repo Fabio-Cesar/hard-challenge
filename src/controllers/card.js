@@ -29,3 +29,14 @@ export async function getChangeableCardsByUserID(req, res) {
         res.status(result.status).json({ message: result.error })
     }
 }
+
+export async function toggleCardChangeable(req, res) {
+    const card = req.body.card;
+    const change = req.body.change;
+    const result = await cardServices.toggleCardChangeable(card, change);
+    if(result.error === null) {
+        res.status(200).json({ change_available: result.change_available })
+    } else {
+        res.status(result.status).json({ message: result.error })
+    }
+}

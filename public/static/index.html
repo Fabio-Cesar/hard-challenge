@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -69,7 +69,7 @@
             <div class="profile-info">
                 <p id="profile-admin-name">Nome</p>
                 <div class="profile-buttons">
-                    <button class="edit-btn"><a href="/admin-profile" class="nav-profile" data-link>Editar</a></button>
+                    <button class="edit-btn"><a href="/adminprofile" class="nav-profile" data-link>Editar</a></button>
                     <button class="logout-btn" data-logoutPost>Sair</button>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                     </div>
                     <div id="new-cards">
                         <div>
-                            <img src="../images/minnie.png" alt="card adquirido" class="card-acquired">
+                            <img src="./images/default-profile.svg" alt="card adquirido" class="card-acquired">
                             <div class="description-new-card">
                                 <p class="name-new-card"></p>
                                 <p class="rarity-new-card"></p>
@@ -194,7 +194,10 @@
             </div>
         </main>
         <main id="collection-page">
-            <p>Minha Coleção</p>
+            <section id="first-section-collection">
+                <h2>Minha Coleção</h2>
+            </section>
+            <section id="my-collection"></section>
         </main>
         <main id="trade-page"> <!--AQUI VAI O CÓDIGO DA PÁGINA DE TROCA--> <!-- <main id="home-page"> -->
             <div id="container-trade"><!-- <div id="container-shop"> -->
@@ -213,44 +216,14 @@
         </main> <!--FIM-->
         <main id="pendingtrade-page">
             <p>Aceitar Trocas</p>
-            <div id="changeable-cards-container">
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeable-cardName">Carta</p>
-                    <p class="changeable-cardBrand">Disney</p>
-                    <p class="changeable-cardRarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeable-cardName">Carta</p>
-                    <p class="changeable-cardBrand">Disney</p>
-                    <p class="changeable-cardRarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-                <div class="changeablecard">
-                    <img src="../../images/uploads/2febbef4-4c1b-4399-b716-35aea3a7d85d.jpg" class="changeablecard-img"/>
-                    <p class="changeablecard-name">Carta</p>
-                    <p class="changeablecard-brand">Disney</p>
-                    <p class="changeablecard-rarity">Raro</p>
-                    <button class="changeable-cardbtn" id="cardID" data-getChangeReq>Ver Pedidos</button>
-                </div>
-            </div>
+            <div id="changeable-cards-container"></div>
             <div id="pendingtrade-modal" class="modal">
                 <div class="modal-box">
                     <div class="close-modal">
                         <img src="./images/close.svg" id="icon-close-pending-modal"/>
                         <h3 class="h3-modal">Escolha uma das cartas para confirmar a troca</h3>
                     </div>
-                    <div id="pendingtrade-cards">
-                        <div>
-                            <img src="../images/minnie.png" alt="card ofertada" class="card-pending">
-                            <div class="description-pending-card">
-                                <p class="name-pending-card"></p>
-                                <p class="rarity-pending-card"></p>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="pendingtrade-cards"></div>
                 </div>
             </div>
         </main>
@@ -323,6 +296,15 @@
                     <h3 class="h3-modal">ERRO</h3>
                 </div>
                 <div id="error-log-message"></div>
+            </div>
+        </div>
+        <div id="success-log" class="modal">
+            <div class="modal-box">
+                <div class="close-modal">
+                    <img src="./images/close.svg" id="icon-close-success-log"/>
+                    <h3 class="h3-modal">SUCESSO</h3>
+                </div>
+                <div id="success-log-message"></div>
             </div>
         </div>
         <script type="module" src="./index.js"></script>

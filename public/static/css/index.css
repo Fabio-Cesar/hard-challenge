@@ -12,7 +12,8 @@
 /* BODY */
 body {
     background-image: url('../images/bg-principal.jpg');
-    background-repeat: repeat-y;
+    background-position: center center;
+    background-attachment: fixed;
     background-size: cover;
     color: #fff;
     font-family: 'Poppins';
@@ -270,7 +271,7 @@ a{
     padding-bottom: 10px;
 }
 
-.save-btn, .btn-shop, .changeable-cardbtn, #addpackage-btn, #addcharacter-btn, #addbrand-btn{
+.save-btn, .btn-shop, .pending-cardbtn, #addpackage-btn, #addcharacter-btn, #addbrand-btn{
     height: 5vh;
     width: 8vw;
     background-color: #ff4098;
@@ -314,6 +315,7 @@ label{
 #shop-packages{
     display: flex;
     gap: 5vw;
+    flex-wrap: wrap;
 }
 
 .packages{
@@ -353,9 +355,9 @@ label{
 
 .modal-box{
     width: 50vw;
-    height: 70vh;
+    height: 80vh;
     display: flex;
-    background-color: #FFFFFFCC;
+    background-color: #FFFFFFDD;
     transform: translate(-50%,-50%);
     position: relative;
     top: 50vh;
@@ -372,7 +374,7 @@ label{
     from{opacity:0}
 }
 
-#icon-close-shop-modal, #icon-close-pending-modal, #icon-close-error-log{
+#icon-close-shop-modal, #icon-close-pending-modal, #icon-close-error-log, #icon-close-success-log{
     position: absolute;
     top: 0;
     right: 0;
@@ -388,7 +390,7 @@ label{
     padding: 10px;
 }
 
-#error-log-message{
+#error-log-message, #success-log-message{
     color: #13101E;
 }
 
@@ -399,13 +401,27 @@ label{
 #new-cards, #pendingtrade-cards{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 10vh 0 20vh 0;
+    overflow-y: auto;
+}
+
+#pendingtrade-cards::-webkit-scrollbar {
+    width: 1.3vw;
+    background-color: #bbbbbb80;
+}
+
+#pendingtrade-cards::-webkit-scrollbar-thumb {
+    background-color: #13101EA0;
 }
 
 .description-new-card, .description-pending-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 12vw;
-    height: 10vh; 
+    height: fit-content;
     border: 2px solid #13101E;
 }
 
@@ -446,6 +462,11 @@ label{
 
 .changeablecard > p {
     font-size: calc( 6px + 0.7vw );
+}
+
+.description-pending-card > p {
+    font-size: calc( 6px + 0.7vw );
+    color: #13101E;
 }
 
 /* ESCONDER TUDO */
@@ -518,4 +539,62 @@ label{
     display: none;
     flex-direction: column;
     gap: 2vh;
+}
+
+/* CSS DA PÁGINA MINHA COLEÇÃO */
+
+#collection-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#my-collection{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 60vw;
+}
+
+.img-my-collection{
+    width: 12vw;
+}
+
+#first-section-collection{
+    display: flex;
+    justify-content: space-between;
+    width: 60vw;
+    padding: 20px 20px 0 20px;
+}
+
+#first-section-collection > h2{
+    font-size: 2rem;
+}
+
+.container-card-collection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 14vw;
+    height: fit-content;
+    padding: 10px 0;
+    background-color: #FFFFFF26;
+}
+
+.container-card-collection > p {
+    font-size: calc( 7px + 0.7vw );
+}
+
+.container-taggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6rem;
 }
