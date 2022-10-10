@@ -18,11 +18,15 @@ export async function getChangeRequests(_cardID) {
 export async function createChangeRequestService(_offeredcardID, _requestcardID) {
     const client = await db.connect();
     try {
+        await db.begin(client);
+        const checkChangeRequest = await changeRequestQueries.checkChangeRequest(client, _offeredcardID, _requestcardID);
         const changeRequest = await changeRequestQueries.createChangeRequest(client, _offeredcardID, _requestcardID)
+        await db.commit(client);
         db.release(client);
         return changeRequest;
     } catch (error) {
         console.error(error);
+        await db.rollback(client);
         db.release(client);
         return {'status': error.status || 500, 'error': error.message};
     }

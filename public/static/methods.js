@@ -98,6 +98,7 @@ export async function listChangeableCards(e) {
                 <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
                 <div class="trade-shop">
                     <p>${userCardsForTrade.cards[i].charactername}</p>
+                    <p>${userCardsForTrade.cards[i].brand_name} ${userCardsForTrade.cards[i].brand_series}</p>
                     <p>${userCardsForTrade.cards[i].characterrarity}</p>
                     <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
                </div>
