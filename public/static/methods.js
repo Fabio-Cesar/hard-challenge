@@ -1,6 +1,7 @@
 // funções auxiliares
 
 import { adminName, adminProfileImg, profileImg, router, userCoins, userName } from './index.js';
+let requestcardID;
 
 const errorModal = document.querySelector('#error-log');
 const btnCloseErrorModal = document.querySelector('#icon-close-error-log');
@@ -12,6 +13,8 @@ const shopModal = document.querySelector('#shop-modal');
 const btnCloseShopModal = document.querySelector('#icon-close-shop-modal');
 const pendingTradeModal = document.querySelector('#pendingtrade-modal');
 const btnClosePendingModal = document.querySelector('#icon-close-pending-modal');
+const tradeModal = document.querySelector('#trade-modal');
+const btnCloseTradeModal = document.querySelector('#icon-close-trade-modal');
 
 const userImgPreview = document.querySelector('#user-img-preview');
 const userImg = document.querySelector('#profile-edit-img');
@@ -69,6 +72,56 @@ export async function buyCard(e) {
         acqCardRarity.textContent = `${acquiredCard.rarity}`;
         userCoins.innerText = `${acquiredCard.user_coins}`;
         openShopModal();
+    } catch (error) {
+        openErrorModal(`${error.message}`);
+    }
+}
+
+export async function listChangeableCards(e) {
+    try {
+        requestcardID = e.target.id; //criado no escopo global
+        const options = {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },              
+        };
+        const response = await fetch(`api/cards`, options)
+        if (response.status !== 200) {
+            const error = await response.json();
+            throw new Error(`${error.message}`);
+        };
+        const userCardsForTrade = await response.json();
+        openUserCardsToTradeModal()
+        const userCardsModalToTrade = document.querySelector('#user-cards-modal');
+        userCardsModalToTrade.innerHTML = "";
+        for (let i = 0; i < userCardsForTrade.cards.length; i++) {
+            userCardsModalToTrade.innerHTML += `<div class="container-packages">
+                <img src="./images/uploads/cards/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
+                <div class="box-shop">
+                    <p>${userCardsForTrade.cards[i].charactername}</p>
+                    <p>${userCardsForTrade.cards[i].characterrarity}</p>
+                    <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
+               </div>
+            </div>`
+        };
+    } catch (error) {
+        openErrorModal(`${error.message}`);
+    }
+}
+
+export async function createRequest(e) {
+    try {
+        const offeredcardID = e.target.id;
+        const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },              
+        };
+        const response = await fetch(`api/change-requests/${offeredcardID}/for/${requestcardID}`, options)
+        if (response.status !== 201) {
+            const error = await response.json();
+            throw new Error(`${error.message}`);
+        };
+        const res = await response.json();
+        console.log(res); 
     } catch (error) {
         openErrorModal(`${error.message}`);
     }
@@ -420,6 +473,7 @@ btnCloseErrorModal.addEventListener('click', closeErrorModal);
 btnCloseSuccessModal.addEventListener('click', closeSuccessModal)
 btnCloseShopModal.addEventListener('click', closeShopModal);
 btnClosePendingModal.addEventListener('click', closePendingTradeModal);
+btnCloseTradeModal.addEventListener('click', closeUserCardsToTradeModal);
 
 export function openErrorModal(message) {
     errorLogMessage.innerText = message;
@@ -453,6 +507,14 @@ function openPendingTradeModal(){
 
 function closePendingTradeModal(){
     pendingTradeModal.style.display = 'none';
+}
+
+function openUserCardsToTradeModal(){
+    tradeModal.style.display = 'flex';
+}
+
+function closeUserCardsToTradeModal(){
+    tradeModal.style.display = 'none';
 }
 
 userImg.addEventListener('change', (e) => {
