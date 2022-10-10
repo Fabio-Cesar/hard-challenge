@@ -7,12 +7,24 @@ export async function selectCards(_client, _cardID) {
     return {'cards': res.rows, 'error': null};
 };
 
+export async function checkChangeRequest(_client, _offeredcardID, _requestcardID) {
+    const query = {
+        'text': `SELECT * FROM change_request WHERE (requestcard_id, offeredcard_id) IN (($1, $2), ($2, $1));`,
+        'values': [_requestcardID, _offeredcardID]
+    }
+    const res = await _client.query(query);
+    if (res.rows.length > 0) {
+        throw new Error('Esse pedido de troca já existe!')
+    }
+    return {'error': null};
+}
+
 export async function createChangeRequest(_client, _offeredcardID, _requestcardID) {
     const query = {
         'text': 'INSERT INTO change_request (requestcard_id,offeredcard_id) VALUES ($1,$2)',
         'values': [_requestcardID, _offeredcardID]
     }
-    await _client.query(query);
+    const res = await _client.query(query);
     return {'res': 'Pedido de troca realizado!', 'error': null};
 }
 
@@ -49,6 +61,15 @@ export async function finishChangeRequest(_client, _reqcardID, _offcardID) {
 export async function cancelAnyOpenTrades(_client, _cardID) {
     const query = {
         'text': 'UPDATE change_request SET cancelled_at = now() WHERE (requestcard_id = $1 AND finished_at IS NULL) OR (offeredcard_id = $1 AND finished_at IS NULL)',
+        'values': [_cardID]
+    }
+    const res = await _client.query(query);
+    return {'error': null };
+}
+
+export async function reopenTrades(_client, _cardID) {
+    const query = {
+        'text': 'UPDATE change_request SET cancelled_at = NULL WHERE (requestcard_id = $1 AND finished_at IS NULL) OR (offeredcard_id = $1 AND finished_at IS NULL)',
         'values': [_cardID]
     }
     const res = await _client.query(query);

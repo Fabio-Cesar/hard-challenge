@@ -22,6 +22,7 @@ export class TradeView extends View {
                     <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}.png" alt="${tradeCardsRes.cards[i].character_name}" class="packages">
                     <div class="box-shop">
                         <p>${tradeCardsRes.cards[i].character_name}</p>
+                        <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
                         <p>${tradeCardsRes.cards[i].character_rarity}</p>
                         <button class="btn-shop" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>
                    </div>

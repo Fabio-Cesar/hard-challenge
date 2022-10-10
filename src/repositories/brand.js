@@ -1,12 +1,10 @@
 export async function selectBrands(_client) {
     const query = {
-        'text': 'SELECT id, name, series FROM brand'
+        'text': 'SELECT id, name, series FROM brand ORDER BY name ASC, series ASC'
     };
     const res = await _client.query(query);
     return {'brands': res.rows, 'error': null};
 };
-
-// Funções usuário admin criar nova brand
 
 export async function filterBrand(_client, _name, _series) {
     const query = {

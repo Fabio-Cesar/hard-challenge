@@ -1,6 +1,6 @@
 import * as db from '../repositories/index.js';
 import * as cardQueries from '../repositories/card.js';
-import { cancelAnyOpenTrades } from '../repositories/changerequest.js';
+import { cancelAnyOpenTrades, reopenTrades } from '../repositories/changerequest.js';
 
 export async function getUserCards(_userID) {
     const client = await db.connect();
@@ -45,18 +45,21 @@ export async function toggleCardChangeable(_cardID, _isAvailable) {
     const client = await db.connect();
     try {
         await db.begin(client);
+
         let change;
         if (_isAvailable === 'false') {
             change = true;
+            const reopenPendingTrades = await reopenTrades(client, _cardID);
         } else {
             change = false;
+            const cancelPendingTrades = await cancelAnyOpenTrades(client, _cardID);
         }
-        const findCards = await cardQueries.toggleCardChangeable(client, _cardID, change);
 
-        const cancelPendingTrades = await cancelAnyOpenTrades(client, _cardID);
+        const updateCard = await cardQueries.toggleCardChangeable(client, _cardID, change);
+
         await db.commit(client);
         db.release(client);
-        return findCards;
+        return updateCard;
     } catch (error) {
         console.error(error);
         await db.rollback(client);
