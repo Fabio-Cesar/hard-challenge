@@ -29,7 +29,7 @@ export class PendingTradeView extends View {
             };
         } catch (error) {
             openErrorModal(error.message);
-            navigateTo('/');
+            navigateTo('/pendingtrade');
         }
         
     }

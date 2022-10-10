@@ -38,7 +38,7 @@ export class HomeView extends View {
             };
         } catch (error) {
             openErrorModal(error.message);
-            navigateTo('/');
+            navigateTo('/home');
         };
     }
 };

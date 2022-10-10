@@ -22,8 +22,7 @@ export class AddPackageView extends View {
             }
         } catch (error) {
             console.log(`${error.message}`);
-            path = '/addbrand';
-            navigateTo(path);
+            navigateTo('/addpackage');
         }
     }
 };

@@ -562,7 +562,6 @@ label{
 }
 
 .img-my-collection{
-    height: 32vh;
     width: 12vw;
 }
 
@@ -583,13 +582,13 @@ label{
     justify-content: space-between;
     flex-direction: column;
     width: 14vw;
-    height: 45vh;
+    height: fit-content;
     padding: 10px 0;
     background-color: #FFFFFF26;
 }
 
-.rarely-card-collection, .name-card-collection{
-    font-size: 1rem;
+.container-card-collection > p {
+    font-size: calc( 7px + 0.7vw );
 }
 
 .container-taggle{

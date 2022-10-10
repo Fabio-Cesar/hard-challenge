@@ -7,6 +7,18 @@ export async function selectCards(_client, _cardID) {
     return {'cards': res.rows, 'error': null};
 };
 
+export async function selectChangeRequest(_client, _reqcardID, _offcardID) {
+    const query = {
+        'text': 'SELECT cancelled_at FROM change_request WHERE requestcard_id = $1 AND offeredcard_id = $2',
+        'values': [_reqcardID, _offcardID]
+    };
+    const res = await _client.query(query);
+    if (res.rows[0].cancelled_at !== null) {
+        throw new Error('Pedido de troca foi cancelado!')
+    }
+    return {'error': null}
+}
+
 export async function deleteCardFromOriginalUser(_client, _cardID) {
     const query = {
         'text': 'UPDATE card SET deleted_at = now() WHERE id = $1 RETURNING user_id, character_id',
