@@ -18,15 +18,13 @@ export class TradeView extends View {
             }
             const tradeCardsRes = await tradeResponse.json();
             for (let i = 0; i < tradeCardsRes.cards.length; i++) {
-                tradeCardContainer.innerHTML += `<div class="container-packages">
-                    <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}" alt="${tradeCardsRes.cards[i].character_name}" class="packages">
-                    <div class="box-shop">
-                        <p>${tradeCardsRes.cards[i].character_name}</p>
-                        <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
-                        <p>${tradeCardsRes.cards[i].character_rarity}</p>
-                        <button class="btn-shop" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>
-                   </div>
-                </div>`
+                tradeCardContainer.innerHTML += `<div class="container-card-trade-page">
+                    <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}" alt="${tradeCardsRes.cards[i].character_name}" class="trade-imgs">
+                    <p>${tradeCardsRes.cards[i].character_name}</p>
+                    <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
+                    <p>${tradeCardsRes.cards[i].character_rarity}</p>
+                    <button class="btn-trade" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>
+                    </div>`
             };
         } catch (error) {
             path = '/';
