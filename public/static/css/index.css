@@ -271,7 +271,7 @@ a{
     padding-bottom: 10px;
 }
 
-.save-btn, .btn-shop, .pending-cardbtn, #addpackage-btn, #addcharacter-btn, #addbrand-btn{
+.save-btn, .btn-shop, .btn-trade, .pending-cardbtn, #addpackage-btn, #addcharacter-btn, #addbrand-btn{
     height: 5vh;
     width: 8vw;
     background-color: #ff4098;
@@ -318,7 +318,7 @@ label{
     flex-wrap: wrap;
 }
 
-.packages{
+.packages, .img-my-collection, .trade-imgs, .penging-imgs{
     width: 12vw;
     box-shadow: 4px 4px 3px 3px #00000080;
 }
@@ -433,12 +433,12 @@ label{
 
 /* TROCAR CARDS */
 
-#pendingtrade-page {
+/* #pendingtrade-page {
     flex-direction: column;
     gap: 5vh;
-}
+} */
 
-#changeable-cards-container {
+/* #changeable-cards-container {
     display: flex;
     justify-content: center;
     width: 80vw;
@@ -446,7 +446,7 @@ label{
     gap: 1.5vw;
     flex-wrap: wrap;
     padding: 1vh 1vw;
-}
+} */
 
 .changeablecard-img {
     max-width: 9.5vw;
@@ -471,7 +471,7 @@ label{
 
 /* CSS DA PÁGINA MINHA COLEÇÃO */
 
-#collection-page{
+#collection-page, #trade-page, #pendingtrade-page{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -481,7 +481,7 @@ label{
     padding-bottom: 20px;
 }
 
-#my-collection{
+#my-collection, #trade-cards, #changeable-cards-container{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -489,22 +489,7 @@ label{
     width: 60vw;
 }
 
-.img-my-collection{
-    width: 12vw;
-}
-
-#first-section-collection{
-    display: flex;
-    justify-content: space-between;
-    width: 60vw;
-    padding: 20px 20px 0 20px;
-}
-
-#first-section-collection > h2{
-    font-size: 2rem;
-}
-
-.container-card-collection{
+.container-card-collection, .container-card-trade-page, .container-card-penging-page{
     display: flex;
     align-items: center;
     justify-content: space-between;
