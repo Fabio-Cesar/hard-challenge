@@ -462,23 +462,6 @@ label{
     text-align: center;
 }
 
-/* TROCAR CARDS */
-
-/* #pendingtrade-page {
-    flex-direction: column;
-    gap: 5vh;
-} */
-
-/* #changeable-cards-container {
-    display: flex;
-    justify-content: center;
-    width: 60vw;
-    background-color: #f9f9f926;
-    gap: 1.5vw;
-    flex-wrap: wrap;
-    padding: 1vh 1vw;
-} */
-
 .changeablecard-img {
     max-width: 9.5vw;
 }
