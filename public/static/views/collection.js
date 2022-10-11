@@ -28,7 +28,7 @@ export class CollectionView extends View {
                 const inputToggle = document.createElement('input')
                 const checked = document.createElement('label')
                 containerImg.className = 'container-card-collection';
-                img.src = `./images/uploads/character/${data.cards[i].characterid}.png`;
+                img.src = `./images/uploads/character/${data.cards[i].characterid}`;
                 img.className = 'img-my-collection';
                 name.className = 'name-card-collection';
                 name.innerHTML = data.cards[i].charactername;
