@@ -42,6 +42,7 @@ export class CollectionView extends View {
                 inputToggle.checked = data.cards[i].change_available;
                 inputToggle.className = 'toggle-change';
                 checked.innerHTML = 'Diponibilizar para troca';
+                checked.setAttribute('for',data.cards[i].cardid);
                 myCollection.appendChild(containerImg);
                 containerImg.appendChild(img);
                 containerImg.appendChild(name);
