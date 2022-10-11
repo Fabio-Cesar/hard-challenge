@@ -67,7 +67,7 @@ export async function buyCard(e) {
         };
         const cardObject = await response.json();
         const acquiredCard = cardObject.card;
-        acqCardImg.src = `../images/uploads/character/${acquiredCard.character_id}.png`;
+        acqCardImg.src = `../images/uploads/character/${acquiredCard.character_id}`;
         acqCardName.textContent = `${acquiredCard.character_name}`;
         acqCardRarity.textContent = `${acquiredCard.rarity}`;
         userCoins.innerText = `${acquiredCard.user_coins}`;
@@ -95,7 +95,7 @@ export async function listChangeableCards(e) {
         userCardsModalToTrade.innerHTML = "";
         for (let i = 0; i < userCardsForTrade.cards.length; i++) {
             userCardsModalToTrade.innerHTML += `<div class="container-packages">
-                <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}.png" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
+                <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
                 <div class="trade-shop">
                     <p>${userCardsForTrade.cards[i].charactername}</p>
                     <p>${userCardsForTrade.cards[i].brand_name} ${userCardsForTrade.cards[i].brand_series}</p>
@@ -142,7 +142,7 @@ export async function getChangeRequests(e) {
         const data = await pendingTradeResponse.json();
         for (let i = 0; i < data.cards.length; i++) {
             pendingCardContainer.innerHTML += `<div>
-            <img src="./images/uploads/character/${data.cards[i].character_id}.png" alt="card ofertada" class="card-pending">
+            <img src="./images/uploads/character/${data.cards[i].character_id}" alt="card ofertada" class="card-pending">
             <div class="description-pending-card">
                 <p>${data.cards[i].name}</p>
                 <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
@@ -427,7 +427,7 @@ export async function updateAdminProfile() {
         const data = await response.json();
         openSuccessModal('Usuário atualizado com sucesso!');
         adminName.innerText = `${data.name}`;
-        adminProfileImg.src = `./images/uploads/${data.userID}.png`
+        adminProfileImg.src = `./images/uploads/${data.userID}`
         adminImgPreview.src = './images/default-profile.svg';
         adminImg.value = '';
         document.querySelector('#admin-profile-name-input').value = '';
@@ -461,7 +461,7 @@ export async function updateUserProfile() {
         const data = await response.json();
         openSuccessModal('Usuário atualizado com sucesso!');
         userName.innerText = `${data.name}`;
-        profileImg.src = `./images/uploads/${data.userID}.png`
+        profileImg.src = `./images/uploads/${data.userID}`
         userImgPreview.src = './images/default-profile.svg';
         userImg.value = '';
         document.querySelector('#profile-name-input').value = '';

@@ -24,7 +24,7 @@ export class HomeView extends View {
                 commonchance = 100 - packageRes.packages[i].chance_rare;
                 rarechance = packageRes.packages[i].chance_rare - packageRes.packages[i].chance_ultrarare;
                 packageContainer.innerHTML += `<div class="container-packages">
-                    <img src="./images/uploads/package/${packageRes.packages[i].id}.jpg" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
+                    <img src="./images/uploads/package/${packageRes.packages[i].id}" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
                     <div class="box-shop">
                         <p><img src="/images/coin-svgrepo-com.svg" class="coins-img" />${packageRes.packages[i].price}</p>
                         <p>Pacote ${packageRes.packages[i].brand}</p>
