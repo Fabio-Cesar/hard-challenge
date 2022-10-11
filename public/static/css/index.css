@@ -19,6 +19,8 @@ body {
     font-family: 'Poppins';
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
+    min-height: 100vh;
 }
 
 button:hover {
@@ -45,13 +47,35 @@ header {
 #logo > a {
     text-decoration: none;
     font-size: calc(14px + 1.4vw);
-    color: #ffffff;
+    color: #f9f9f9;
 }
 
 #nav-login, #nav-signup, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-addbrand, #nav-collection {
     text-decoration: none;
-    font-size: calc( 6px + 0.9vw );
-    color: #ffffff;
+    font-size: calc( 5px + 0.9vw );
+    color: #f9f9f9;
+    padding: 10px 15px;
+}
+
+#nav-login:hover, #nav-signup:hover, #nav-shop:hover, #nav-collection:hover, #nav-trade:hover, #nav-pendingtrade:hover,
+#nav-addpackage:hover, #nav-addcharacter:hover, #nav-addbrand:hover{
+    background-color: #f9f9f9;
+    color: #13101E;
+}
+
+#container-trade{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3.2vh;
+    background-color: #f9f9f926;
+    width: 60vw;
+    padding: 4vh 0vw;
+}
+
+#container-trade > h2{
+    padding: 20px 20px 0 20px;
 }
 
 ul {
@@ -86,7 +110,8 @@ li {
 }
 
 #profile-img, #profile-admin-img {
-    width: 50px;
+    width: 5vw;
+    border: 1px solid #f9f9f9;
 }
 
 #profile-user-name, #profile-admin-user-name{
@@ -107,18 +132,18 @@ li {
 }
 
 .edit-btn, .logout-btn {
-    height: 20px;
-    width: 40px;
+    height: 25px;
+    width: 60px;
     background-color: #9479A9;
     border-radius: 10px;
     font-size: calc( 5px + 0.6vw );
-    color: #ffffff;
+    color: #f9f9f9;
     border: none;
 }
 
 #nav-editprofile {
     text-decoration: none;
-    color: #ffffff;
+    color: #f9f9f9;
 }
 
 #add-coin-btn {
@@ -132,7 +157,7 @@ li {
 
 /* MAIN LANDING PAGE */
 main {
-    padding-top: 6vh;
+    /* padding-top: 6vh; */
     display: none;
     justify-content: center;
     align-items: center;
@@ -143,6 +168,7 @@ main {
     justify-content: space-between;
     align-items: center;
     width: 80vw;
+    padding-top: 10vh;
 }
 
 #texts-home {
@@ -177,8 +203,8 @@ main {
 #container-register, #container-login {
     padding: 4vh 0vw;
     width: 40vw;
-    background-color: #FFFFFF26;
-    color: #FFFFFF;
+    background-color: #f9f9f926;
+    color: #f9f9f9;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -194,13 +220,17 @@ main {
     width: 25vw;
 }
 
+#form-login > label, #form-register > label{
+    font-size: calc(18px + 0.2vh);
+}
+
 input{
     height: 4.8vh;
     background: none;
     border: none;
     padding-bottom: 1px;
-    border-bottom: 2px solid #FFFFFF;
-    color: #FFFFFF;
+    border-bottom: 2px solid #f9f9f9;
+    color: #f9f9f9;
     font-size: calc( 6px + 0.7vw );
 }
 
@@ -219,14 +249,14 @@ p{
 
 a{
     text-decoration: none;
-    color: #FFFFFF;
+    color: #f9f9f9;
 }
 
 #signup-btn, #login-btn, #back-btn {
     min-height: 35px;
     min-width: 90px;
     width: 15vw;
-    color: #FFFFFF;
+    color: #f9f9f9;
     background-color: #ff4098;
     border: none;
     border-radius: 10px;
@@ -254,8 +284,8 @@ a{
 #container-profile, #container-addbrand, #container-addpackage, #container-addcharacter{
     padding: 2vh 0;
     width: 40vw;
-    background-color: #FFFFFF26; 
-    color: #FFFFFF;
+    background-color: #f9f9f926; 
+    color: #f9f9f9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -278,7 +308,7 @@ a{
     border-radius: 1vh;
     font-family: 'Poppins';
     font-size: calc( 5px + 0.6vw );
-    color: #FFFFFF;
+    color: #f9f9f9;
     border: none;
 }
 
@@ -302,8 +332,8 @@ label{
 #container-shop {
     padding: 4vh 0vw;
     width: 60vw;
-    background-color: #FFFFFF26;
-    color: #FFFFFF;
+    background-color: #f9f9f926;
+    color: #f9f9f9;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -311,7 +341,7 @@ label{
     gap: 3.2vh;
 }
 
-#shop-packages{
+#shop-packages, #trade-cards{
     display: flex;
     gap: 5vw;
     justify-content: center;
@@ -319,6 +349,7 @@ label{
 }
 
 .packages, .img-my-collection, .trade-imgs, .penging-imgs{
+
     width: 12vw;
     box-shadow: 4px 4px 3px 3px #00000080;
 }
@@ -329,7 +360,7 @@ label{
     justify-content: space-between;
     align-items: center;
     width: 12vw;
-    background-color: #FFFFFF26;
+    background-color: #f9f9f926;
     font-size: calc( 6px + 0.6vw );
     text-align: center;
     gap: 0.5vh;
@@ -357,7 +388,7 @@ label{
     width: 50vw;
     height: 80vh;
     display: flex;
-    background-color: #FFFFFFDD;
+    background-color: #f9f9f9DD;
     transform: translate(-50%,-50%);
     position: relative;
     top: 50vh;
@@ -441,8 +472,8 @@ label{
 /* #changeable-cards-container {
     display: flex;
     justify-content: center;
-    width: 80vw;
-    background-color: #FFFFFF26;
+    width: 60vw;
+    background-color: #f9f9f926;
     gap: 1.5vw;
     flex-wrap: wrap;
     padding: 1vh 1vw;
@@ -456,8 +487,13 @@ label{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #00000046;
+    background-color: #FFFFFF26;
     padding: 1vh 1vw;
+}
+
+.trade-shop{
+    height: fit-content;
+    border: 2px solid #13101E;
 }
 
 .changeablecard > p {
@@ -478,18 +514,19 @@ label{
     flex-direction: column;
     gap: 2vh;
     width: 100%;
-    padding-bottom: 20px;
+    padding: 0 0 20px 0;
 }
 
 #my-collection, #trade-cards, #changeable-cards-container{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     width: 60vw;
 }
 
 .container-card-collection, .container-card-trade-page, .container-card-penging-page{
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -497,7 +534,7 @@ label{
     width: 14vw;
     height: fit-content;
     padding: 10px 0;
-    background-color: #FFFFFF26;
+    background-color: #f9f9f926;
 }
 
 .container-card-collection > p {
@@ -510,6 +547,10 @@ label{
     align-items: center;
     gap: 5px;
     font-size: 0.6rem;
+}
+
+label{
+    font-size: 0.8rem;
 }
 
 /* ESCONDER TUDO */
@@ -536,14 +577,17 @@ label{
 
 #login-page {
     display: none;
+    padding: 10vh;
 }
 
 #signup-page {
     display: none;
+    padding: 10vh;
 }
 
 #home-page {
     display: none;
+    padding: 0 0 2vh 0;
 }
 
 #profile-page {
