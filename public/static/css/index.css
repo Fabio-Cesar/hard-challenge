@@ -348,10 +348,17 @@ label{
     flex-wrap: wrap;
 }
 
-.packages, .img-my-collection, .trade-imgs, .penging-imgs{
-
+.img-my-collection, .trade-imgs, .penging-imgs{
     width: 12vw;
     box-shadow: 4px 4px 3px 3px #00000080;
+}
+
+.packages{
+    width: 12vw;
+}
+
+.name-card-collection{
+    padding-top: 1.2vh;
 }
 
 .box-shop{
@@ -454,6 +461,7 @@ label{
     width: 12vw;
     height: fit-content;
     border: 2px solid #13101E;
+    padding: 1.6vh 0;
 }
 
 .name-new-card, .rarity-new-card, .name-pending-card, .rarity-pending-card {
