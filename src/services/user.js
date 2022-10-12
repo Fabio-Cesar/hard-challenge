@@ -6,6 +6,8 @@ const saltRounds = 10;
 export async function createUser(_name, _email, _password, _type) {
     const client = await db.connect();
     try {
+        await db.begin(client);
+        const checkUserExists = await userQueries.checkExists(client, _email)
         if ( _name === undefined || _name === '') {
             const error = new Error('Necessário informar um nome de usuário!');
             error.status = 400;
@@ -23,10 +25,12 @@ export async function createUser(_name, _email, _password, _type) {
         }
         const hash = await bcrypt.hash(_password, saltRounds);
         const addUser = await userQueries.createUser(client, _type, _name, _email, hash, 100)
+        await db.commit(client);
         db.release(client);
         return addUser;
     } catch (error) {
         console.error(error);
+        await db.rollback(client);
         db.release(client);
         return {'status': error.status || 500, 'error': error.message};
     };
