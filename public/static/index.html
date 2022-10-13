@@ -131,6 +131,10 @@
         <main id="home-page">
             <div id="container-shop">
                 <h2>Loja de Cards</h2>
+                <div id="search-container">
+                    <input type="text" id="locate-package-input" placeholder="Pesquisar..." />
+                    <button type="button" class="locate-btn locate-package-btn" ><img src="./images/search.svg" class="locate-package-btn" /></button>
+                </div>
                 <div id="shop-packages"></div>
             </div>
             <div id="shop-modal" class="modal">
@@ -197,16 +201,28 @@
         </main>
         <main id="collection-page">
             <h2>Minha Coleção</h2>
+            <div id="search-container">
+                <input type="text" id="locate-collection-input" placeholder="Pesquisar..." />
+                <button type="button" class="locate-btn locate-collection-btn"><img src="./images/search.svg" class="locate-collection-btn" /></button>
+            </div>
             <section id="my-collection"></section>
         </main>
         <main id="trade-page">
             <h2>Loja de Trocas</h2>
+            <div id="search-container">
+                <input type="text" id="locate-trade-input" placeholder="Pesquisar..." />
+                <button type="button" class="locate-btn locate-trade-btn"><img src="./images/search.svg" class="locate-trade-btn" /></button>
+            </div>
             <section id="trade-cards"></section>
             <div id="trade-modal" class="modal">
                 <div class="modal-box">
                     <div class="close-modal">
                         <img src="./images/close.svg" id="icon-close-trade-modal"/>
                         <h3 class="h3-modal">Selecione um card para trocar</h3>
+                        <div id="search-container">
+                            <input type="text" id="locate-trade-collection-input" placeholder="Pesquisar..." />
+                            <button type="button" class="locate-modal-btn locate-trade-collection-btn"><img src="./images/search2.svg" class="locate-trade-collection-btn"/></button>
+                        </div>
                     </div>
                     <div id="user-cards-modal"></div>
                 </div>
@@ -214,12 +230,20 @@
         </main>
         <main id="pendingtrade-page">
             <h2>Aceitar Trocas</h2>
+            <div id="search-container">
+                <input type="text" id="locate-pending-input" placeholder="Pesquisar..." />
+                <button type="button" class="locate-btn locate-pending-btn"><img src="./images/search.svg" class="locate-pending-btn" /></button>
+            </div>
             <section id="changeable-cards-container"></section>
             <div id="pendingtrade-modal" class="modal">
                 <div class="modal-box">
                     <div class="close-modal">
                         <img src="./images/close.svg" id="icon-close-pending-modal"/>
                         <h3 class="h3-modal">Escolha uma das cartas para confirmar a troca</h3>
+                        <div id="search-container">
+                            <input type="text" id="locate-pending-offer-input" placeholder="Pesquisar..." />
+                            <button type="button" class="locate-modal-btn locate-pending-offer-btn"><img src="./images/search2.svg" class="locate-pending-offer-btn" /></button>
+                        </div>
                     </div>
                     <div id="pendingtrade-cards"></div>
                 </div>

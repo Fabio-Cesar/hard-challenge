@@ -10,6 +10,16 @@ export async function getPackages(req, res) {
     };
 };
 
+export async function getPackagesFilter(req, res) {
+    const { filter } = req.params;
+    const result = await packageServices.getPackagesFilter(filter);
+    if (result.error === null) {
+        res.status(200).json({ packages: result.packages });
+    } else {
+        res.status(result.status).json({ message: result.error });
+    };
+};
+
 export async function createNewPackage(req, res) {
     const { brand, type, price, chancerare, chanceultrarare } = req.body;
     const result = await packageServices.createNewPackage(brand, type, price, chancerare, chanceultrarare);

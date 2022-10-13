@@ -2,6 +2,7 @@
 
 import { adminName, adminProfileImg, profileImg, router, userCoins, userName } from './index.js';
 let requestcardID;
+let cardID;
 
 const errorModal = document.querySelector('#error-log');
 const btnCloseErrorModal = document.querySelector('#icon-close-error-log');
@@ -131,7 +132,7 @@ export async function createRequest(e) {
 
 export async function getChangeRequests(e) {
     try {
-        const cardID = e.target.id;
+        cardID = e.target.id;
         const pendingCardContainer = document.querySelector('#pendingtrade-cards');
         pendingCardContainer.innerHTML = ''
         const pendingTradeResponse = await fetch(`api/change-requests/${cardID}`)
@@ -147,7 +148,7 @@ export async function getChangeRequests(e) {
                 <p>${data.cards[i].name}</p>
                 <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
                 <p>${data.cards[i].rarity}</p>
-                <button class="pending-cardbtn" data-reqcardid="${e.target.id}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
             </div>
             </div>`
         }
@@ -470,6 +471,391 @@ export async function updateUserProfile() {
     } catch (error) {
         openErrorModal(`${error.message}`);
     };
+}
+
+export async function filterPackagesByName() {
+    try {
+        const filter = document.querySelector('#locate-package-input').value;
+        if (filter === '') {
+            const packageContainer = document.querySelector('#shop-packages');
+            packageContainer.innerHTML = '';
+            const homeResponse = await fetch('api/packages');
+            if (homeResponse.status !== 200) {
+                const error = await homeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const packageRes = await homeResponse.json();
+            let commonchance;
+            let rarechance;
+            for (let i = 0; i < packageRes.packages.length; i++) {
+                commonchance = 100 - packageRes.packages[i].chance_rare;
+                rarechance = packageRes.packages[i].chance_rare - packageRes.packages[i].chance_ultrarare;
+                packageContainer.innerHTML += `<div class="container-packages">
+                    <img src="./images/uploads/package/${packageRes.packages[i].id}" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
+                    <div class="box-shop">
+                        <p><img src="/images/coin-svgrepo-com.svg" class="coins-img" />${packageRes.packages[i].price}</p>
+                        <p>Pacote ${packageRes.packages[i].brand}</p>
+                        <p>${packageRes.packages[i].type}</p>
+                        <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
+                        <p class="package-chances">CHANCE RARO ${rarechance}%</p>
+                        <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
+                        <button class="btn-shop" id="${packageRes.packages[i].id}" data-buyPackagePost>Comprar</button>
+                </div>
+                </div>`
+            };
+        } else {
+            const packageContainer = document.querySelector('#shop-packages');
+            packageContainer.innerHTML = '';
+            const homeResponse = await fetch(`api/packages/${filter}`);
+            if (homeResponse.status !== 200) {
+                const error = await homeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const packageRes = await homeResponse.json();
+            let commonchance;
+            let rarechance;
+            for (let i = 0; i < packageRes.packages.length; i++) {
+                commonchance = 100 - packageRes.packages[i].chance_rare;
+                rarechance = packageRes.packages[i].chance_rare - packageRes.packages[i].chance_ultrarare;
+                packageContainer.innerHTML += `<div class="container-packages">
+                    <img src="./images/uploads/package/${packageRes.packages[i].id}" alt="Pacote disney ${packageRes.packages[i].type}" class="packages">
+                    <div class="box-shop">
+                        <p><img src="/images/coin-svgrepo-com.svg" class="coins-img" />${packageRes.packages[i].price}</p>
+                        <p>Pacote ${packageRes.packages[i].brand}</p>
+                        <p>${packageRes.packages[i].type}</p>
+                        <p class="package-chances">CHANCE COMUM ${commonchance}%</p>
+                        <p class="package-chances">CHANCE RARO ${rarechance}%</p>
+                        <p class="package-chances">CHANCE ULTRARARO ${packageRes.packages[i].chance_ultrarare}%</p>
+                        <button class="btn-shop" id="${packageRes.packages[i].id}" data-buyPackagePost>Comprar</button>
+                </div>
+                </div>`
+            };
+        }
+    } catch (error) {
+        openErrorModal(error.message);
+        navigateTo('/home');
+    };
+}
+
+export async function filterMyCollection() {
+    const filter = document.querySelector('#locate-collection-input').value;
+    if (filter === '') {
+        try {
+            const myCollection = document.querySelector('#my-collection');
+            myCollection.innerHTML = '';
+            const cardsResponse = await fetch('api/cards');
+            if (cardsResponse.status !== 200) {
+                const error = await cardsResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await cardsResponse.json();
+            for (let i = 0; i < data.cards.length; i++) {
+                const containerImg = document.createElement('div');
+                const img = document.createElement('img');
+                const name = document.createElement('p');
+                const brand = document.createElement('p');
+                const rarely = document.createElement('p');
+                const divToggle = document.createElement('div');
+                const inputToggle = document.createElement('input')
+                const checked = document.createElement('label')
+                containerImg.className = 'container-card-collection';
+                img.src = `./images/uploads/character/${data.cards[i].characterid}`;
+                img.className = 'img-my-collection';
+                name.className = 'name-card-collection';
+                name.innerHTML = data.cards[i].charactername;
+                brand.innerHTML = `${data.cards[i].brand_name} ${data.cards[i].brand_series}`
+                rarely.className = 'rarely-card-collection';
+                rarely.innerHTML = data.cards[i].characterrarity;
+                divToggle.className = 'container-taggle';
+                inputToggle.type = 'checkbox';
+                inputToggle.id = data.cards[i].cardid;
+                inputToggle.dataset.change = data.cards[i].change_available;
+                inputToggle.checked = data.cards[i].change_available;
+                inputToggle.className = 'toggle-change';
+                checked.innerHTML = 'Diponibilizar para troca';
+                checked.setAttribute('for',data.cards[i].cardid);
+                myCollection.appendChild(containerImg);
+                containerImg.appendChild(img);
+                containerImg.appendChild(name);
+                containerImg.appendChild(brand);
+                containerImg.appendChild(rarely);
+                containerImg.appendChild(divToggle);
+                divToggle.appendChild(inputToggle);
+                divToggle.appendChild(checked);
+            }
+        } catch (error) {
+            openErrorModal(error.message);
+            navigateTo('/collection');
+        }
+    } else {
+        try {
+            const myCollection = document.querySelector('#my-collection');
+            myCollection.innerHTML = '';
+            const cardsResponse = await fetch(`api/cards/${filter}`);
+            if (cardsResponse.status !== 200) {
+                const error = await cardsResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await cardsResponse.json();
+            for (let i = 0; i < data.cards.length; i++) {
+                const containerImg = document.createElement('div');
+                const img = document.createElement('img');
+                const name = document.createElement('p');
+                const brand = document.createElement('p');
+                const rarely = document.createElement('p');
+                const divToggle = document.createElement('div');
+                const inputToggle = document.createElement('input')
+                const checked = document.createElement('label')
+                containerImg.className = 'container-card-collection';
+                img.src = `./images/uploads/character/${data.cards[i].characterid}`;
+                img.className = 'img-my-collection';
+                name.className = 'name-card-collection';
+                name.innerHTML = data.cards[i].charactername;
+                brand.innerHTML = `${data.cards[i].brand_name} ${data.cards[i].brand_series}`
+                rarely.className = 'rarely-card-collection';
+                rarely.innerHTML = data.cards[i].characterrarity;
+                divToggle.className = 'container-taggle';
+                inputToggle.type = 'checkbox';
+                inputToggle.id = data.cards[i].cardid;
+                inputToggle.dataset.change = data.cards[i].change_available;
+                inputToggle.checked = data.cards[i].change_available;
+                inputToggle.className = 'toggle-change';
+                checked.innerHTML = 'Diponibilizar para troca';
+                checked.setAttribute('for',data.cards[i].cardid);
+                myCollection.appendChild(containerImg);
+                containerImg.appendChild(img);
+                containerImg.appendChild(name);
+                containerImg.appendChild(brand);
+                containerImg.appendChild(rarely);
+                containerImg.appendChild(divToggle);
+                divToggle.appendChild(inputToggle);
+                divToggle.appendChild(checked);
+            }
+        } catch (error) {
+            openErrorModal(error.message);
+            navigateTo('/collection');
+        }
+    }
+}
+
+export async function filterTrades() {
+    const filter = document.querySelector('#locate-trade-input').value;
+    if (filter === '') {
+        try {
+            const tradeCardContainer = document.querySelector('#trade-cards');
+            tradeCardContainer.innerHTML = '';
+            const tradeResponse = await fetch('api/changeable-cards');
+            if (tradeResponse.status !== 200) {
+                const error = await tradeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const tradeCardsRes = await tradeResponse.json();
+            for (let i = 0; i < tradeCardsRes.cards.length; i++) {
+                tradeCardContainer.innerHTML += `<div class="container-card-trade-page">
+                    <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}" alt="${tradeCardsRes.cards[i].character_name}" class="trade-imgs">
+                    <p>${tradeCardsRes.cards[i].character_name}</p>
+                    <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
+                    <p>${tradeCardsRes.cards[i].character_rarity}</p>
+                    <button class="btn-trade" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>
+                    </div>`
+            };
+        } catch (error) {
+            path = '/';
+            navigateTo(path);
+        };
+    } else {
+        try {
+            const tradeCardContainer = document.querySelector('#trade-cards');
+            tradeCardContainer.innerHTML = '';
+            const tradeResponse = await fetch(`api/changeable-cards/${filter}`);
+            if (tradeResponse.status !== 200) {
+                const error = await tradeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const tradeCardsRes = await tradeResponse.json();
+            for (let i = 0; i < tradeCardsRes.cards.length; i++) {
+                tradeCardContainer.innerHTML += `<div class="container-card-trade-page">
+                    <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}" alt="${tradeCardsRes.cards[i].character_name}" class="trade-imgs">
+                    <p>${tradeCardsRes.cards[i].character_name}</p>
+                    <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
+                    <p>${tradeCardsRes.cards[i].character_rarity}</p>
+                    <button class="btn-trade" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>
+                    </div>`
+            };
+        } catch (error) {
+            path = '/';
+            navigateTo(path);
+        };
+    }
+}
+
+export async function filterMyCollectionTrade() {
+    const filter = document.querySelector('#locate-trade-collection-input').value;
+    if (filter === '') {
+        try {
+            const options = {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },              
+            };
+            const response = await fetch(`api/cards`, options)
+            if (response.status !== 200) {
+                const error = await response.json();
+                throw new Error(`${error.message}`);
+            };
+            const userCardsForTrade = await response.json();
+            openUserCardsToTradeModal()
+            const userCardsModalToTrade = document.querySelector('#user-cards-modal');
+            userCardsModalToTrade.innerHTML = "";
+            for (let i = 0; i < userCardsForTrade.cards.length; i++) {
+                userCardsModalToTrade.innerHTML += `<div class="container-packages">
+                    <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
+                    <div class="trade-shop">
+                        <p>${userCardsForTrade.cards[i].charactername}</p>
+                        <p>${userCardsForTrade.cards[i].brand_name} ${userCardsForTrade.cards[i].brand_series}</p>
+                        <p>${userCardsForTrade.cards[i].characterrarity}</p>
+                        <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
+                   </div>
+                </div>`
+            };
+        } catch (error) {
+            openErrorModal(`${error.message}`);
+        }
+    } else {
+        try {
+            const options = {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },              
+            };
+            const response = await fetch(`api/cards/${filter}`, options)
+            if (response.status !== 200) {
+                const error = await response.json();
+                throw new Error(`${error.message}`);
+            };
+            const userCardsForTrade = await response.json();
+            openUserCardsToTradeModal()
+            const userCardsModalToTrade = document.querySelector('#user-cards-modal');
+            userCardsModalToTrade.innerHTML = "";
+            for (let i = 0; i < userCardsForTrade.cards.length; i++) {
+                userCardsModalToTrade.innerHTML += `<div class="container-packages">
+                    <img src="./images/uploads/character/${userCardsForTrade.cards[i].characterid}" alt="${userCardsForTrade.cards[i].charactername}" class="packages">
+                    <div class="trade-shop">
+                        <p>${userCardsForTrade.cards[i].charactername}</p>
+                        <p>${userCardsForTrade.cards[i].brand_name} ${userCardsForTrade.cards[i].brand_series}</p>
+                        <p>${userCardsForTrade.cards[i].characterrarity}</p>
+                        <button class="btn-shop" id="${userCardsForTrade.cards[i].cardid}" data-cardTradeOffer>Ofertar</button>
+                   </div>
+                </div>`
+            };
+        } catch (error) {
+            openErrorModal(`${error.message}`);
+        }
+    }
+}
+
+export async function filterMyPendingTrade() {
+    const filter = document.querySelector('#locate-pending-input').value;
+    if (filter === '') {
+        try {
+            const changeableUserCardsContainer = document.querySelector('#changeable-cards-container');
+            changeableUserCardsContainer.innerHTML = '';
+            const changeableCardsResponse = await fetch('api/user-changeable-cards');
+            if (changeableCardsResponse.status !== 200) {
+                const error = await changeableCardsResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await changeableCardsResponse.json()
+            for (let i = 0; i < data.cards.length; i++) {
+                changeableUserCardsContainer.innerHTML += `<div class="container-card-penging-page">
+                <img src="./images/uploads/character/${data.cards[i].character_id}" class="penging-imgs"/>
+                <p>${data.cards[i].name}</p>
+                <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
+                <p>${data.cards[i].rarity}</p>
+                <button class="pending-cardbtn" id="${data.cards[i].card_id}" data-getChangeReq>Ver Pedidos</button>
+            </div>`
+            };
+        } catch (error) {
+            openErrorModal(error.message);
+            navigateTo('/pendingtrade');
+        }
+    } else {
+        try {
+            const changeableUserCardsContainer = document.querySelector('#changeable-cards-container');
+            changeableUserCardsContainer.innerHTML = '';
+            const changeableCardsResponse = await fetch(`api/user-changeable-cards/${filter}`);
+            if (changeableCardsResponse.status !== 200) {
+                const error = await changeableCardsResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await changeableCardsResponse.json()
+            for (let i = 0; i < data.cards.length; i++) {
+                changeableUserCardsContainer.innerHTML += `<div class="container-card-penging-page">
+                <img src="./images/uploads/character/${data.cards[i].character_id}" class="penging-imgs"/>
+                <p>${data.cards[i].name}</p>
+                <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
+                <p>${data.cards[i].rarity}</p>
+                <button class="pending-cardbtn" id="${data.cards[i].card_id}" data-getChangeReq>Ver Pedidos</button>
+            </div>`
+            };
+        } catch (error) {
+            openErrorModal(error.message);
+            navigateTo('/pendingtrade');
+        }
+    }
+}
+
+export async function filterOffers() {
+    const filter = document.querySelector('#locate-pending-offer-input').value;
+    if (filter === '') {
+        try {
+            const pendingCardContainer = document.querySelector('#pendingtrade-cards');
+            pendingCardContainer.innerHTML = ''
+            const pendingTradeResponse = await fetch(`api/change-requests/${cardID}`)
+            if (pendingTradeResponse.status !== 200) {
+                const error = await pendingTradeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await pendingTradeResponse.json();
+            for (let i = 0; i < data.cards.length; i++) {
+                pendingCardContainer.innerHTML += `<div>
+                <img src="./images/uploads/character/${data.cards[i].character_id}" alt="card ofertada" class="card-pending">
+                <div class="description-pending-card">
+                    <p>${data.cards[i].name}</p>
+                    <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
+                    <p>${data.cards[i].rarity}</p>
+                    <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                </div>
+                </div>`
+            }
+            openPendingTradeModal();
+        } catch (error) {
+            openErrorModal(`${error.message}`);
+        }
+    } else {
+        try {
+            const pendingCardContainer = document.querySelector('#pendingtrade-cards');
+            pendingCardContainer.innerHTML = ''
+            const pendingTradeResponse = await fetch(`api/change-requests/${cardID}/filter/${filter}`)
+            if (pendingTradeResponse.status !== 200) {
+                const error = await pendingTradeResponse.json();
+                throw new Error(`${error.message}`);
+            }
+            const data = await pendingTradeResponse.json();
+            for (let i = 0; i < data.cards.length; i++) {
+                pendingCardContainer.innerHTML += `<div>
+                <img src="./images/uploads/character/${data.cards[i].character_id}" alt="card ofertada" class="card-pending">
+                <div class="description-pending-card">
+                    <p>${data.cards[i].name}</p>
+                    <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
+                    <p>${data.cards[i].rarity}</p>
+                    <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                </div>
+                </div>`
+            }
+            openPendingTradeModal();
+        } catch (error) {
+            openErrorModal(`${error.message}`);
+        }
+    }
 }
 
 btnCloseErrorModal.addEventListener('click', closeErrorModal);

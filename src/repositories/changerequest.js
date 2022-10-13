@@ -7,6 +7,15 @@ export async function selectCards(_client, _cardID) {
     return {'cards': res.rows, 'error': null};
 };
 
+export async function filterCards(_client, _cardID, _filter) {
+    const query = {
+        'text': 'SELECT change_request.offeredcard_id, card.character_id, character.name, character.rarity, brand.name as brand_name, brand.series as brand_series FROM change_request INNER JOIN card ON change_request.offeredcard_id = card.id INNER JOIN character ON card.character_id = character.id INNER JOIN brand ON character.brand = brand.id WHERE change_request.requestcard_id = $1 AND change_request.finished_at IS NULL AND change_request.cancelled_at IS NULL AND character.name ILIKE $2',
+        'values': [_cardID, `%${_filter}%`]
+    };
+    const res = await _client.query(query);
+    return {'cards': res.rows, 'error': null};
+};
+
 export async function checkChangeRequest(_client, _offeredcardID, _requestcardID) {
     const query = {
         'text': `SELECT * FROM change_request WHERE (requestcard_id, offeredcard_id) IN (($1, $2), ($2, $1));`,

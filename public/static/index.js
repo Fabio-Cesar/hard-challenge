@@ -11,7 +11,7 @@ import { PendingTradeView } from './views/pendingtrade.js';
 import { ProfileView } from './views/profile.js';
 import { SignupView } from './views/signup.js';
 import { TradeView } from './views/trade.js';
-import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange, createRequest, listChangeableCards } from './methods.js';
+import { buyCard, closeModals, createBrand, createCharacter, createPackage, getChangeRequests, linkClick, login, logout, navigateTo, signup, updateAdminProfile, updateUserProfile, openErrorModal, finishChangeRequest, toggleChange, createRequest, listChangeableCards, filterPackagesByName, filterMyCollection, filterTrades, filterMyCollectionTrade, filterMyPendingTrade, filterOffers } from './methods.js';
 
 const routes = {
     '404': NotFoundView,
@@ -75,7 +75,6 @@ export async function router() {
             userHeader.style.display = "flex";
             userProfile.style.display = "flex";
             userName.innerText = `${data.userName}`;
-            profileImg.src = `./images/uploads/${data.userID}`
             userCoins.innerText = `${data.userCoins}`;
             const view = new routes[path];
             const viewData = await view.getData();
@@ -96,7 +95,6 @@ export async function router() {
             adminHeader.style.display = "flex";
             adminProfile.style.display = "flex";
             adminName.innerText = `${data.userName}`;
-            adminProfileImg.src = `./images/uploads/${data.userID}`
             const view = new routes[path];
             const viewData = await view.getData();
         } catch (error) {
@@ -161,6 +159,24 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.matches("[data-profilePut]")) {
             updateUserProfile();
+        }
+        if (e.target.matches(".locate-package-btn")) {
+            filterPackagesByName();
+        }
+        if (e.target.matches(".locate-collection-btn")) {
+            filterMyCollection();
+        }
+        if (e.target.matches(".locate-trade-btn")) {
+            filterTrades();
+        }
+        if (e.target.matches(".locate-trade-collection-btn")) {
+            filterMyCollectionTrade();
+        }
+        if (e.target.matches(".locate-pending-btn")) {
+            filterMyPendingTrade();
+        }
+        if (e.target.matches(".locate-pending-offer-btn")) {
+            filterOffers();
         }
     });
     router();
