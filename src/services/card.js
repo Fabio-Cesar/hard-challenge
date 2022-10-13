@@ -15,6 +15,19 @@ export async function getUserCards(_userID) {
     };
 };
 
+export async function getUserCardsFilter(_userID, _filter) {
+    const client = await db.connect();
+    try {
+        const findCards = await cardQueries.filterUserCards(client, _userID, _filter);
+        db.release(client);
+        return findCards;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    };
+};
+
 export async function getChangeableCards(_userID) {
     const client = await db.connect();
     try {
@@ -28,10 +41,36 @@ export async function getChangeableCards(_userID) {
     };
 }
 
+export async function getChangeableCardsFilter(_userID, _filter) {
+    const client = await db.connect();
+    try {
+        const findCards = await cardQueries.filterChangeableCards(client, _userID, _filter);
+        db.release(client);
+        return findCards;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    };
+}
+
 export async function getUserChangeableCards(_userID) {
     const client = await db.connect();
     try {
         const findCards = await cardQueries.selectUserChangeableCards(client, _userID);
+        db.release(client);
+        return findCards;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    };
+}
+
+export async function getUserChangeableCardsFilter(_userID, _filter) {
+    const client = await db.connect();
+    try {
+        const findCards = await cardQueries.filterUserChangeableCards(client, _userID, _filter);
         db.release(client);
         return findCards;
     } catch (error) {

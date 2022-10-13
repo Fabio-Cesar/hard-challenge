@@ -14,6 +14,19 @@ export async function getPackages() {
     };
 };
 
+export async function getPackagesFilter(_filter) {
+    const client = await db.connect();
+    try {
+        const findPackages = await packageQueries.selectFilterPackages(client, _filter);
+        db.release(client);
+        return findPackages;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    };
+};
+
 export async function createNewPackage(_brand, _type, _price, _chancerare, _chanceultrarare) {
     const client = await db.connect();
     try {

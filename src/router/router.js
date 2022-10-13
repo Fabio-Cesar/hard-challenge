@@ -16,11 +16,16 @@ const app = Router();
 app.get('/user', verifyJWT, authControllers.verified);
 app.get('/admin', verifyJWT, authControllers.authorized);
 app.get('/packages', verifyJWT, packageControllers.getPackages);
+app.get('/packages/:filter', verifyJWT, packageControllers.getPackagesFilter);
 app.get('/cards', verifyJWT, cardsControllers.getCardsByUserID);
+app.get('/cards/:filter', verifyJWT, cardsControllers.getCardsByUserIDFilter)
 app.get('/brands', verifyJWT, brandControllers.getBrands);
 app.get('/changeable-cards', verifyJWT, cardsControllers.getChangeableCards);
+app.get('/changeable-cards/:filter', verifyJWT, cardsControllers.getChangeableCardsFilter);
 app.get('/user-changeable-cards', verifyJWT, cardsControllers.getChangeableCardsByUserID);
+app.get('/user-changeable-cards/:filter', verifyJWT, cardsControllers.getChangeableCardsByUserIDFilter);
 app.get('/change-requests/:cardID', verifyJWT, changeRequestControllers.getChangeRequestByCardID);
+app.get('/change-requests/:cardID/filter/:filter', verifyJWT, changeRequestControllers.getChangeRequestByCardIDFilter);
 
 app.post('/login', authControllers.authenticateUser);
 app.post('/logout', authControllers.logout);
