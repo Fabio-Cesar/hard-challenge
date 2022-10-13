@@ -9,10 +9,6 @@
     padding: 0;
 }
 
-html {
-    font-size: 62.5%
-}
-
 /* BODY */
 body {
     background-image: url('../images/bg-principal.jpg');
@@ -50,13 +46,13 @@ header {
 
 #logo > a {
     text-decoration: none;
-    font-size: 3.5rem;
+    font-size: calc(14px + 1.4vw);
     color: #f9f9f9;
 }
 
 #nav-login, #nav-signup, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-addbrand, #nav-collection {
     text-decoration: none;
-    font-size: 1.8rem;
+    font-size: calc( 5px + 0.9vw );
     color: #f9f9f9;
     padding: 10px 15px;
 }
@@ -114,14 +110,14 @@ li {
 }
 
 #profile-img, #profile-admin-img {
-    width: 7.6rem;
+    width: 80px;
     border: 1px solid #f9f9f9;
     border-radius: 50%;
     margin-left: 10px;
 }
 
 #profile-user-name, #profile-admin-user-name, #profile-user-coins{
-    font-size: 20px;
+    font-size: calc( 8px + 0.8vw );
     text-align: end;
 }
 
@@ -142,7 +138,7 @@ li {
     width: 60px;
     background-color: #ff4098;
     border-radius: 10px;
-    font-size: 1.4rem;
+    font-size: calc( 5px + 0.6vw );
     color: #f9f9f9;
     border: none;
 }
@@ -157,7 +153,7 @@ li {
     width: 18px;
     background-color: #ff4098;
     border-radius: 9px;
-    font-size: 1.4rem;
+    font-size: 0.8rem;
     border: none;
 }
 
@@ -186,13 +182,13 @@ main {
 
 #main-text-home > p {
     text-align: left;
-    font-size: 5rem;
+    font-size: calc(18px + 2.2vw);
     line-height: calc(28px + 4vh);
 }
 
 .secondary-text-home > p {
     text-align: left;
-    font-size: 2.5rem;
+    font-size: calc(8px + 1.1vw);
 }
 
 #texts-home > p {
@@ -389,16 +385,16 @@ label{
 }
 
 .img-my-collection, .trade-imgs, .pending-imgs{
-    width: 184px;
+    width: 12vw;
     box-shadow: 4px 4px 3px 3px #00000080;
 }
 
 .packages{
-    width: 184px;
+    width: 12vw;
 }
 
 .name-card-collection, .name-card-trade, .name-card-pending{
-    padding-top: 10px;
+    padding-top: 1.2vh;
 }
 
 .box-shop{
@@ -406,16 +402,16 @@ label{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 184px;
+    width: 12vw;
     background-color: #f9f9f926;
-    font-size: 20px;
+    font-size: calc( 6px + 0.6vw );
     text-align: center;
     gap: 0.5vh;
     padding-bottom: 1vh;
 }
 
 .box-shop p{
-    font-size: 20px;
+    font-size: calc( 5px + 0.5vw );
 }
 
 .box-shop .package-chances {
@@ -571,14 +567,14 @@ label{
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    width: auto;
+    width: 14vw;
     height: fit-content;
-    padding: 15px;
+    padding: 12px 0px;
     background-color: #f9f9f926;
 }
 
 .container-card-collection > p {
-    font-size: 2rem;
+    font-size: calc( 7px + 0.7vw );
 }
 
 .container-taggle{
