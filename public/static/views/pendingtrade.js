@@ -31,6 +31,5 @@ export class PendingTradeView extends View {
             openErrorModal(error.message);
             navigateTo('/pendingtrade');
         }
-        
     }
 };

@@ -6,6 +6,15 @@ export async function selectPackages(_client) {
     return {'packages': res.rows, 'error': null};
 };
 
+export async function selectFilterPackages(_client, _filter) {
+    const query = {
+        'text': 'SELECT package.id as id, brand.name as brand, package.type as type, package.price as price, package.chance_rare as chance_rare, package.chance_ultrarare as chance_ultrarare FROM package INNER JOIN brand ON package.brand = brand.id WHERE brand.name ILIKE $1 ORDER BY package.brand ASC, package.type DESC',
+        'values': [`%${_filter}%`]
+    };
+    const res = await _client.query(query);
+    return {'packages': res.rows, 'error': null};
+};
+
 // Funções usuário admin criar novo Pacote
 
 export async function filterPackages(_client, _brand, _type) {

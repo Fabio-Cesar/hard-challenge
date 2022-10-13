@@ -15,6 +15,19 @@ export async function getChangeRequests(_cardID) {
     };
 }
 
+export async function filterChangeRequests(_cardID, _filter) {
+    const client = await db.connect();
+    try {
+        const findCards = await changeRequestQueries.filterCards(client, _cardID, _filter);
+        db.release(client);
+        return findCards;
+    } catch (error) {
+        console.error(error);
+        db.release(client);
+        return {'status': error.status || 500, 'error': error.message};
+    };
+}
+
 export async function createChangeRequestService(_offeredcardID, _requestcardID) {
     const client = await db.connect();
     try {

@@ -10,6 +10,16 @@ export async function getChangeRequestByCardID(req, res) {
     }
 }
 
+export async function getChangeRequestByCardIDFilter(req, res) {
+    const { cardID, filter } = req.params;
+    const result = await changeRequestServices.filterChangeRequests(cardID, filter);
+    if(result.error === null) {
+        res.status(200).json({ cards: result.cards })
+    } else {
+        res.status(result.status).json({ message: result.error })
+    }
+}
+
 export async function createChangeRequest(req, res) {
     const { offeredcardID, requestcardID } = req.params;
     const result = await changeRequestServices.createChangeRequestService(offeredcardID, requestcardID);
