@@ -2,6 +2,7 @@
 
 import { adminName, adminProfileImg, profileImg, router, userCoins, userName } from './index.js';
 let requestcardID;
+let cardID;
 
 const errorModal = document.querySelector('#error-log');
 const btnCloseErrorModal = document.querySelector('#icon-close-error-log');
@@ -131,7 +132,7 @@ export async function createRequest(e) {
 
 export async function getChangeRequests(e) {
     try {
-        const cardID = e.target.id;
+        cardID = e.target.id;
         const pendingCardContainer = document.querySelector('#pendingtrade-cards');
         pendingCardContainer.innerHTML = ''
         const pendingTradeResponse = await fetch(`api/change-requests/${cardID}`)
@@ -147,7 +148,7 @@ export async function getChangeRequests(e) {
                 <p>${data.cards[i].name}</p>
                 <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
                 <p>${data.cards[i].rarity}</p>
-                <button class="pending-cardbtn" data-reqcardid="${e.target.id}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
             </div>
             </div>`
         }
@@ -806,7 +807,6 @@ export async function filterOffers() {
     const filter = document.querySelector('#locate-pending-input').value;
     if (filter === '') {
         try {
-            const cardID = e.target.id;
             const pendingCardContainer = document.querySelector('#pendingtrade-cards');
             pendingCardContainer.innerHTML = ''
             const pendingTradeResponse = await fetch(`api/change-requests/${cardID}`)
@@ -822,7 +822,7 @@ export async function filterOffers() {
                     <p>${data.cards[i].name}</p>
                     <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
                     <p>${data.cards[i].rarity}</p>
-                    <button class="pending-cardbtn" data-reqcardid="${e.target.id}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                    <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
                 </div>
                 </div>`
             }
@@ -832,7 +832,6 @@ export async function filterOffers() {
         }
     } else {
         try {
-            const cardID = e.target.id;
             const pendingCardContainer = document.querySelector('#pendingtrade-cards');
             pendingCardContainer.innerHTML = ''
             const pendingTradeResponse = await fetch(`api/change-requests/${cardID}/filter/${filter}`)
@@ -848,7 +847,7 @@ export async function filterOffers() {
                     <p>${data.cards[i].name}</p>
                     <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
                     <p>${data.cards[i].rarity}</p>
-                    <button class="pending-cardbtn" data-reqcardid="${e.target.id}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
+                    <button class="pending-cardbtn" data-reqcardid="${cardID}" data-offcardid="${data.cards[i].offeredcard_id}" data-finishChangeReq>Selecionar</button>
                 </div>
                 </div>`
             }
