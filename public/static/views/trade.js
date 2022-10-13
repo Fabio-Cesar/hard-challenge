@@ -20,7 +20,7 @@ export class TradeView extends View {
             for (let i = 0; i < tradeCardsRes.cards.length; i++) {
                 tradeCardContainer.innerHTML += `<div class="container-card-trade-page">
                     <img src="./images/uploads/character/${tradeCardsRes.cards[i].character_id}" alt="${tradeCardsRes.cards[i].character_name}" class="trade-imgs">
-                    <p>${tradeCardsRes.cards[i].character_name}</p>
+                    <p class="name-card-trade">${tradeCardsRes.cards[i].character_name}</p>
                     <p>${tradeCardsRes.cards[i].brand_name} ${tradeCardsRes.cards[i].brand_series}</p>
                     <p>${tradeCardsRes.cards[i].character_rarity}</p>
                     <button class="btn-trade" id="${tradeCardsRes.cards[i].card_id}" data-cardTradeRequest>Negociar</button>

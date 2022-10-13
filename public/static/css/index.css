@@ -9,6 +9,10 @@
     padding: 0;
 }
 
+html {
+    font-size: 62.5%
+}
+
 /* BODY */
 body {
     background-image: url('../images/bg-principal.jpg');
@@ -46,13 +50,13 @@ header {
 
 #logo > a {
     text-decoration: none;
-    font-size: calc(14px + 1.4vw);
+    font-size: 3.5rem;
     color: #f9f9f9;
 }
 
 #nav-login, #nav-signup, #nav-shop, #nav-trade, #nav-pendingtrade, #nav-addpackage, #nav-addcharacter, #nav-addbrand, #nav-collection {
     text-decoration: none;
-    font-size: calc( 5px + 0.9vw );
+    font-size: 1.8rem;
     color: #f9f9f9;
     padding: 10px 15px;
 }
@@ -110,12 +114,14 @@ li {
 }
 
 #profile-img, #profile-admin-img {
-    width: 5vw;
+    width: 7.6rem;
     border: 1px solid #f9f9f9;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
-#profile-user-name, #profile-admin-user-name{
-    font-size: calc( 8px + 0.8vw );
+#profile-user-name, #profile-admin-user-name, #profile-user-coins{
+    font-size: 20px;
     text-align: end;
 }
 
@@ -134,9 +140,9 @@ li {
 .edit-btn, .logout-btn {
     height: 25px;
     width: 60px;
-    background-color: #9479A9;
+    background-color: #ff4098;
     border-radius: 10px;
-    font-size: calc( 5px + 0.6vw );
+    font-size: 1.4rem;
     color: #f9f9f9;
     border: none;
 }
@@ -151,7 +157,7 @@ li {
     width: 18px;
     background-color: #ff4098;
     border-radius: 9px;
-    font-size: 0.8rem;
+    font-size: 1.4rem;
     border: none;
 }
 
@@ -180,13 +186,13 @@ main {
 
 #main-text-home > p {
     text-align: left;
-    font-size: calc(18px + 2.2vw);
+    font-size: 5rem;
     line-height: calc(28px + 4vh);
 }
 
-#secondary-text-home > p {
+.secondary-text-home > p {
     text-align: left;
-    font-size: calc(8px + 1.1vw);
+    font-size: 2.5rem;
 }
 
 #texts-home > p {
@@ -382,17 +388,17 @@ label{
     flex-wrap: wrap;
 }
 
-.img-my-collection, .trade-imgs, .penging-imgs{
-    width: 12vw;
+.img-my-collection, .trade-imgs, .pending-imgs{
+    width: 184px;
     box-shadow: 4px 4px 3px 3px #00000080;
 }
 
 .packages{
-    width: 12vw;
+    width: 184px;
 }
 
-.name-card-collection{
-    padding-top: 1.2vh;
+.name-card-collection, .name-card-trade, .name-card-pending{
+    padding-top: 10px;
 }
 
 .box-shop{
@@ -400,16 +406,20 @@ label{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 12vw;
+    width: 184px;
     background-color: #f9f9f926;
-    font-size: calc( 6px + 0.6vw );
+    font-size: 20px;
     text-align: center;
     gap: 0.5vh;
     padding-bottom: 1vh;
 }
 
-.package-chances {
-    font-size: calc( 5px + 0.5vw );
+.box-shop p{
+    font-size: 20px;
+}
+
+.box-shop .package-chances {
+    font-size: 13px;
 }
 
 /* MODAL */
@@ -556,20 +566,19 @@ label{
     width: 60vw;
 }
 
-.container-card-collection, .container-card-trade-page, .container-card-penging-page{
-
+.container-card-collection, .container-card-trade-page, .container-card-pending-page{
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    width: 14vw;
+    width: auto;
     height: fit-content;
-    padding: 10px 0;
+    padding: 15px;
     background-color: #f9f9f926;
 }
 
 .container-card-collection > p {
-    font-size: calc( 7px + 0.7vw );
+    font-size: 2rem;
 }
 
 .container-taggle{
@@ -665,4 +674,173 @@ label{
 
 #pendingtrade-page{
     display: none;
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 40%;
+    }
+
+    #section-container {
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        width: 90vw;
+        padding-top: 5vh;
+    }
+
+    #texts-home {
+        display: flex;
+        flex-direction: column;
+        gap: 3vh;
+        width: 90vw;
+    }
+
+    #main-text-home > p {
+        text-align: center;
+        font-size: 5rem;
+        line-height: 6rem;
+    }
+    
+    .secondary-text-home > p {
+        text-align: center;
+    }
+    
+    #texts-home > p {
+        text-align: center;
+    }
+
+    #img-cards {
+        padding-top: 6vh;
+        width: 80vw;
+    }
+
+    #login-page, #signup-page  {
+        display: none;
+        padding: 10vh 3vh;
+    }
+
+    #container-register, #container-login, #container-profile {
+        padding: 4vh 0vw;
+        width: 80vw;
+        background-color: #f9f9f926;
+        color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 3.2vh;
+    }
+
+    #container-register h2, #container-login h2{
+        font-size: 3rem;
+    }
+
+    #form-register, #form-login, .form-profile {
+        display: flex;
+        flex-direction: column;
+        gap: 2.6vh;
+        font-size: calc( 6px + 0.8vw );
+        width: 60vw;
+    }
+    
+    #form-login label, #form-register label, .form-profile label {
+        font-size: 20px;
+    }
+
+    input{
+        height: 4.5vh;
+        background: none;
+        border: none;
+        padding: 0 10px;
+        border-bottom: 2px solid #f9f9f9;
+        color: #f9f9f9;
+        font-size: 3rem
+    }
+
+    #profile-name-input, #profile-email-input, #profile-password-input {
+        width: 60vw;
+    }
+
+    #error-log-message, #success-log-message {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    #signup-btn, #login-btn, #back-btn {
+        padding: 0 20px;
+        width: auto;
+        font-size: 3rem;
+    }
+
+    .edit-btn, .logout-btn, #add-coin-btn {
+        font-size: 2.3rem;
+    }
+
+    #container-shop {
+        width: 70vw;
+    }
+
+    #container-shop h2 {
+        font-size: 20px;
+    }
+
+    .save-btn, .btn-shop, .btn-trade, .pending-cardbtn {
+        padding: 0 20px;
+        width: auto;
+        font-size: 3rem;
+    }
+
+    .modal-box {
+        width: 70vw;
+    }
+
+    .h3-modal, .name-new-card, .rarity-new-card {
+        padding-top: 30px;
+        font-size: 20px;
+    }
+
+    .card-acquired, .description-new-card {
+        width: 184px;
+    }
+
+    #pendingtrade-cards {
+        width: 100%;
+    }
+
+    #pendingtrade-cards .card-pending, #pendingtrade-cards .description-pending-card {
+        width: 184px 
+    }
+
+    .description-pending-card p {
+        font-size: 20px;
+    }
+
+    .trade-shop p{
+        font-size: 20px;
+    }
+
+    #collection-page h2, #trade-page h2, #pendingtrade-page h2{
+        font-size: 20px
+    }
+
+    .container-card-collection p, .container-card-trade-page p, .container-card-pending-page p {
+        font-size: 20px;
+    }
+
+    .container-taggle label{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 36%;
+    }
+}
+
+@media (max-width: 350px) {
+    html {
+        font-size: 32%;
+    }
 }
