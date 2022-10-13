@@ -75,7 +75,6 @@ export async function router() {
             userHeader.style.display = "flex";
             userProfile.style.display = "flex";
             userName.innerText = `${data.userName}`;
-            profileImg.src = `./images/uploads/${data.userID}`
             userCoins.innerText = `${data.userCoins}`;
             const view = new routes[path];
             const viewData = await view.getData();
@@ -96,7 +95,6 @@ export async function router() {
             adminHeader.style.display = "flex";
             adminProfile.style.display = "flex";
             adminName.innerText = `${data.userName}`;
-            adminProfileImg.src = `./images/uploads/${data.userID}`
             const view = new routes[path];
             const viewData = await view.getData();
         } catch (error) {
