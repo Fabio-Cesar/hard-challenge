@@ -111,8 +111,6 @@ li {
 
 #profile-img, #profile-admin-img {
     width: 80px;
-    border: 1px solid #f9f9f9;
-    border-radius: 50%;
     margin-left: 10px;
 }
 
