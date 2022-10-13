@@ -19,9 +19,9 @@ export class PendingTradeView extends View {
             }
             const data = await changeableCardsResponse.json()
             for (let i = 0; i < data.cards.length; i++) {
-                changeableUserCardsContainer.innerHTML += `<div class="container-card-penging-page">
-                <img src="./images/uploads/character/${data.cards[i].character_id}" class="penging-imgs"/>
-                <p>${data.cards[i].name}</p>
+                changeableUserCardsContainer.innerHTML += `<div class="container-card-pending-page">
+                <img src="./images/uploads/character/${data.cards[i].character_id}" class="pending-imgs"/>
+                <p class="name-card-pending">${data.cards[i].name}</p>
                 <p>${data.cards[i].brand_name} ${data.cards[i].brand_series}</p>
                 <p>${data.cards[i].rarity}</p>
                 <button class="pending-cardbtn" id="${data.cards[i].card_id}" data-getChangeReq>Ver Pedidos</button>
