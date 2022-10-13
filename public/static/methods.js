@@ -804,7 +804,7 @@ export async function filterMyPendingTrade() {
 }
 
 export async function filterOffers() {
-    const filter = document.querySelector('#locate-pending-input').value;
+    const filter = document.querySelector('#locate-pending-offer-input').value;
     if (filter === '') {
         try {
             const pendingCardContainer = document.querySelector('#pendingtrade-cards');
