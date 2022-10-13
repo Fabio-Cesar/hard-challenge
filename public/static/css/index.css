@@ -411,7 +411,7 @@ label{
 }
 
 .box-shop p{
-    font-size: calc( 5px + 0.5vw );
+    font-size: 20px;
 }
 
 .box-shop .package-chances {
@@ -675,6 +675,19 @@ label{
 @media (max-width: 450px) {
     html {
         font-size: 40%;
+    }
+
+    .packages{
+        width: 184px;
+    }
+
+    .box-shop{
+        width: 184px;
+    }
+
+    .container-card-collection, .container-card-trade-page, .container-card-pending-page{
+        width: auto;
+        padding: 15px;
     }
 
     #section-container {
