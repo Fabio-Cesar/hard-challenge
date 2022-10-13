@@ -434,6 +434,7 @@ export async function updateAdminProfile() {
         document.querySelector('#admin-profile-name-input').value = '';
         document.querySelector('#admin-profile-email-input').value = '';
         document.querySelector('#admin-profile-password-input').value = '';
+        navigateTo('/adminprofile')
     } catch (error) {
         openErrorModal(`${error.message}`);
     };
@@ -468,6 +469,7 @@ export async function updateUserProfile() {
         document.querySelector('#profile-name-input').value = '';
         document.querySelector('#profile-email-input').value = '';
         document.querySelector('#profile-password-input').value = '';
+        navigateTo('/profile');
     } catch (error) {
         openErrorModal(`${error.message}`);
     };
