@@ -99,7 +99,7 @@ export async function router() {
             const data = await res.json();
             adminHeader.style.display = "flex";
             adminProfile.style.display = "flex";
-            if (data.image === 'true') {
+            if (data.image === 'true' || data.image === true) {
                 adminProfileImg.src = `./images/uploads/${data.userID}`
             } else {
                 adminProfileImg.src = `./images/default-profile.svg`
