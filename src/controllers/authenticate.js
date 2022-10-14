@@ -7,10 +7,10 @@ export async function authenticateUser(req, res) {
     const { email , password } = req.body;
     const result = await authenticateService(email, password);
     if (result.error === null) {
-        const { userID, userType, userEmail, userName, userCoins, admin } = result;
+        const { userID, userType, userEmail, userName, userCoins, admin, image } = result;
         const alreadyHasToken = req.cookies.token;
         if (alreadyHasToken) { res.clearCookie('token'); };
-        const token = jwt.sign({ userID, userType, userEmail, userName, userCoins }, process.env.SECRET, { expiresIn: 3600 });
+        const token = jwt.sign({ userID, userType, userEmail, userName, userCoins, image }, process.env.SECRET, { expiresIn: 3600 });
         res.cookie('token', token, { httpOnly: true });
         res.status(200).json({ admin });
     } else {
@@ -26,7 +26,7 @@ export async function logout(req, res) {
 export async function verified(req, res) {
     const type = req.userType;
     if (type === 'user') {
-        res.status(200).json({ userID: req.userID, userEmail: req.userEmail, userName: req.userName, userCoins: req.userCoins});
+        res.status(200).json({ userID: req.userID, userEmail: req.userEmail, userName: req.userName, userCoins: req.userCoins, image: req.image});
     } else {
         res.status(403).json({ message: 'Usuário não autorizado!' });
     };
@@ -35,7 +35,7 @@ export async function verified(req, res) {
 export async function authorized(req, res) {
     const type = req.userType;
     if (type === 'admin') {
-        res.status(200).json({ userID: req.userID, userName: req.userName });
+        res.status(200).json({ userID: req.userID, userName: req.userName, image: req.image });
     } else {
         res.status(403).json({ message: 'Usuário não autorizado!' });
     };

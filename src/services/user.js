@@ -39,8 +39,8 @@ export async function createUser(_name, _email, _password, _type) {
 export async function updateUser(_id, _name, _email, _password) {
     const client = await db.connect();
     try {
-        const queryColumnsArray = ['updated_at'];
-        const queryValues = [_id, 'now()'];
+        const queryColumnsArray = ['updated_at', 'image'];
+        const queryValues = [_id, 'now()', true];
         if (_name !== undefined) {
             queryValues.push(_name); queryColumnsArray.push('name');
         }
@@ -63,9 +63,9 @@ export async function updateUser(_id, _name, _email, _password) {
                 throw error;
             }
         }
-        let queryColumns = queryColumnsArray[0];
-        let queryRef = '$2';
-        for (let i = 1; i < queryColumnsArray.length; i++) {
+        let queryColumns = `${queryColumnsArray[0]}, ${queryColumnsArray[1]}`;
+        let queryRef = '$2, $3';
+        for (let i = 2; i < queryColumnsArray.length; i++) {
             queryColumns = queryColumns.concat(', ', queryColumnsArray[i]);
             queryRef = queryRef.concat(`, $${i + 2}`);
         };
