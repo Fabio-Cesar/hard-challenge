@@ -75,7 +75,7 @@ export async function router() {
             userHeader.style.display = "flex";
             userProfile.style.display = "flex";
             userName.innerText = `${data.userName}`;
-            if (data.image === 'true') {
+            if (data.image === 'true' || data.image === true) {
                 profileImg.src = `./images/uploads/${data.userID}`
             } else {
                 profileImg.src = `./images/default-profile.svg`
