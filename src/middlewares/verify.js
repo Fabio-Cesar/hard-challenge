@@ -18,6 +18,7 @@ function verifyJWT(req, res, next){
       req.userName = decoded.userName;
       req.userEmail = decoded.userEmail;
       req.userCoins = decoded.userCoins;
+      req.image = decoded.image;
       next();
     });
 };
