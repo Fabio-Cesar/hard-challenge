@@ -69,7 +69,6 @@ export async function updateUser(_id, _name, _email, _password) {
             queryColumns = queryColumns.concat(', ', queryColumnsArray[i]);
             queryRef = queryRef.concat(`, $${i + 2}`);
         };
-        console.log(queryColumns, queryRef, queryValues);
         const update = await userQueries.update(client, queryColumns, queryRef, queryValues);
         db.release(client);
         return update;

@@ -37,7 +37,7 @@ export async function createNewPackage(_brand, _type, _price, _chancerare, _chan
         db.release(client);
         return createPackage;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         await db.rollback(client)
         db.release(client);
         return {'status': error.status || 500, 'error': error.message};
