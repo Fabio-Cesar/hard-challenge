@@ -947,49 +947,49 @@ const navTrade = document.querySelector("#nav-trade");
 const navPendingTrade = document.querySelector("#nav-pendingtrade");
 
 menuToggleLanding.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionLanding.classList.toggle("on", show);
     show = !show;
 });
 
 navLogin.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionLanding.classList.toggle("on", show);
     show = !show;
 });
 
 navSignup.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionLanding.classList.toggle("on", show);
     show = !show;
 });
 
 menuToggleUser.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionUser.classList.toggle("on", show);
     show = !show;
 });
 
 navShop.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionUser.classList.toggle("on", show);
     show = !show;
 });
 
 navCollection.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionUser.classList.toggle("on", show);
     show = !show;
 });
 
 navTrade.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionUser.classList.toggle("on", show);
     show = !show;
 });
 
 navPendingTrade.addEventListener("click", () => {
-    document.body.style.overflow = show ? "hidden" : "initial";
+    
     menuSectionUser.classList.toggle("on", show);
     show = !show;
 });
