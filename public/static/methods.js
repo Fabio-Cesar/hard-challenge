@@ -931,3 +931,65 @@ packageImg.addEventListener('change', (e) => {
     packageImgPreview.src = url;
     packageImgPreview.onload = function() { window.URL.revokeObjectURL(url) }
 })
+
+// RESPONSIVE NAV
+
+let show = true;
+const menuSectionLanding = document.querySelectorAll(".menu-section")[0];
+const menuToggleLanding = document.querySelectorAll(".menu-toggle")[0];
+const menuSectionUser = document.querySelectorAll(".menu-section")[1];
+const menuToggleUser = document.querySelectorAll(".menu-toggle")[1];
+const navLogin = document.querySelector("#nav-login");
+const navSignup = document.querySelector("#nav-signup");
+const navShop = document.querySelector("#nav-shop");
+const navCollection = document.querySelector("#nav-collection");
+const navTrade = document.querySelector("#nav-trade");
+const navPendingTrade = document.querySelector("#nav-pendingtrade");
+
+menuToggleLanding.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionLanding.classList.toggle("on", show);
+    show = !show;
+});
+
+navLogin.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionLanding.classList.toggle("on", show);
+    show = !show;
+});
+
+navSignup.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionLanding.classList.toggle("on", show);
+    show = !show;
+});
+
+menuToggleUser.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionUser.classList.toggle("on", show);
+    show = !show;
+});
+
+navShop.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionUser.classList.toggle("on", show);
+    show = !show;
+});
+
+navCollection.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionUser.classList.toggle("on", show);
+    show = !show;
+});
+
+navTrade.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionUser.classList.toggle("on", show);
+    show = !show;
+});
+
+navPendingTrade.addEventListener("click", () => {
+    document.body.style.overflow = show ? "hidden" : "initial";
+    menuSectionUser.classList.toggle("on", show);
+    show = !show;
+});

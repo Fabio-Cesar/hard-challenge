@@ -675,11 +675,23 @@ label{
         font-size: 40%;
     }
 
+    #logo a {
+        font-size: 25px;
+    }
+
+    #container-shop {
+        background-color: #00000000;
+    }
+
     .packages{
         width: 184px;
     }
 
     .box-shop{
+        width: 184px;
+    }
+
+    .img-my-collection, .trade-imgs, .pending-imgs{
         width: 184px;
     }
 
@@ -837,6 +849,81 @@ label{
 
     .container-taggle label{
         font-size: 12px;
+    }
+
+    input[id^="locate-"] {
+        width: 180px;
+      }
+
+    .responsive-nav-landing, .responsive-nav-user {
+        display: none;
+    }
+
+    .one, .two, .three {
+        background-color: #ffffff;
+        height: 4px;
+        width: 100%;
+        margin: 4px auto;
+
+        transition-duration: .3s;
+    }
+
+    .menu-toggle {
+        width: 25px;
+        height: auto;
+    }
+
+    .menu-section.on {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-section.on .responsive-nav-landing,
+    .menu-section.on .responsive-nav-user {
+        text-align: center;
+        display: block;
+    }
+
+    .menu-section.on .menu-toggle {
+        position: absolute;
+        right: 38px;
+        top: 23px;
+    }
+
+    .responsive-nav-landing ul,
+    .responsive-nav-user ul {
+        display: block;
+    }
+
+    .menu-section.on .menu-toggle .one {
+        transform: rotate(45deg) translate(8px, 4px);
+    }
+
+    .menu-section.on .menu-toggle .two {
+        opacity: 0;
+    }
+
+    .menu-section.on .menu-toggle .three {
+        transform: rotate(-45deg) translate(8px, -4px);
+    }
+
+    .responsive-nav-landing #nav-login,
+    .responsive-nav-landing #nav-signup,
+    .responsive-nav-user #nav-shop,
+    .responsive-nav-user #nav-collection,
+    .responsive-nav-user #nav-trade,
+    .responsive-nav-user #nav-pendingtrade {
+        font-size: 20px;
+        transition-duration: .5s;
+        line-height: 50px;
     }
 }
 
