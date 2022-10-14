@@ -751,6 +751,18 @@ label{
         gap: 3.2vh;
     }
 
+    #container-register{
+        height: 520px;
+    }
+
+    #container-login{
+        height: 410px;
+    }
+
+    #container-profile {
+        height: 550px;
+    }
+
     #container-register h2, #container-login h2{
         font-size: 3rem;
     }
